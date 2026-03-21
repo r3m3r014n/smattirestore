@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE REALONES STORE | Luxury Fashion</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Playfair+Display:wght@400;600;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -15,10 +15,8 @@
                         'gold-light': '#f4e4ba',
                         charcoal: '#1a1a1a',
                         dark: '#0a0a0a',
-                        cream: '#f8f5f0',
                     },
                     fontFamily: {
-                        orbitron: ['Orbitron', 'sans-serif'],
                         playfair: ['Playfair Display', 'serif'],
                         rajdhani: ['Rajdhani', 'sans-serif'],
                     }
@@ -28,58 +26,97 @@
     </script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-dark text-white font-rajdhani overflow-x-hidden">
-    <!-- Loading Screen -->
-    <div id="loader" class="fixed inset-0 bg-dark z-[10000] flex items-center justify-center transition-opacity duration-500">
-        <div class="w-20 h-20 border-3 border-transparent border-t-gold rounded-full animate-spin relative">
-            <div class="absolute inset-2 border-3 border-transparent border-t-gold/50 rounded-full animate-spin" style="animation-direction: reverse; animation-duration: 2s;"></div>
-        </div>
-    </div>
-
+<body class="bg-dark text-white font-rajdhani">
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-[1000] bg-dark/90 backdrop-blur-xl border-b border-gold/30 px-6 lg:px-12 py-4 flex justify-between items-center transition-all duration-300" id="navbar">
-        <div class="font-playfair text-2xl font-bold bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent uppercase tracking-widest relative">
-            THE REALONES
-            <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent animate-shimmer"></div>
-        </div>
-        
-        <ul class="hidden md:flex gap-8 list-none">
-            <li><a href="#home" class="text-white hover:text-gold transition-all duration-300 uppercase tracking-widest text-sm font-medium relative group">Home<span class="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-gold to-gold-light group-hover:w-full transition-all duration-300"></span></a></li>
-            <li><a href="#collection" class="text-white hover:text-gold transition-all duration-300 uppercase tracking-widest text-sm font-medium relative group">Collection<span class="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-gold to-gold-light group-hover:w-full transition-all duration-300"></span></a></li>
-            <li><a href="#about" class="text-white hover:text-gold transition-all duration-300 uppercase tracking-widest text-sm font-medium relative group">About<span class="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-gold to-gold-light group-hover:w-full transition-all duration-300"></span></a></li>
-            <li><a href="#contact" class="text-white hover:text-gold transition-all duration-300 uppercase tracking-widest text-sm font-medium relative group">Contact<span class="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-gold to-gold-light group-hover:w-full transition-all duration-300"></span></a></li>
-        </ul>
-
-        <div class="flex items-center gap-4">
-            <button onclick="toggleCart()" class="relative text-gold text-2xl hover:scale-110 transition-transform duration-300 hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">
+    <nav class="fixed top-0 w-full bg-dark/90 backdrop-blur-xl border-b border-gold/30 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="font-playfair text-2xl font-bold text-gold tracking-widest">THE REALONES</div>
+            <button onclick="toggleCart()" class="relative text-gold text-2xl">
                 🛒
-                <span id="cartCount" class="absolute -top-2 -right-2 bg-gold text-dark text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold animate-pulse">0</span>
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-gold text-dark text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
             </button>
-            <button onclick="toggleMobileMenu()" class="md:hidden border-2 border-gold text-gold p-2 rounded text-xl">☰</button>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed top-[70px] left-0 right-0 bg-dark/95 backdrop-blur-xl z-[999] hidden flex-col p-8 border-b border-gold/30">
-        <a href="#home" onclick="toggleMobileMenu()" class="text-white py-3 border-b border-gold/20 hover:text-gold transition-colors">Home</a>
-        <a href="#collection" onclick="toggleMobileMenu()" class="text-white py-3 border-b border-gold/20 hover:text-gold transition-colors">Collection</a>
-        <a href="#about" onclick="toggleMobileMenu()" class="text-white py-3 border-b border-gold/20 hover:text-gold transition-colors">About</a>
-        <a href="#contact" onclick="toggleMobileMenu()" class="text-white py-3 hover:text-gold transition-colors">Contact</a>
+    <!-- Hero -->
+    <section class="min-h-screen flex items-center justify-center text-center px-4 pt-20 bg-gradient-to-br from-charcoal to-dark">
+        <div class="max-w-3xl">
+            <p class="font-playfair text-gold italic text-lg mb-4">Est. 2024 • Kenya Coast</p>
+            <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent">THE REALONES<br>STORE</h1>
+            <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">Where luxury meets innovation. Curated fashion for the modern woman who demands excellence.</p>
+            <a href="#collection" class="inline-block px-8 py-4 border-2 border-gold text-gold hover:bg-gold hover:text-dark transition-all duration-300 uppercase tracking-widest font-semibold">Explore Collection</a>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="collection" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <p class="font-playfair text-gold italic">Curated Excellence</p>
+            <h2 class="font-playfair text-4xl font-semibold mt-2">The Collection</h2>
+        </div>
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- About -->
+    <section class="py-20 px-4 bg-charcoal">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="h-80 bg-gradient-to-br from-gold/10 to-dark/50 border border-gold/30 rounded-2xl flex items-center justify-center">
+                <div class="text-center text-gold">
+                    <div class="text-5xl mb-4">✦</div>
+                    <div class="font-playfair text-2xl">THE REALONES</div>
+                </div>
+            </div>
+            <div>
+                <h2 class="font-playfair text-gold text-3xl mb-6">Crafted for the Kenyan Woman</h2>
+                <p class="text-white/80 text-lg mb-4">THE REALONES STORE represents the pinnacle of coastal fashion. Born in Mombasa and designed for the discerning woman across Kenya.</p>
+                <ul class="space-y-2 text-gold-light">
+                    <li>✦ Authentic designer pieces & quality guaranteed</li>
+                    <li>✦ Same-day delivery available in Mombasa & Nairobi</li>
+                    <li>✦ Secure M-Pesa payments accepted</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-charcoal/95 border-l border-gold/30 z-50 transform translate-x-full transition-transform duration-300 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6 border-b border-gold/30 pb-4">
+            <h3 class="font-playfair text-gold text-2xl">Your Cart</h3>
+            <button onclick="toggleCart()" class="text-gold text-2xl hover:rotate-90 transition-transform">×</button>
+        </div>
+        <div id="cartItems" class="space-y-4">
+            <p class="text-white/50 text-center italic mt-8">Your cart is empty</p>
+        </div>
+        <div class="mt-6 pt-6 border-t border-gold/30">
+            <div id="cartTotal" class="font-playfair text-gold text-3xl text-center mb-4">KES 0</div>
+            <button onclick="checkout()" id="checkoutBtn" disabled class="w-full py-4 bg-gold text-dark font-bold uppercase tracking-widest hover:bg-gold-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Checkout via WhatsApp</button>
+        </div>
     </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 relative overflow-hidden bg-gradient-to-br from-charcoal to-dark">
-        <div class="absolute inset-0 opacity-[0.02]" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%2250%25%22 x=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2215%22 fill=%22%23d4af37%22>THE REALONES</text></svg>'); background-size: 400px;"></div>
-        
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <p class="font-playfair text-gold text-lg md:text-xl italic mb-4 tracking-widest animate-fade-in-up">Est. 2024 • Kenya Coast</p>
-            <h1 class="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-                <span class="bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent">THE REALONES</span><br>
-                <span class="bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent">STORE</span>
-            </h1>
-            <p class="text-base md:text-lg max-w-xl mx-auto leading-relaxed text-white/80 mb-8 font-light animate-fade-in-up" style="animation-delay: 0.3s;">
-                Where luxury meets innovation. Curated fashion for the modern woman who demands excellence. 
-                Premium dresses, exclusive sets, and statement pieces delivered from Mombasa to Nairobi and beyond.
+    <!-- Product Modal -->
+    <div id="productModal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeModal()">
+        <div class="bg-charcoal border border-gold/30 rounded-2xl max-w-lg w-full p-6 relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gold text-2xl hover:rotate-90 transition-transform">×</button>
+            <img id="modalImg" src="" alt="" class="w-full h-64 object-cover rounded-xl mb-4 bg-dark">
+            <h3 id="modalName" class="font-playfair text-2xl text-white mb-2"></h3>
+            <p id="modalPrice" class="text-gold text-xl font-bold mb-4"></p>
+            <p id="modalDesc" class="text-white/70 mb-6"></p>
+            <button onclick="addFromModal()" class="w-full py-3 border-2 border-gold text-gold hover:bg-gold hover:text-dark transition-all uppercase font-bold tracking-widest">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark border-t border-gold/30 py-12 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h3 class="font-playfair text-gold text-2xl mb-4">THE REALONES STORE</h3>
+            <p class="text-white/60 mb-2">Mombasa, Kenya | +254111636725</p>
+            <p class="text-white/40 text-sm mt-8">© 2024 THE REALONES STORE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
             </p>
             <a href="#collection" class="inline-block px-8 py-4 border-2 border-gold text-gold font-semibold tracking-widest uppercase hover:bg-gold hover:text-dark transition-all duration-400 relative overflow-hidden group animate-fade-in-up" style="animation-delay: 0.6s;">
                 <span class="relative z-10">Explore Collection</span>
