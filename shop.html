@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Vault | THE REALONES STORE | Luxury Fashion</title>
-    <meta name="description" content="Shop premium women's fashion. Designer pieces powered by a live Vault.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,20 +14,9 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        gold: '#d4af37',
-                        'gold-light': '#f4e4ba',
-                        charcoal: '#1a1a1a',
-                        dark: '#0a0a0a',
-                    },
-                    fontFamily: {
-                        playfair: ['Playfair Display', 'serif'],
-                        rajdhani: ['Rajdhani', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'gold-glow': '0 0 40px -10px rgba(212, 175, 55, 0.15)',
-                        'gold-glow-hover': '0 0 50px -5px rgba(212, 175, 55, 0.3)',
-                    }
+                    colors: { gold: '#d4af37', 'gold-light': '#f4e4ba', charcoal: '#1a1a1a', dark: '#0a0a0a' },
+                    fontFamily: { playfair: ['Playfair Display', 'serif'], rajdhani: ['Rajdhani', 'sans-serif'] },
+                    boxShadow: { 'gold-glow': '0 0 40px -10px rgba(212, 175, 55, 0.15)', 'gold-glow-hover': '0 0 50px -5px rgba(212, 175, 55, 0.3)' }
                 }
             }
         }
@@ -47,9 +35,7 @@
 
     <nav class="fixed w-full z-50 glass-panel border-b border-gold/10 transition-all duration-500">
         <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="index.html" class="font-playfair text-2xl tracking-[0.15em] text-gold hover:text-gold-light transition-colors">
-                THE REALONES
-            </a>
+            <a href="index.html" class="font-playfair text-2xl tracking-[0.15em] text-gold hover:text-gold-light transition-colors">THE REALONES</a>
             <div class="flex gap-8 text-[11px] font-semibold tracking-[0.2em] uppercase">
                 <a href="index.html" class="hover:text-gold transition-colors">Home</a>
                 <a href="shop.html" class="text-gold border-b border-gold pb-1">The Vault</a>
@@ -74,6 +60,7 @@
         <button onclick="loadProducts('all')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">All Collections</button>
         <button onclick="loadProducts('Dresses')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Dresses</button>
         <button onclick="loadProducts('Streetwear')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Streetwear</button>
+        <button onclick="loadProducts('Loungewear')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Loungewear</button>
     </div>
 
     <main class="max-w-7xl mx-auto px-6 pb-40">
@@ -91,35 +78,32 @@
     <script src="app.js"></script>
     
     <script>
-        // Your complete 20-item inventory
-        // I have given them placeholder names and prices. You can edit these names/prices anytime in the future!
         const inventory = [
-            { id: 1, name: "Golden Hour Gown", price: 15000, category: "Dresses", image_url: "1.jpg" },
-            { id: 2, name: "Midnight Silk Wrap", price: 12500, category: "Dresses", image_url: "2.jpg" },
-            { id: 3, name: "Noir Chic Set", price: 8000, category: "Streetwear", image_url: "3.jpg" },
-            { id: 4, name: "Summer Flow Dress", price: 9500, category: "Dresses", image_url: "4.jpg" },
-            { id: 5, name: "Satin Lounge Essence", price: 7000, category: "Loungewear", image_url: "5.jpg" },
-            { id: 6, name: "Signature Crown Piece", price: 18000, category: "Dresses", image_url: "6.jpg" },
-            { id: 7, name: "Elite Streetwear Set", price: 11000, category: "Streetwear", image_url: "7.jpg" },
-            { id: 8, name: "Royal Velvet Gown", price: 22000, category: "Dresses", image_url: "8.jpg" },
-            { id: 9, name: "Urban Goddess Tracksuit", price: 13500, category: "Streetwear", image_url: "9.jpg" },
-            { id: 10, name: "Celestial Slip Dress", price: 10500, category: "Dresses", image_url: "10.jpg" },
-            { id: 11, name: "Onyx Evening Wear", price: 19000, category: "Dresses", image_url: "11.jpg" },
-            { id: 12, name: "Cashmere Cloud Lounge", price: 14000, category: "Loungewear", image_url: "12.jpg" },
-            { id: 13, name: "Monochrome City Fit", price: 9000, category: "Streetwear", image_url: "13.jpg" },
-            { id: 14, name: "Elegance Maxi", price: 16500, category: "Dresses", image_url: "14.jpg" },
-            { id: 15, name: "Downtown Cargo Set", price: 8500, category: "Streetwear", image_url: "15.jpg" },
-            { id: 16, name: "Pearl Embellished Gown", price: 25000, category: "Dresses", image_url: "16.jpg" },
-            { id: 17, name: "Silk Essential Robe", price: 6500, category: "Loungewear", image_url: "17.jpg" },
-            { id: 18, name: "High-Roller Jacket", price: 12000, category: "Streetwear", image_url: "18.jpg" },
-            { id: 19, name: "Ruby Sunset Dress", price: 17500, category: "Dresses", image_url: "19.jpg" },
+            { id: 1, name: "Masterpiece 01", price: 15000, category: "Dresses", image_url: "1.jpg" },
+            { id: 2, name: "Masterpiece 02", price: 12500, category: "Dresses", image_url: "2.jpg" },
+            { id: 3, name: "Masterpiece 03", price: 8000, category: "Streetwear", image_url: "3.jpg" },
+            { id: 4, name: "Masterpiece 04", price: 9500, category: "Dresses", image_url: "4.jpg" },
+            { id: 5, name: "Masterpiece 05", price: 7000, category: "Loungewear", image_url: "5.jpg" },
+            { id: 6, name: "Masterpiece 06", price: 18000, category: "Dresses", image_url: "6.jpg" },
+            { id: 7, name: "Masterpiece 07", price: 11000, category: "Streetwear", image_url: "7.jpg" },
+            { id: 8, name: "Masterpiece 08", price: 22000, category: "Dresses", image_url: "8.jpg" },
+            { id: 9, name: "Masterpiece 09", price: 13500, category: "Streetwear", image_url: "9.jpg" },
+            { id: 10, name: "Masterpiece 10", price: 10500, category: "Dresses", image_url: "10.jpg" },
+            { id: 11, name: "Masterpiece 11", price: 19000, category: "Dresses", image_url: "11.jpg" },
+            { id: 12, name: "Masterpiece 12", price: 14000, category: "Loungewear", image_url: "12.jpg" },
+            { id: 13, name: "Masterpiece 13", price: 9000, category: "Streetwear", image_url: "13.jpg" },
+            { id: 14, name: "Masterpiece 14", price: 16500, category: "Dresses", image_url: "14.jpg" },
+            { id: 15, name: "Masterpiece 15", price: 8500, category: "Streetwear", image_url: "15.jpg" },
+            { id: 16, name: "Masterpiece 16", price: 25000, category: "Dresses", image_url: "16.jpg" },
+            { id: 17, name: "Masterpiece 17", price: 6500, category: "Loungewear", image_url: "17.jpg" },
+            { id: 18, name: "Masterpiece 18", price: 12000, category: "Streetwear", image_url: "18.jpg" },
+            { id: 19, name: "Masterpiece 19", price: 17500, category: "Dresses", image_url: "19.jpg" },
             { id: 20, name: "The Realones Exclusive", price: 30000, category: "Dresses", image_url: "20.jpg" }
         ];
 
         function loadProducts(filter = 'all') {
             const grid = document.getElementById('productGrid');
             
-            // Filter logic
             const filtered = filter === 'all' 
                 ? inventory 
                 : inventory.filter(p => p.category === filter);
@@ -129,7 +113,6 @@
                 return;
             }
 
-            // Render products instantly
             grid.innerHTML = filtered.map(p => {
                 const productData = {
                     id: p.id,
@@ -166,478 +149,9 @@
             }).join('');
         }
 
-        // Instantly load items when page opens
         document.addEventListener('DOMContentLoaded', () => loadProducts());
     </script>
 </body>
 </html>
 
-    <main class="max-w-7xl mx-auto px-6 pb-40">
-        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div class="col-span-full py-32 flex flex-col items-center justify-center">
-                <div class="relative w-16 h-16 mb-6">
-                    <div class="absolute inset-0 border-t-2 border-gold rounded-full animate-spin"></div>
-                    <div class="absolute inset-2 border-r-2 border-gold/50 rounded-full animate-spin" style="animation-direction: reverse;"></div>
-                </div>
-                <p class="text-[10px] tracking-[0.5em] text-gold uppercase">Syncing with Database...</p>
-            </div>
-        </div>
-    </main>
-
-    <footer class="bg-black border-t border-gold/20 py-16 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-            <h2 class="font-playfair text-2xl text-gold mb-4 tracking-widest">THE REALONES STORE</h2>
-            <p class="text-[9px] tracking-[0.4em] text-white/40 uppercase">&copy; 2026 Crafted for Royalty &bull; Nairobi, Kenya</p>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
-    
-    <script>
-        async function fetchNeonProducts(filter = 'all') {
-            const grid = document.getElementById('productGrid');
-            let products = [];
-            
-            try {
-                // Fetch from the serverless function
-                const response = await fetch('/api/get-products');
-                if (!response.ok) throw new Error('API connection failed');
-                products = await response.json();
-                
-                // Filter logic
-                const filtered = filter === 'all' 
-                    ? products 
-                    : products.filter(p => p.category === filter);
-
-                if (filtered.length === 0) {
-                    grid.innerHTML = '<div class="col-span-full py-20 text-center"><p class="text-white/50 font-playfair text-2xl italic">The vault is currently empty.</p></div>';
-                    return;
-                }
-
-                // Render products with heavily optimized image tags
-                grid.innerHTML = filtered.map(p => {
-                    const productData = {
-                        id: p.id,
-                        name: p.name.replace(/'/g, "\\'"),
-                        price: p.price,
-                        image: p.image_url,
-                        category: p.category
-                    };
-                    const jsonString = JSON.stringify(productData).replace(/"/g, '&quot;');
-
-                    return `
-                    <div class="group relative bg-charcoal border border-white/5 rounded-sm overflow-hidden shadow-gold-glow hover:shadow-gold-glow-hover hover:border-gold/40 transition-all duration-700 hover:-translate-y-2">
-                        <div class="relative image-container overflow-hidden">
-                            <img src="${p.image_url}" 
-                                 alt="${p.name}" 
-                                 loading="lazy"
-                                 decoding="async"
-                                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                                 onerror="this.src='https://via.placeholder.com/600x800/1a1a1a/d4af37?text=Image+Missing'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-transparent to-transparent opacity-80"></div>
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full p-8 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-[9px] font-bold tracking-[0.4em] text-gold uppercase mb-2">${p.category || 'Exclusive'}</p>
-                            <h3 class="font-playfair text-3xl mb-4 text-white">${p.name}</h3>
-                            <div class="flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                                <span class="font-rajdhani text-xl tracking-tight text-white/90">KES ${Number(p.price).toLocaleString()}</span>
-                                <button onclick="if(typeof addToCart === 'function') addToCart(${jsonString});" 
-                                        class="text-[10px] tracking-[0.2em] uppercase text-gold border-b border-gold pb-1 hover:text-white hover:border-white transition-all">
-                                    Acquire
-                                </button>
-                            </div>
-                        </div>
-                    </div>`;
-                }).join('');
-
-            } catch (error) {
-                console.error("Vault Error:", error);
-                // Safe string concatenation to prevent code leaking
-                grid.innerHTML = '<div class="col-span-full py-20 text-center border border-red-900/50 bg-red-900/10 rounded-lg p-8">' +
-                    '<h3 class="text-red-500 font-playfair text-2xl mb-2">System Disconnected</h3>' +
-                    '<p class="text-[10px] tracking-[0.2em] text-white/60 uppercase">Unable to retrieve masterpieces from the database.</p>' +
-                    '<p class="text-[10px] tracking-[0.1em] text-red-400/80 mt-4 uppercase">Developer Note: Please check Netlify Environment Variables.</p>' +
-                '</div>';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => fetchNeonProducts());
-    </script>
-</body>
-</html>
-                <div class="relative w-16 h-16 mb-6">
-                    <div class="absolute inset-0 border-t-2 border-gold rounded-full animate-spin"></div>
-                    <div class="absolute inset-2 border-r-2 border-gold/50 rounded-full animate-spin" style="animation-direction: reverse;"></div>
-                </div>
-                <p class="text-[10px] tracking-[0.5em] text-gold uppercase">Accessing Neon Vault...</p>
-            </div>
-        </div>
-    </main>
-
-    <footer class="bg-black border-t border-gold/20 py-16 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-            <h2 class="font-playfair text-2xl text-gold mb-4 tracking-widest">THE REALONES STORE</h2>
-            <p class="text-[9px] tracking-[0.4em] text-white/40 uppercase">&copy; 2026 Designed for the Elite</p>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
-    
-    <script>
-        async function fetchNeonProducts(filter = 'all') {
-            const grid = document.getElementById('productGrid');
-            let products = [];
-            
-            try {
-                // 1. CHECK BROWSER MEMORY FIRST (Saves Neon Compute)
-                const cachedData = sessionStorage.getItem('vaultProducts');
-                
-                if (cachedData) {
-                    products = JSON.parse(cachedData);
-                } else {
-                    // 2. IF NO MEMORY, WAKE UP NEON
-                    const response = await fetch('/api/get-products');
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    products = await response.json();
-                    
-                    // Save to memory so we don't bother Neon again this session
-                    sessionStorage.setItem('vaultProducts', JSON.stringify(products));
-                }
-                
-                // 3. FILTER AND DISPLAY
-                const filtered = filter === 'all' 
-                    ? products 
-                    : products.filter(p => p.category === filter);
-
-                if (filtered.length === 0) {
-                    grid.innerHTML = `<div class="col-span-full py-20 text-center"><p class="text-white/50 font-playfair text-2xl italic">The vault is currently empty.</p></div>`;
-                    return;
-                }
-
-                grid.innerHTML = filtered.map(p => {
-                    const productData = {
-                        id: p.id,
-                        name: p.name.replace(/'/g, "\\'"),
-                        price: p.price,
-                        image: p.image_url,
-                        category: p.category
-                    };
-                    const jsonString = JSON.stringify(productData).replace(/"/g, '&quot;');
-
-                    return `
-                    <div class="group relative bg-charcoal border border-white/5 rounded-sm overflow-hidden shadow-gold-glow hover:shadow-gold-glow-hover hover:border-gold/40 transition-all duration-700 hover:-translate-y-2">
-                        
-                        <div class="relative aspect-[3/4] overflow-hidden bg-black">
-                            <img src="${p.image_url}" 
-                                 alt="${p.name}" 
-                                 loading="lazy"
-                                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                                 onerror="this.src='https://via.placeholder.com/600x800/1a1a1a/d4af37?text=Realones+Exclusive'">
-                            
-                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-transparent to-transparent opacity-80"></div>
-                        </div>
-                        
-                        <div class="absolute bottom-0 left-0 w-full p-8 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-[9px] font-bold tracking-[0.4em] text-gold uppercase mb-2">${p.category}</p>
-                            <h3 class="font-playfair text-3xl mb-4 text-white">${p.name}</h3>
-                            
-                            <div class="flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                                <span class="font-rajdhani text-xl tracking-tight text-white/90">KES ${Number(p.price).toLocaleString()}</span>
-                                <button onclick="if(typeof addToCart === 'function') addToCart(${jsonString}); else console.error('app.js missing addToCart');" 
-                                        class="text-[10px] tracking-[0.2em] uppercase text-gold border-b border-gold pb-1 hover:text-white hover:border-white transition-all">
-                                    Acquire
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `}).join('');
-            } catch (error) {
-                console.error("Neon Vault Error:", error);
-                grid.innerHTML = `
-                    <div class="col-span-full py-20 text-center">
-                        <p class="text-gold font-playfair text-2xl mb-2">System Interruption</p>
-                        <p class="text-[10px] tracking-[0.2em] text-white/40 uppercase">Unable to sync with the Neon Vault.</p>
-                    </div>`;
-            }
-        }
-
-        // Initialize Neon Vault
-        document.addEventListener('DOMContentLoaded', () => fetchNeonProducts());
-    </script>
-</body>
-</html>
-
-    <main class="max-w-7xl mx-auto px-6 pb-40">
-        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div class="col-span-full py-32 flex flex-col items-center justify-center">
-                <div class="relative w-16 h-16 mb-6">
-                    <div class="absolute inset-0 border-t-2 border-gold rounded-full animate-spin"></div>
-                    <div class="absolute inset-2 border-r-2 border-gold/50 rounded-full animate-spin" style="animation-direction: reverse;"></div>
-                </div>
-                <p class="text-[10px] tracking-[0.5em] text-gold uppercase">Accessing Neon Vault...</p>
-            </div>
-        </div>
-    </main>
-
-    <footer class="bg-black border-t border-gold/20 py-16 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-            <h2 class="font-playfair text-2xl text-gold mb-4 tracking-widest">THE REALONES STORE</h2>
-            <p class="text-[9px] tracking-[0.4em] text-white/40 uppercase">&copy; 2026 Designed for the Elite</p>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
-    
-    <script>
-        async function fetchNeonProducts(filter = 'all') {
-            const grid = document.getElementById('productGrid');
-            
-            try {
-                const response = await fetch('/api/get-products');
-                if (!response.ok) throw new Error('Network response was not ok');
-                const products = await response.json();
-                
-                const filtered = filter === 'all' 
-                    ? products 
-                    : products.filter(p => p.category === filter);
-
-                if (filtered.length === 0) {
-                    grid.innerHTML = `<div class="col-span-full py-20 text-center"><p class="text-white/50 font-playfair text-2xl italic">The vault is currently empty.</p></div>`;
-                    return;
-                }
-
-                grid.innerHTML = filtered.map(p => {
-                    // Properly format data for your existing addToCart function
-                    const productData = {
-                        id: p.id,
-                        name: p.name.replace(/'/g, "\\'"),
-                        price: p.price,
-                        image: p.image_url,
-                        category: p.category
-                    };
-                    const jsonString = JSON.stringify(productData).replace(/"/g, '&quot;');
-
-                    return `
-                    <div class="group relative bg-charcoal border border-white/5 rounded-sm overflow-hidden shadow-gold-glow hover:shadow-gold-glow-hover hover:border-gold/40 transition-all duration-700 hover:-translate-y-2">
-                        
-                        <div class="relative aspect-[3/4] overflow-hidden bg-black">
-                            <img src="${p.image_url}" 
-                                 alt="${p.name}" 
-                                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                                 onerror="this.src='https://via.placeholder.com/600x800/1a1a1a/d4af37?text=Realones+Exclusive'">
-                            
-                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-transparent to-transparent opacity-80"></div>
-                        </div>
-                        
-                        <div class="absolute bottom-0 left-0 w-full p-8 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-[9px] font-bold tracking-[0.4em] text-gold uppercase mb-2">${p.category}</p>
-                            <h3 class="font-playfair text-3xl mb-4 text-white">${p.name}</h3>
-                            
-                            <div class="flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                                <span class="font-rajdhani text-xl tracking-tight text-white/90">KES ${Number(p.price).toLocaleString()}</span>
-                                <button onclick="if(typeof addToCart === 'function') addToCart(${jsonString}); else console.error('app.js missing addToCart');" 
-                                        class="text-[10px] tracking-[0.2em] uppercase text-gold border-b border-gold pb-1 hover:text-white hover:border-white transition-all">
-                                    Acquire
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `}).join('');
-            } catch (error) {
-                console.error("Neon Vault Error:", error);
-                grid.innerHTML = `
-                    <div class="col-span-full py-20 text-center">
-                        <p class="text-gold font-playfair text-2xl mb-2">System Interruption</p>
-                        <p class="text-[10px] tracking-[0.2em] text-white/40 uppercase">Unable to sync with the Neon Vault.</p>
-                    </div>`;
-            }
-        }
-
-        // Initialize Neon Vault
-        document.addEventListener('DOMContentLoaded', () => fetchNeonProducts());
-    </script>
-</body>
-</html>
-    <div class="max-w-7xl mx-auto px-6 py-12 flex flex-wrap justify-center gap-6">
-        <button onclick="fetchNeonProducts('all')" class="px-6 py-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-charcoal border-b-2 border-transparent hover:border-gold transition-all duration-300">All Masterpieces</button>
-        <button onclick="fetchNeonProducts('Dresses')" class="px-6 py-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-charcoal border-b-2 border-transparent hover:border-gold transition-all duration-300">Dresses</button>
-        <button onclick="fetchNeonProducts('Streetwear')" class="px-6 py-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-charcoal border-b-2 border-transparent hover:border-gold transition-all duration-300">Streetwear</button>
-    </div>
-
-    <main class="max-w-7xl mx-auto px-6 pb-40">
-        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
-            <div class="col-span-full py-20 flex flex-col items-center justify-center">
-                <div class="w-12 h-12 border-2 border-gold/30 border-t-gold rounded-full animate-spin mb-6"></div>
-                <p class="text-xs font-semibold tracking-[0.4em] text-charcoal uppercase">Unlocking The Vault...</p>
-            </div>
-        </div>
-    </main>
-
-    <footer class="bg-white border-t border-gold/20 py-16">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
-            <h2 class="font-playfair text-2xl text-charcoal mb-4 font-bold tracking-widest">THE REALONES STORE</h2>
-            <p class="text-[10px] tracking-[0.3em] text-charcoal/50 uppercase font-semibold">&copy; 2026 Crafted for Royalty &bull; Nairobi, Kenya</p>
-        </div>
-    </footer>
-
-    <script>
-        async function fetchNeonProducts(filter = 'all') {
-            const grid = document.getElementById('productGrid');
-            
-            try {
-                const response = await fetch('/api/get-products');
-                const products = await response.json();
-                
-                const filtered = filter === 'all' 
-                    ? products 
-                    : products.filter(p => p.category === filter);
-
-                if (filtered.length === 0) {
-                    grid.innerHTML = `<p class="col-span-full text-center text-charcoal/50 font-playfair italic text-2xl">No masterpieces found in this category.</p>`;
-                    return;
-                }
-
-                grid.innerHTML = filtered.map(p => `
-                    <div class="group relative bg-white rounded-t-2xl overflow-hidden shadow-royal hover:shadow-royal-hover border border-gold/10 transition-all duration-700 hover:-translate-y-2">
-                        
-                        <div class="relative aspect-[3/4] overflow-hidden bg-pearl">
-                            <img src="${p.image_url}" 
-                                 alt="${p.name}" 
-                                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                                 onerror="this.src='https://via.placeholder.com/600x800/FDFBF7/D4AF37?text=Masterpiece'">
-                            
-                            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-                        </div>
-                        
-                        <div class="p-8 text-center bg-white relative">
-                            <p class="text-[9px] font-bold tracking-[0.3em] text-gold uppercase mb-3">${p.category}</p>
-                            <h3 class="font-playfair text-2xl mb-4 text-charcoal group-hover:text-gold-dark transition-colors">${p.name}</h3>
-                            
-                            <div class="flex flex-col items-center gap-4 mt-6">
-                                <span class="font-rajdhani text-xl tracking-tight text-charcoal/80 font-medium">KES ${Number(p.price).toLocaleString()}</span>
-                                <button class="w-full py-3 bg-charcoal text-white text-[10px] font-semibold tracking-[0.3em] uppercase hover:bg-gold transition-colors duration-300">
-                                    Add to Collection
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (error) {
-                grid.innerHTML = `
-                    <div class="col-span-full py-20 text-center">
-                        <p class="text-charcoal font-playfair text-2xl italic mb-2">We are adjusting our displays.</p>
-                        <p class="text-[10px] tracking-[0.2em] text-charcoal/50 uppercase">Please check your database connection.</p>
-                    </div>`;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => fetchNeonProducts());
-    </script>
-</body>
-</html>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-
-            } catch (error) {
-                console.error('Neon Error:', error);
-                grid.innerHTML = `
-                    <div class="col-span-full border border-red-900/50 bg-red-900/10 p-10 text-center">
-                        <p class="text-red-500 tracking-widest uppercase mb-2">System Error</p>
-                        <p class="text-white/60 text-sm">Verify DATABASE_URL in Netlify Environment Variables.</p>
-                    </div>`;
-            }
-        }
-
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', fetchNeonProducts);
-    </script>
-</body>
-</html>
-        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Populated by JS -->
-        </div>
-    </section>
-
-    <!-- Product Modal -->
-    <div id="productModal" class="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeModal()">
-        <div class="bg-charcoal border border-gold/30 rounded-2xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gold text-3xl hover:rotate-90 transition-transform w-10 h-10 flex items-center justify-center border border-gold/30 rounded-full hover:bg-gold hover:text-dark">×</button>
-            <img id="modalImg" src="" alt="" class="w-full h-64 object-cover rounded-xl mb-4 bg-gradient-to-br from-gold/10 to-dark border border-gold/20" loading="lazy">
-            <span id="modalBadge" class="inline-block px-3 py-1 bg-gold text-dark text-xs font-bold uppercase rounded mb-2 hidden"></span>
-            <h3 id="modalName" class="font-playfair text-2xl text-white mb-2"></h3>
-            <p id="modalCategory" class="text-gold text-sm uppercase tracking-wider mb-2"></p>
-            <p id="modalPrice" class="text-gold text-2xl font-bold mb-4"></p>
-            <p id="modalDesc" class="text-white/70 mb-6 leading-relaxed"></p>
-            <button onclick="addFromModal()" class="w-full py-4 bg-gold text-dark font-bold uppercase tracking-widest hover:bg-gold-light transition-all rounded-lg">Add to Cart</button>
-        </div>
-    </div>
-
-    <!-- Cart Sidebar -->
-    <div id="cartSidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-charcoal/95 backdrop-blur-xl border-l border-gold/30 z-50 transform translate-x-full transition-transform duration-300 p-6 overflow-y-auto">
-        <div class="flex justify-between items-center mb-6 border-b border-gold/30 pb-4">
-            <h3 class="font-playfair text-gold text-2xl uppercase tracking-widest">Your Cart</h3>
-            <button onclick="toggleCart()" class="text-gold text-3xl hover:rotate-90 transition-transform">×</button>
-        </div>
-        <div id="cartItems" class="space-y-4">
-            <p class="text-white/50 text-center italic mt-8">Your cart is empty</p>
-        </div>
-        <div class="mt-6 pt-6 border-t border-gold/30">
-            <div id="cartTotal" class="font-playfair text-gold text-3xl text-center mb-4">KES 0</div>
-            <button onclick="checkout()" id="checkoutBtn" disabled class="w-full py-4 border-2 border-gold text-gold font-bold uppercase tracking-widest hover:bg-gold hover:text-dark transition-all disabled:opacity-30">Checkout via WhatsApp</button>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-dark border-t border-gold/30 py-12 px-4 mt-20">
-        <div class="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div>
-                <h3 class="font-playfair text-gold text-xl mb-4">THE REALONES STORE</h3>
-                <p class="text-white/60 text-sm">Premium women's fashion boutique based in Mombasa.</p>
-            </div>
-            <div>
-                <h3 class="font-playfair text-gold text-xl mb-4">Quick Links</h3>
-                <a href="index.html" class="text-white/60 text-sm hover:text-gold block py-1">Home</a>
-                <a href="about.html" class="text-white/60 text-sm hover:text-gold block py-1">About</a>
-                <a href="contact.html" class="text-white/60 text-sm hover:text-gold block py-1">Contact</a>
-            </div>
-            <div>
-                <h3 class="font-playfair text-gold text-xl mb-4">Contact</h3>
-                <p class="text-white/60 text-sm">+254111636725</p>
-            </div>
-            <div>
-                <h3 class="font-playfair text-gold text-xl mb-4">Payment</h3>
-                <div class="inline-block px-4 py-2 bg-gold/10 border border-gold/30 rounded-lg text-gold font-bold text-sm">M-Pesa</div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
-    <script>
-        // Initialize shop page
-        document.addEventListener('DOMContentLoaded', () => {
-            renderAllProducts();
-        });
-        
-        let currentFilter = 'all';
-        
-        function renderAllProducts() {
-            const grid = document.getElementById('productGrid');
-            const filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter || p.category.includes(currentFilter));
-            grid.innerHTML = filtered.map(product => createProductCard(product)).join('');
-        }
-        
-        function filterProducts(category) {
-            currentFilter = category;
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active', 'bg-gold', 'text-dark');
-                if(btn.dataset.filter === category) btn.classList.add('active', 'bg-gold', 'text-dark');
-            });
-            renderAllProducts();
-        }
-    </script>
-</body>
-</html>
 
