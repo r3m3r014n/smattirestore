@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Vault | THE REALONES STORE</title>
-    <meta name="description" content="Shop premium luxury fashion. Powered by Neon.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -16,93 +15,144 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: '#d4af37',
-                        dark: '#050505',
-                        glass: 'rgba(255, 255, 255, 0.03)',
+                        gold: '#D4AF37',
+                        'gold-dark': '#B5952F',
+                        pearl: '#FDFBF7',
+                        charcoal: '#2C2A25',
                     },
                     fontFamily: {
                         playfair: ['Playfair Display', 'serif'],
                         rajdhani: ['Rajdhani', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'royal': '0 20px 40px -15px rgba(212, 175, 55, 0.15)',
+                        'royal-hover': '0 30px 60px -15px rgba(212, 175, 55, 0.3)',
                     }
                 }
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Royal Shimmer Effect */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        .loading-shimmer {
+            animation: shimmer 2s infinite linear;
+            background: linear-gradient(to right, #f6f4f0 4%, #ece9e2 25%, #f6f4f0 36%);
+            background-size: 1000px 100%;
+        }
+        /* Custom elegant scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FDFBF7; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+    </style>
 </head>
-<body class="bg-dark text-white min-h-screen font-rajdhani selection:bg-gold selection:text-dark">
-<img src="1000006412.jpg" alt="Test Image" style="width: 300px; height: 300px; border: 5px solid red; display: block; z-index: 9999; position: relative;">
+<body class="bg-pearl text-charcoal font-rajdhani selection:bg-gold selection:text-white antialiased">
 
-    <nav class="fixed w-full z-50 transition-all duration-500 border-b border-white/5 bg-dark/80 backdrop-blur-md">
+    <nav class="fixed w-full z-50 border-b border-gold/20 bg-pearl/80 backdrop-blur-xl transition-all duration-500">
         <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="index.html" class="font-playfair text-2xl tracking-widest text-gold hover:opacity-70 transition-opacity">THE REALONES</a>
-            <div class="flex gap-8 text-xs tracking-[0.3em] uppercase">
+            <a href="index.html" class="font-playfair text-2xl font-bold tracking-[0.15em] text-charcoal flex items-center gap-2">
+                <span class="text-gold text-3xl leading-none">&diams;</span> THE REALONES
+            </a>
+            <div class="flex gap-8 text-[11px] font-semibold tracking-[0.2em] uppercase">
                 <a href="index.html" class="hover:text-gold transition-colors">Home</a>
-                <a href="shop.html" class="text-gold border-b border-gold">The Vault</a>
+                <a href="shop.html" class="text-gold border-b border-gold pb-1">The Vault</a>
                 <a href="about.html" class="hover:text-gold transition-colors">House</a>
             </div>
         </div>
     </nav>
 
-    <section class="pt-40 pb-20 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <h1 class="font-playfair text-6xl md:text-8xl mb-6 tracking-tighter">The Vault</h1>
-            <p class="text-white/40 uppercase tracking-[0.5em] text-sm">Curated Excellence &bull; Live Database</p>
+    <header class="pt-48 pb-16 px-6 relative overflow-hidden bg-white border-b border-gold/10 shadow-sm">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(212,175,55,0.05),transparent)] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <h1 class="font-playfair italic text-6xl md:text-8xl mb-6 tracking-tight text-charcoal">The Vault</h1>
+            <div class="flex items-center justify-center gap-4 text-gold/80 uppercase tracking-[0.5em] text-[10px] font-semibold">
+                <span>&mdash;</span>
+                <p>Curated Excellence</p>
+                <span>&mdash;</span>
+            </div>
         </div>
-    </section>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 py-12 flex flex-wrap justify-center gap-6">
+        <button onclick="fetchNeonProducts('all')" class="px-6 py-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-charcoal border-b-2 border-transparent hover:border-gold transition-all duration-300">All Masterpieces</button>
+        <button onclick="fetchNeonProducts('Dresses')" class="px-6 py-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-charcoal border-b-2 border-transparent hover:border-gold transition-all duration-300">Dresses</button>
+        <button onclick="fetchNeonProducts('Streetwear')" class="px-6 py-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-charcoal border-b-2 border-transparent hover:border-gold transition-all duration-300">Streetwear</button>
+    </div>
 
     <main class="max-w-7xl mx-auto px-6 pb-40">
-        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div class="col-span-full py-20 text-center animate-pulse">
-                <div class="w-12 h-12 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                <p class="tracking-[0.4em] text-gold">SYNCHRONIZING WITH NEON...</p>
+        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
+            <div class="col-span-full py-20 flex flex-col items-center justify-center">
+                <div class="w-12 h-12 border-2 border-gold/30 border-t-gold rounded-full animate-spin mb-6"></div>
+                <p class="text-xs font-semibold tracking-[0.4em] text-charcoal uppercase">Unlocking The Vault...</p>
             </div>
         </div>
     </main>
 
-    <footer class="border-t border-white/10 py-20 bg-black">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="font-playfair text-3xl text-gold mb-8">THE REALONES STORE</h2>
-            <p class="text-white/30 text-sm tracking-widest uppercase">&copy; 2026 Crafted for the Superior</p>
+    <footer class="bg-white border-t border-gold/20 py-16">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+            <h2 class="font-playfair text-2xl text-charcoal mb-4 font-bold tracking-widest">THE REALONES STORE</h2>
+            <p class="text-[10px] tracking-[0.3em] text-charcoal/50 uppercase font-semibold">&copy; 2026 Crafted for Royalty &bull; Nairobi, Kenya</p>
         </div>
     </footer>
 
-    <script src="app.js"></script>
     <script>
-        async function fetchNeonProducts() {
+        async function fetchNeonProducts(filter = 'all') {
             const grid = document.getElementById('productGrid');
             
             try {
-                // Fetching from the Netlify Function Bridge
                 const response = await fetch('/api/get-products');
-                if (!response.ok) throw new Error('Database Offline');
-                
                 const products = await response.json();
+                
+                const filtered = filter === 'all' 
+                    ? products 
+                    : products.filter(p => p.category === filter);
 
-                if (products.length === 0) {
-                    grid.innerHTML = `<p class="col-span-full text-center text-white/40">The Vault is currently empty.</p>`;
+                if (filtered.length === 0) {
+                    grid.innerHTML = `<p class="col-span-full text-center text-charcoal/50 font-playfair italic text-2xl">No masterpieces found in this category.</p>`;
                     return;
                 }
 
-                grid.innerHTML = products.map(product => `
-                    <div class="group relative bg-white/5 border border-white/10 p-2 transition-all duration-700 hover:border-gold/50">
-                        <div class="relative overflow-hidden aspect-[3/4] bg-neutral-900">
-                            <img src="${product.image_url}" 
-                                 alt="${product.name}" 
-                                 class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                                 onerror="this.src='https://via.placeholder.com/600x800?text=Luxury+Coming+Soon'">
+                grid.innerHTML = filtered.map(p => `
+                    <div class="group relative bg-white rounded-t-2xl overflow-hidden shadow-royal hover:shadow-royal-hover border border-gold/10 transition-all duration-700 hover:-translate-y-2">
+                        
+                        <div class="relative aspect-[3/4] overflow-hidden bg-pearl">
+                            <img src="${p.image_url}" 
+                                 alt="${p.name}" 
+                                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                 onerror="this.src='https://via.placeholder.com/600x800/FDFBF7/D4AF37?text=Masterpiece'">
                             
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                         </div>
                         
-                        <div class="p-6">
-                            <span class="text-[10px] tracking-[0.4em] text-gold/60 uppercase">${product.category}</span>
-                            <h3 class="font-playfair text-2xl mt-2 mb-6 group-hover:text-gold transition-colors">${product.name}</h3>
-                            <div class="flex justify-between items-center border-t border-white/5 pt-6">
-                                <span class="text-xl font-light tracking-tighter">KES ${Number(product.price).toLocaleString()}</span>
-                                <button onclick="addToCart({id: '${product.id}', name: '${product.name}', price: ${product.price}, image: '${product.image_url}'})" 
-                                        class="text-[10px] tracking-[0.3em] uppercase border border-gold px-6 py-3 hover:bg-gold hover:text-black transition-all duration-500">
-                                    Acquire
+                        <div class="p-8 text-center bg-white relative">
+                            <p class="text-[9px] font-bold tracking-[0.3em] text-gold uppercase mb-3">${p.category}</p>
+                            <h3 class="font-playfair text-2xl mb-4 text-charcoal group-hover:text-gold-dark transition-colors">${p.name}</h3>
+                            
+                            <div class="flex flex-col items-center gap-4 mt-6">
+                                <span class="font-rajdhani text-xl tracking-tight text-charcoal/80 font-medium">KES ${Number(p.price).toLocaleString()}</span>
+                                <button class="w-full py-3 bg-charcoal text-white text-[10px] font-semibold tracking-[0.3em] uppercase hover:bg-gold transition-colors duration-300">
+                                    Add to Collection
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-20 text-center">
+                        <p class="text-charcoal font-playfair text-2xl italic mb-2">We are adjusting our displays.</p>
+                        <p class="text-[10px] tracking-[0.2em] text-charcoal/50 uppercase">Please check your database connection.</p>
+                    </div>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => fetchNeonProducts());
+    </script>
+</body>
+</html>
                                 </button>
                             </div>
                         </div>
