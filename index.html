@@ -31,7 +31,7 @@
     <nav class="fixed top-0 w-full bg-dark/90 backdrop-blur-xl border-b border-gold/30 z-50 px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="font-playfair text-2xl font-bold text-gold tracking-widest">THE REALONES</div>
-            <button onclick="toggleCart()" class="relative text-gold text-2xl">
+            <button onclick="toggleCart()" class="relative text-gold text-2xl hover:scale-110 transition-transform">
                 🛒
                 <span id="cartCount" class="absolute -top-2 -right-2 bg-gold text-dark text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
             </button>
@@ -40,19 +40,23 @@
 
     <!-- Hero -->
     <section class="min-h-screen flex items-center justify-center text-center px-4 pt-20 bg-gradient-to-br from-charcoal to-dark">
-        <div class="max-w-3xl">
-            <p class="font-playfair text-gold italic text-lg mb-4">Est. 2024 • Kenya Coast</p>
-            <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent">THE REALONES<br>STORE</h1>
-            <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">Where luxury meets innovation. Curated fashion for the modern woman who demands excellence.</p>
-            <a href="#collection" class="inline-block px-8 py-4 border-2 border-gold text-gold hover:bg-gold hover:text-dark transition-all duration-300 uppercase tracking-widest font-semibold">Explore Collection</a>
+        <div class="max-w-3xl mx-auto">
+            <p class="font-playfair text-gold italic text-lg mb-4 tracking-widest">Est. 2024 • Kenya Coast</p>
+            <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent leading-tight">THE REALONES<br>STORE</h1>
+            <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto leading-relaxed">Where luxury meets innovation. Curated fashion for the modern woman who demands excellence. Premium dresses, exclusive sets, and statement pieces delivered from Mombasa to Nairobi and beyond.</p>
+            <a href="#collection" class="inline-block px-8 py-4 border-2 border-gold text-gold hover:bg-gold hover:text-dark transition-all duration-300 uppercase tracking-widest font-semibold relative overflow-hidden group">
+                <span class="relative z-10">Explore Collection</span>
+                <div class="absolute inset-0 bg-gold transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+            </a>
         </div>
     </section>
 
     <!-- Products -->
     <section id="collection" class="py-20 px-4 max-w-7xl mx-auto">
-        <div class="text-center mb-12">
-            <p class="font-playfair text-gold italic">Curated Excellence</p>
-            <h2 class="font-playfair text-4xl font-semibold mt-2">The Collection</h2>
+        <div class="text-center mb-16">
+            <p class="font-playfair text-gold italic text-xl tracking-widest mb-2">Curated Excellence</p>
+            <h2 class="font-playfair text-4xl font-semibold text-white">The Collection</h2>
+            <div class="w-24 h-0.5 bg-gradient-to-r from-gold to-gold-light mx-auto mt-4 shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
         </div>
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </section>
@@ -60,26 +64,121 @@
     <!-- About -->
     <section class="py-20 px-4 bg-charcoal">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div class="h-80 bg-gradient-to-br from-gold/10 to-dark/50 border border-gold/30 rounded-2xl flex items-center justify-center">
+            <div class="h-80 md:h-96 bg-gradient-to-br from-gold/10 to-dark/50 border border-gold/30 rounded-2xl flex items-center justify-center relative overflow-hidden">
                 <div class="text-center text-gold">
-                    <div class="text-5xl mb-4">✦</div>
-                    <div class="font-playfair text-2xl">THE REALONES</div>
+                    <div class="text-6xl mb-4 animate-pulse">✦</div>
+                    <div class="font-playfair text-3xl tracking-widest">THE REALONES</div>
                 </div>
             </div>
             <div>
-                <h2 class="font-playfair text-gold text-3xl mb-6">Crafted for the Kenyan Woman</h2>
-                <p class="text-white/80 text-lg mb-4">THE REALONES STORE represents the pinnacle of coastal fashion. Born in Mombasa and designed for the discerning woman across Kenya.</p>
-                <ul class="space-y-2 text-gold-light">
-                    <li>✦ Authentic designer pieces & quality guaranteed</li>
-                    <li>✦ Same-day delivery available in Mombasa & Nairobi</li>
-                    <li>✦ Secure M-Pesa payments accepted</li>
+                <h2 class="font-playfair text-gold text-3xl md:text-4xl mb-6 leading-tight">Crafted for the Kenyan Woman</h2>
+                <p class="text-white/80 text-lg mb-4 leading-relaxed">THE REALONES STORE represents the pinnacle of coastal fashion. Born in Mombasa and designed for the discerning woman across Kenya, we bring you exclusive pieces that blend international luxury with local elegance.</p>
+                <p class="text-white/80 text-lg mb-6 leading-relaxed">Every piece in our collection is selected to ensure you stand out—whether you're attending a boardroom meeting in Nairobi, a beach wedding in Diani, or a gala in Kisumu.</p>
+                <ul class="space-y-3 text-gold-light">
+                    <li class="flex items-center gap-3"><span class="text-gold text-xl">✦</span> Authentic designer pieces & quality guaranteed</li>
+                    <li class="flex items-center gap-3"><span class="text-gold text-xl">✦</span> Same-day delivery available in Mombasa & Nairobi</li>
+                    <li class="flex items-center gap-3"><span class="text-gold text-xl">✦</span> Secure M-Pesa payments accepted</li>
+                    <li class="flex items-center gap-3"><span class="text-gold text-xl">✦</span> Personal styling consultations available</li>
                 </ul>
             </div>
         </div>
     </section>
 
+    <!-- Delivery Info -->
+    <section class="py-20 px-4 bg-gradient-to-b from-gold/5 to-dark">
+        <div class="text-center mb-12">
+            <p class="font-playfair text-gold italic text-xl tracking-widest mb-2">Service Excellence</p>
+            <h2 class="font-playfair text-4xl font-semibold text-white">Shopping Made Simple</h2>
+            <div class="w-24 h-0.5 bg-gradient-to-r from-gold to-gold-light mx-auto mt-4 shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div class="bg-charcoal/80 backdrop-blur-sm p-8 border border-gold/30 rounded-2xl text-center hover:-translate-y-2 hover:border-gold hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transition-all duration-300">
+                <div class="text-4xl mb-4 text-gold drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">🚚</div>
+                <h3 class="font-playfair text-xl mb-3 text-white">Nationwide Delivery</h3>
+                <p class="text-white/70 leading-relaxed">Fast delivery to Nairobi, Mombasa, Kisumu, Nakuru, and all major towns across Kenya</p>
+            </div>
+            <div class="bg-charcoal/80 backdrop-blur-sm p-8 border border-gold/30 rounded-2xl text-center hover:-translate-y-2 hover:border-gold hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transition-all duration-300">
+                <div class="text-4xl mb-4 text-gold drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">📱</div>
+                <h3 class="font-playfair text-xl mb-3 text-white">M-Pesa Accepted</h3>
+                <p class="text-white/70 leading-relaxed">Secure mobile payments. Pay via M-Pesa Paybill or Till Number instantly</p>
+            </div>
+            <div class="bg-charcoal/80 backdrop-blur-sm p-8 border border-gold/30 rounded-2xl text-center hover:-translate-y-2 hover:border-gold hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transition-all duration-300">
+                <div class="text-4xl mb-4 text-gold drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">✨</div>
+                <h3 class="font-playfair text-xl mb-3 text-white">Premium Quality</h3>
+                <p class="text-white/70 leading-relaxed">Every item hand-selected. Quality guaranteed or your money back</p>
+            </div>
+            <div class="bg-charcoal/80 backdrop-blur-sm p-8 border border-gold/30 rounded-2xl text-center hover:-translate-y-2 hover:border-gold hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transition-all duration-300">
+                <div class="text-4xl mb-4 text-gold drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">💬</div>
+                <h3 class="font-playfair text-xl mb-3 text-white">WhatsApp Support</h3>
+                <p class="text-white/70 leading-relaxed">Direct support for sizing, styling advice, and order tracking</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Cart Sidebar -->
-    <div id="cartSidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-charcoal/95 border-l border-gold/30 z-50 transform translate-x-full transition-transform duration-300 p-6 overflow-y-auto">
+    <div id="cartSidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-charcoal/95 backdrop-blur-xl border-l border-gold/30 z-50 transform translate-x-full transition-transform duration-300 p-6 overflow-y-auto shadow-[-10px_0_40px_rgba(0,0,0,0.5)]">
+        <div class="flex justify-between items-center mb-6 border-b border-gold/30 pb-4">
+            <h3 class="font-playfair text-gold text-2xl uppercase tracking-widest">Your Cart</h3>
+            <button onclick="toggleCart()" class="text-gold text-3xl hover:rotate-90 transition-transform duration-300">×</button>
+        </div>
+        <div id="cartItems" class="space-y-4">
+            <p class="text-white/50 text-center italic mt-8">Your cart is empty</p>
+        </div>
+        <div class="mt-6 pt-6 border-t border-gold/30">
+            <div id="cartTotal" class="font-playfair text-gold text-3xl text-center mb-4 drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">KES 0</div>
+            <button onclick="checkout()" id="checkoutBtn" disabled class="w-full py-4 border-2 border-gold text-gold font-bold uppercase tracking-widest hover:bg-gold hover:text-dark transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed">Checkout via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeModal()">
+        <div class="bg-charcoal border border-gold/30 rounded-2xl max-w-lg w-full p-6 relative shadow-[0_0_60px_rgba(212,175,55,0.2)]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gold text-3xl hover:rotate-90 transition-transform duration-300 w-10 h-10 flex items-center justify-center border border-gold/30 rounded-full hover:bg-gold hover:text-dark">×</button>
+            <img id="modalImg" src="" alt="" class="w-full h-64 object-cover rounded-xl mb-4 bg-gradient-to-br from-gold/10 to-dark border border-gold/20">
+            <h3 id="modalName" class="font-playfair text-2xl text-white mb-2"></h3>
+            <p id="modalPrice" class="text-gold text-2xl font-bold mb-4 drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]"></p>
+            <p id="modalDesc" class="text-white/70 mb-6 leading-relaxed"></p>
+            <button onclick="addFromModal()" class="w-full py-4 border-2 border-gold text-gold hover:bg-gold hover:text-dark transition-all duration-300 uppercase font-bold tracking-widest rounded-lg relative overflow-hidden group">
+                <span class="relative z-10">Add to Cart</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-gold via-gold-light to-gold transform -translate-x-full group-hover:translate-x-0 transition-transform duration-400"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark border-t border-gold/30 py-12 px-4">
+        <div class="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <div>
+                <h3 class="font-playfair text-gold text-xl mb-4">THE REALONES STORE</h3>
+                <p class="text-white/60 text-sm leading-relaxed">Premium women's fashion boutique based in Mombasa, serving all of Kenya with luxury clothing and accessories.</p>
+            </div>
+            <div>
+                <h3 class="font-playfair text-gold text-xl mb-4">Contact</h3>
+                <p class="text-white/60 text-sm">Email: info@therealonestore.co.ke</p>
+                <p class="text-white/60 text-sm">Phone: +254111636725</p>
+                <p class="text-white/60 text-sm">Location: Mombasa, Kenya</p>
+            </div>
+            <div>
+                <h3 class="font-playfair text-gold text-xl mb-4">Quick Links</h3>
+                <p><a href="#" class="text-white/60 text-sm hover:text-gold transition-colors block py-1">Size Guide</a></p>
+                <p><a href="#" class="text-white/60 text-sm hover:text-gold transition-colors block py-1">Delivery Policy</a></p>
+                <p><a href="#" class="text-white/60 text-sm hover:text-gold transition-colors block py-1">Return Policy</a></p>
+            </div>
+            <div>
+                <h3 class="font-playfair text-gold text-xl mb-4">Payment</h3>
+                <div class="inline-block px-4 py-2 bg-gold/10 border border-gold/30 rounded-lg text-gold font-bold text-sm">M-Pesa</div>
+                <p class="text-gold text-xs mt-2">Till Number: 123456<br>Business Name: REALONES</p>
+            </div>
+        </div>
+        <div class="border-t border-gold/20 pt-6 text-center">
+            <p class="text-white/40 text-sm">&copy; 2024 THE REALONES STORE. All rights reserved. | Designed with luxury & innovation in mind.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
         <div class="flex justify-between items-center mb-6 border-b border-gold/30 pb-4">
             <h3 class="font-playfair text-gold text-2xl">Your Cart</h3>
             <button onclick="toggleCart()" class="text-gold text-2xl hover:rotate-90 transition-transform">×</button>
