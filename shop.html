@@ -101,6 +101,111 @@
     <script>
         async function fetchNeonProducts(filter = 'all') {
             const grid = document.getElementById('productGrid');
+            let products = [];
+            
+            try {
+                // 1. CHECK BROWSER MEMORY FIRST (Saves Neon Compute)
+                const cachedData = sessionStorage.getItem('vaultProducts');
+                
+                if (cachedData) {
+                    products = JSON.parse(cachedData);
+                } else {
+                    // 2. IF NO MEMORY, WAKE UP NEON
+                    const response = await fetch('/api/get-products');
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    products = await response.json();
+                    
+                    // Save to memory so we don't bother Neon again this session
+                    sessionStorage.setItem('vaultProducts', JSON.stringify(products));
+                }
+                
+                // 3. FILTER AND DISPLAY
+                const filtered = filter === 'all' 
+                    ? products 
+                    : products.filter(p => p.category === filter);
+
+                if (filtered.length === 0) {
+                    grid.innerHTML = `<div class="col-span-full py-20 text-center"><p class="text-white/50 font-playfair text-2xl italic">The vault is currently empty.</p></div>`;
+                    return;
+                }
+
+                grid.innerHTML = filtered.map(p => {
+                    const productData = {
+                        id: p.id,
+                        name: p.name.replace(/'/g, "\\'"),
+                        price: p.price,
+                        image: p.image_url,
+                        category: p.category
+                    };
+                    const jsonString = JSON.stringify(productData).replace(/"/g, '&quot;');
+
+                    return `
+                    <div class="group relative bg-charcoal border border-white/5 rounded-sm overflow-hidden shadow-gold-glow hover:shadow-gold-glow-hover hover:border-gold/40 transition-all duration-700 hover:-translate-y-2">
+                        
+                        <div class="relative aspect-[3/4] overflow-hidden bg-black">
+                            <img src="${p.image_url}" 
+                                 alt="${p.name}" 
+                                 loading="lazy"
+                                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                 onerror="this.src='https://via.placeholder.com/600x800/1a1a1a/d4af37?text=Realones+Exclusive'">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-transparent to-transparent opacity-80"></div>
+                        </div>
+                        
+                        <div class="absolute bottom-0 left-0 w-full p-8 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+                            <p class="text-[9px] font-bold tracking-[0.4em] text-gold uppercase mb-2">${p.category}</p>
+                            <h3 class="font-playfair text-3xl mb-4 text-white">${p.name}</h3>
+                            
+                            <div class="flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                <span class="font-rajdhani text-xl tracking-tight text-white/90">KES ${Number(p.price).toLocaleString()}</span>
+                                <button onclick="if(typeof addToCart === 'function') addToCart(${jsonString}); else console.error('app.js missing addToCart');" 
+                                        class="text-[10px] tracking-[0.2em] uppercase text-gold border-b border-gold pb-1 hover:text-white hover:border-white transition-all">
+                                    Acquire
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `}).join('');
+            } catch (error) {
+                console.error("Neon Vault Error:", error);
+                grid.innerHTML = `
+                    <div class="col-span-full py-20 text-center">
+                        <p class="text-gold font-playfair text-2xl mb-2">System Interruption</p>
+                        <p class="text-[10px] tracking-[0.2em] text-white/40 uppercase">Unable to sync with the Neon Vault.</p>
+                    </div>`;
+            }
+        }
+
+        // Initialize Neon Vault
+        document.addEventListener('DOMContentLoaded', () => fetchNeonProducts());
+    </script>
+</body>
+</html>
+
+    <main class="max-w-7xl mx-auto px-6 pb-40">
+        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div class="col-span-full py-32 flex flex-col items-center justify-center">
+                <div class="relative w-16 h-16 mb-6">
+                    <div class="absolute inset-0 border-t-2 border-gold rounded-full animate-spin"></div>
+                    <div class="absolute inset-2 border-r-2 border-gold/50 rounded-full animate-spin" style="animation-direction: reverse;"></div>
+                </div>
+                <p class="text-[10px] tracking-[0.5em] text-gold uppercase">Accessing Neon Vault...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-black border-t border-gold/20 py-16 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <h2 class="font-playfair text-2xl text-gold mb-4 tracking-widest">THE REALONES STORE</h2>
+            <p class="text-[9px] tracking-[0.4em] text-white/40 uppercase">&copy; 2026 Designed for the Elite</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    
+    <script>
+        async function fetchNeonProducts(filter = 'all') {
+            const grid = document.getElementById('productGrid');
             
             try {
                 const response = await fetch('/api/get-products');
