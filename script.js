@@ -1,13 +1,13 @@
 // Product data
 const products = [
-    { id: 1, name: "Designer Cargo Set - Dior Tee", category: "Streetwear", price: 4500, image: "1.jpg", desc: "Premium streetwear set featuring authentic Dior tee paired with tactical cargo pants." },
-    { id: 2, name: "Elegant Off-Shoulder Two-Piece", category: "Formal Sets", price: 3800, image: "2.jpg", desc: "Sophisticated off-shoulder top with matching skirt. Ideal for cocktail parties." },
-    { id: 3, name: "Abstract Print Lounge Set", category: "Loungewear", price: 3200, image: "3.jpg", desc: "Comfortable yet stylish lounge set with contemporary abstract prints." },
-    { id: 4, name: "Premium Bodycon Collection", category: "Dresses", price: 2800, image: "4.jpg", desc: "Figure-hugging bodycon dress that accentuates your curves." },
-    { id: 5, name: "Embroidered Maxi Dress", category: "Evening Wear", price: 5500, image: "5.jpg", desc: "Hand-embroidered maxi dress with intricate details." },
-    { id: 6, name: "Floral Milkmaid Dress", category: "Casual", price: 2500, image: "6.jpg", desc: "Romantic milkmaid-style dress with delicate floral patterns." },
-    { id: 7, name: "Monochrome Abstract Gown", category: "Evening", price: 6000, image: "7.jpg", desc: "Stunning monochrome gown featuring artistic abstract design." },
-    { id: 8, name: "Street Style Bucket Hat Set", category: "Streetwear", price: 4200, image: "8.jpg", desc: "Complete street style set including designer bucket hat." }
+    { id: 1, name: "Designer Cargo Set - Dior Tee", category: "Streetwear", price: 4500, image: "1.jpg", desc: "Premium streetwear set featuring authentic Dior tee paired with tactical cargo pants. Perfect for urban fashion statements." },
+    { id: 2, name: "Elegant Off-Shoulder Two-Piece", category: "Formal Sets", price: 3800, image: "2.jpg", desc: "Sophisticated off-shoulder top with matching skirt. Ideal for cocktail parties and evening events." },
+    { id: 3, name: "Abstract Print Lounge Set", category: "Loungewear", price: 3200, image: "3.jpg", desc: "Comfortable yet stylish lounge set with contemporary abstract prints for the modern home." },
+    { id: 4, name: "Premium Bodycon Collection", category: "Dresses", price: 2800, image: "4.jpg", desc: "Figure-hugging bodycon dress that accentuates your curves with premium stretch fabric." },
+    { id: 5, name: "Embroidered Maxi Dress", category: "Evening Wear", price: 5500, image: "5.jpg", desc: "Hand-embroidered maxi dress with intricate details. A showstopper for any formal occasion." },
+    { id: 6, name: "Floral Milkmaid Dress", category: "Casual", price: 2500, image: "6.jpg", desc: "Romantic milkmaid-style dress with delicate floral patterns. Perfect for brunches and daytime events." },
+    { id: 7, name: "Monochrome Abstract Gown", category: "Evening", price: 6000, image: "7.jpg", desc: "Stunning monochrome gown featuring artistic abstract design. Limited edition piece." },
+    { id: 8, name: "Street Style Bucket Hat Set", category: "Streetwear", price: 4200, image: "8.jpg", desc: "Complete street style set including designer bucket hat, coordinated top and bottoms." }
 ];
 
 let cart = [];
@@ -22,15 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
 // Render products
 function renderProducts() {
     const grid = document.getElementById('productGrid');
-    grid.innerHTML = products.map((product, index) => `
-        <div class="product-card bg-charcoal/50 border border-gold/30 rounded-xl overflow-hidden cursor-pointer animate-fade-in" style="animation-delay: ${index * 0.1}s" onclick="openModal(${product.id})">
-            <div class="h-64 overflow-hidden bg-gradient-to-br from-gold/10 to-dark">
-                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect width=%22400%22 height=%22400%22 fill=%22%231a1a1a%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23d4af37%22 font-family=%22serif%22 font-size=%2220%22>${product.id}</text></svg>'">
+    grid.innerHTML = products.map(product => `
+        <div class="product-card bg-charcoal/80 backdrop-blur-sm border border-gold/30 rounded-2xl overflow-hidden cursor-pointer group" onclick="openModal(${product.id})">
+            <div class="relative h-72 overflow-hidden bg-gradient-to-br from-gold/10 to-dark">
+                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect width=%22400%22 height=%22400%22 fill=%22%231a1a1a%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23d4af37%22 font-family=%22serif%22 font-size=%2224%22>${product.id}</text></svg>'">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
-            <div class="p-4">
-                <div class="text-gold text-xs uppercase tracking-widest mb-1">${product.category}</div>
-                <h3 class="font-playfair text-white text-lg mb-2">${product.name}</h3>
-                <div class="text-gold font-bold text-xl">KES ${product.price.toLocaleString()}</div>
+            <div class="p-5">
+                <div class="text-gold text-xs font-semibold uppercase tracking-widest mb-2">${product.category}</div>
+                <h3 class="font-playfair text-white text-lg mb-3 leading-tight group-hover:text-gold transition-colors">${product.name}</h3>
+                <div class="text-gold font-bold text-xl drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]">KES ${product.price.toLocaleString()}</div>
             </div>
         </div>
     `).join('');
@@ -45,13 +46,18 @@ function openModal(id) {
     document.getElementById('modalName').textContent = currentProduct.name;
     document.getElementById('modalPrice').textContent = `KES ${currentProduct.price.toLocaleString()}`;
     document.getElementById('modalDesc').textContent = currentProduct.desc;
-    document.getElementById('productModal').classList.remove('hidden');
-    document.getElementById('productModal').classList.add('flex');
+    
+    const modal = document.getElementById('productModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
-    document.getElementById('productModal').classList.add('hidden');
-    document.getElementById('productModal').classList.remove('flex');
+    const modal = document.getElementById('productModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = 'auto';
     currentProduct = null;
 }
 
@@ -72,10 +78,86 @@ function addToCart(product) {
         cart.push({ ...product, quantity: 1 });
     }
     updateCart();
+    
+    // Animate cart icon
+    const cartBtn = document.querySelector('nav button');
+    cartBtn.style.transform = 'scale(1.2)';
+    setTimeout(() => cartBtn.style.transform = 'scale(1)', 200);
 }
 
 function removeFromCart(id) {
     cart = cart.filter(item => item.id !== id);
+    updateCart();
+}
+
+function updateQuantity(id, change) {
+    const item = cart.find(item => item.id === id);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) removeFromCart(id);
+        else updateCart();
+    }
+}
+
+function updateCart() {
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    cartCount.textContent = count;
+    cartTotal.textContent = `KES ${total.toLocaleString()}`;
+    checkoutBtn.disabled = cart.length === 0;
+    
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-white/50 text-center italic mt-8">Your cart is empty</p>';
+    } else {
+        cartItems.innerHTML = cart.map(item => `
+            <div class="flex gap-4 items-center bg-dark/50 border border-gold/20 p-4 rounded-xl hover:border-gold/50 transition-colors">
+                <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg border border-gold/50" onerror="this.style.display='none'">
+                <div class="flex-1 min-w-0">
+                    <h4 class="font-playfair text-white text-sm truncate">${item.name}</h4>
+                    <p class="text-gold font-bold text-sm">KES ${item.price.toLocaleString()}</p>
+                    <div class="flex items-center gap-3 mt-2">
+                        <button onclick="updateQuantity(${item.id}, -1)" class="w-7 h-7 border border-gold text-gold rounded hover:bg-gold hover:text-dark transition-all text-sm font-bold">-</button>
+                        <span class="text-white font-semibold w-4 text-center">${item.quantity}</span>
+                        <button onclick="updateQuantity(${item.id}, 1)" class="w-7 h-7 border border-gold text-gold rounded hover:bg-gold hover:text-dark transition-all text-sm font-bold">+</button>
+                    </div>
+                </div>
+                <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-400 hover:scale-110 transition-all text-xl">🗑</button>
+            </div>
+        `).join('');
+    }
+}
+
+function toggleCart() {
+    const sidebar = document.getElementById('cartSidebar');
+    sidebar.classList.toggle('translate-x-full');
+}
+
+function checkout() {
+    if (cart.length === 0) return;
+    
+    let message = `👑 THE REALONES STORE - Order Request 👑%0A%0A`;
+    let total = 0;
+    
+    cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+        message += `• ${item.name}%0A  Qty: ${item.quantity} × KES ${item.price.toLocaleString()} = KES ${subtotal.toLocaleString()}%0A%0A`;
+    });
+    
+    message += `━━━━━━━━━━━━━━━━━━━━━%0A`;
+    message += `💰 TOTAL: KES ${total.toLocaleString()}%0A%0A`;
+    message += `📍 Delivery Location: [Please fill in]%0A`;
+    message += `💳 Payment: M-Pesa%0A%0A`;
+    message += `Please confirm availability and provide payment details.`;
+    
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+}
     updateCart();
 }
 
