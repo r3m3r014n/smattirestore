@@ -40,7 +40,6 @@
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #d4af37; }
         .glass-panel { background: rgba(26, 26, 26, 0.4); backdrop-filter: blur(12px); }
-        /* Optimization to stop layout jumping when your 20 images load */
         .image-container { aspect-ratio: 3/4; background-color: #111; }
     </style>
 </head>
@@ -65,17 +64,113 @@
             <h1 class="font-playfair text-6xl md:text-8xl mb-6 tracking-tighter text-white">The Vault</h1>
             <div class="flex items-center justify-center gap-4 text-gold uppercase tracking-[0.6em] text-[10px] font-semibold">
                 <span class="w-8 h-[1px] bg-gold/50"></span>
-                <p class="animate-pulse">Unlocking Masterpieces</p>
+                <p>Exclusive Masterpieces</p>
                 <span class="w-8 h-[1px] bg-gold/50"></span>
             </div>
         </div>
     </header>
 
     <div class="max-w-7xl mx-auto px-6 py-8 flex flex-wrap justify-center gap-4">
-        <button onclick="fetchNeonProducts('all')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">All Collections</button>
-        <button onclick="fetchNeonProducts('Dresses')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Dresses</button>
-        <button onclick="fetchNeonProducts('Streetwear')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Streetwear</button>
+        <button onclick="loadProducts('all')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">All Collections</button>
+        <button onclick="loadProducts('Dresses')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Dresses</button>
+        <button onclick="loadProducts('Streetwear')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Streetwear</button>
     </div>
+
+    <main class="max-w-7xl mx-auto px-6 pb-40">
+        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            </div>
+    </main>
+
+    <footer class="bg-black border-t border-gold/20 py-16 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <h2 class="font-playfair text-2xl text-gold mb-4 tracking-widest">THE REALONES STORE</h2>
+            <p class="text-[9px] tracking-[0.4em] text-white/40 uppercase">&copy; 2026 Crafted for Royalty &bull; Nairobi, Kenya</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    
+    <script>
+        // Your complete 20-item inventory
+        // I have given them placeholder names and prices. You can edit these names/prices anytime in the future!
+        const inventory = [
+            { id: 1, name: "Golden Hour Gown", price: 15000, category: "Dresses", image_url: "1.jpg" },
+            { id: 2, name: "Midnight Silk Wrap", price: 12500, category: "Dresses", image_url: "2.jpg" },
+            { id: 3, name: "Noir Chic Set", price: 8000, category: "Streetwear", image_url: "3.jpg" },
+            { id: 4, name: "Summer Flow Dress", price: 9500, category: "Dresses", image_url: "4.jpg" },
+            { id: 5, name: "Satin Lounge Essence", price: 7000, category: "Loungewear", image_url: "5.jpg" },
+            { id: 6, name: "Signature Crown Piece", price: 18000, category: "Dresses", image_url: "6.jpg" },
+            { id: 7, name: "Elite Streetwear Set", price: 11000, category: "Streetwear", image_url: "7.jpg" },
+            { id: 8, name: "Royal Velvet Gown", price: 22000, category: "Dresses", image_url: "8.jpg" },
+            { id: 9, name: "Urban Goddess Tracksuit", price: 13500, category: "Streetwear", image_url: "9.jpg" },
+            { id: 10, name: "Celestial Slip Dress", price: 10500, category: "Dresses", image_url: "10.jpg" },
+            { id: 11, name: "Onyx Evening Wear", price: 19000, category: "Dresses", image_url: "11.jpg" },
+            { id: 12, name: "Cashmere Cloud Lounge", price: 14000, category: "Loungewear", image_url: "12.jpg" },
+            { id: 13, name: "Monochrome City Fit", price: 9000, category: "Streetwear", image_url: "13.jpg" },
+            { id: 14, name: "Elegance Maxi", price: 16500, category: "Dresses", image_url: "14.jpg" },
+            { id: 15, name: "Downtown Cargo Set", price: 8500, category: "Streetwear", image_url: "15.jpg" },
+            { id: 16, name: "Pearl Embellished Gown", price: 25000, category: "Dresses", image_url: "16.jpg" },
+            { id: 17, name: "Silk Essential Robe", price: 6500, category: "Loungewear", image_url: "17.jpg" },
+            { id: 18, name: "High-Roller Jacket", price: 12000, category: "Streetwear", image_url: "18.jpg" },
+            { id: 19, name: "Ruby Sunset Dress", price: 17500, category: "Dresses", image_url: "19.jpg" },
+            { id: 20, name: "The Realones Exclusive", price: 30000, category: "Dresses", image_url: "20.jpg" }
+        ];
+
+        function loadProducts(filter = 'all') {
+            const grid = document.getElementById('productGrid');
+            
+            // Filter logic
+            const filtered = filter === 'all' 
+                ? inventory 
+                : inventory.filter(p => p.category === filter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="col-span-full py-20 text-center"><p class="text-white/50 font-playfair text-2xl italic">The vault is currently empty.</p></div>';
+                return;
+            }
+
+            // Render products instantly
+            grid.innerHTML = filtered.map(p => {
+                const productData = {
+                    id: p.id,
+                    name: p.name.replace(/'/g, "\\'"),
+                    price: p.price,
+                    image: p.image_url,
+                    category: p.category
+                };
+                const jsonString = JSON.stringify(productData).replace(/"/g, '&quot;');
+
+                return `
+                <div class="group relative bg-charcoal border border-white/5 rounded-sm overflow-hidden shadow-gold-glow hover:shadow-gold-glow-hover hover:border-gold/40 transition-all duration-700 hover:-translate-y-2">
+                    <div class="relative image-container overflow-hidden">
+                        <img src="${p.image_url}" 
+                             alt="${p.name}" 
+                             loading="lazy"
+                             decoding="async"
+                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                             onerror="this.src='https://via.placeholder.com/600x800/1a1a1a/d4af37?text=Image+Missing'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-transparent to-transparent opacity-80"></div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full p-8 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+                        <p class="text-[9px] font-bold tracking-[0.4em] text-gold uppercase mb-2">${p.category}</p>
+                        <h3 class="font-playfair text-3xl mb-4 text-white">${p.name}</h3>
+                        <div class="flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            <span class="font-rajdhani text-xl tracking-tight text-white/90">KES ${Number(p.price).toLocaleString()}</span>
+                            <button onclick="if(typeof addToCart === 'function') addToCart(${jsonString});" 
+                                    class="text-[10px] tracking-[0.2em] uppercase text-gold border-b border-gold pb-1 hover:text-white hover:border-white transition-all">
+                                Acquire
+                            </button>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        // Instantly load items when page opens
+        document.addEventListener('DOMContentLoaded', () => loadProducts());
+    </script>
+</body>
+</html>
 
     <main class="max-w-7xl mx-auto px-6 pb-40">
         <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
