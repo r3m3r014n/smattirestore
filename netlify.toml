@@ -1,63 +1,8 @@
 [build]
-  # No build command needed for static site
   publish = "."
+  functions = "functions"
 
 [[redirects]]
-  # SPA-style routing for clean URLs
-  from = "/shop"
-  to = "/shop.html"
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
   status = 200
-
-[[redirects]]
-  from = "/about"
-  to = "/about.html"
-  status = 200
-
-[[redirects]]
-  from = "/contact"
-  to = "/contact.html"
-  status = 200
-
-[[redirects]]
-  # Redirect index to root
-  from = "/index"
-  to = "/"
-  status = 301
-
-[[redirects]]
-  # Catch-all redirect to index for any unknown paths
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-
-[[headers]]
-  # Security headers
-  for = "/*"
-    [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
-
-[[headers]]
-  # Cache static assets
-  for = "*.css"
-    [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.js"
-    [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.jpg"
-    [headers.values]
-    Cache-Control = "public, max-age=2592000"
-
-[[headers]]
-  for = "*.png"
-    [headers.values]
-    Cache-Control = "public, max-age=2592000"
-
