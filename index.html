@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE REALONES STORE | Luxury Fashion</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>THE REALONES STORE | Luxury Fashion Kenya | Premium Women's Clothing</title>
+    <meta name="description" content="Premium women's fashion boutique in Mombasa. Designer dresses, evening wear, streetwear & accessories. Nationwide delivery across Kenya. M-Pesa accepted.">
+    <meta name="keywords" content="luxury fashion Kenya, designer dresses Nairobi, women's clothing Mombasa, evening wear Kenya, premium fashion">
+    <meta name="author" content="THE REALONES STORE">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="THE REALONES STORE | Luxury Fashion Kenya">
+    <meta property="og:description" content="Premium women's fashion boutique. Designer pieces delivered nationwide.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://therealonestore.co.ke">
+    <meta property="og:image" content="https://therealonestore.co.ke/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="THE REALONES STORE | Luxury Fashion">
+    <meta name="twitter:description" content="Premium women's fashion in Kenya">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://therealonestore.co.ke">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -24,58 +52,169 @@
             }
         }
     </script>
+    
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ClothingStore",
+        "name": "THE REALONES STORE",
+        "description": "Premium women's fashion boutique in Kenya",
+        "url": "https://therealonestore.co.ke",
+        "telephone": "+254111636725",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Mombasa",
+            "addressCountry": "KE"
+        },
+        "paymentAccepted": "M-Pesa",
+        "areaServed": "Kenya",
+        "priceRange": "$$$"
+    }
+    </script>
 </head>
 <body class="bg-dark text-white font-rajdhani">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-dark/90 backdrop-blur-xl border-b border-gold/30 z-50 px-6 py-4">
+    <nav class="fixed top-0 w-full bg-dark/90 backdrop-blur-xl border-b border-gold/30 z-50 px-6 py-4 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="font-playfair text-2xl font-bold text-gold tracking-widest">THE REALONES</div>
-            <button onclick="toggleCart()" class="relative text-gold text-2xl hover:scale-110 transition-transform">
-                🛒
-                <span id="cartCount" class="absolute -top-2 -right-2 bg-gold text-dark text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
-            </button>
+            <a href="index.html" class="font-playfair text-2xl font-bold text-gold tracking-widest hover:scale-105 transition-transform">THE REALONES</a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="text-gold hover:text-white transition-colors uppercase tracking-wider text-sm font-semibold">Home</a>
+                <a href="shop.html" class="text-white/80 hover:text-gold transition-colors uppercase tracking-wider text-sm font-semibold">Shop</a>
+                <a href="about.html" class="text-white/80 hover:text-gold transition-colors uppercase tracking-wider text-sm font-semibold">About</a>
+                <a href="contact.html" class="text-white/80 hover:text-gold transition-colors uppercase tracking-wider text-sm font-semibold">Contact</a>
+                <button onclick="toggleCart()" class="relative text-gold text-2xl hover:scale-110 transition-transform" aria-label="Shopping cart">
+                    🛒
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-gold text-dark text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-gold text-2xl" aria-label="Menu">☰</button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 w-full bg-dark/95 backdrop-blur-xl border-b border-gold/30 p-6 flex-col gap-4">
+            <a href="index.html" class="text-gold uppercase tracking-wider font-semibold">Home</a>
+            <a href="shop.html" class="text-white/80 uppercase tracking-wider">Shop</a>
+            <a href="about.html" class="text-white/80 uppercase tracking-wider">About</a>
+            <a href="contact.html" class="text-white/80 uppercase tracking-wider">Contact</a>
         </div>
     </nav>
 
     <!-- Hero -->
-    <section class="min-h-screen flex items-center justify-center text-center px-4 pt-20 bg-gradient-to-br from-charcoal to-dark">
-        <div class="max-w-3xl mx-auto">
-            <p class="font-playfair text-gold italic text-lg mb-4 tracking-widest">Est. 2024 • Kenya Coast</p>
-            <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent leading-tight">THE REALONES<br>STORE</h1>
-            <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto leading-relaxed">Where luxury meets innovation. Curated fashion for the modern woman who demands excellence. Premium dresses, exclusive sets, and statement pieces delivered from Mombasa to Nairobi and beyond.</p>
-            <a href="#collection" class="inline-block px-8 py-4 border-2 border-gold text-gold hover:bg-gold hover:text-dark transition-all duration-300 uppercase tracking-widest font-semibold relative overflow-hidden group">
-                <span class="relative z-10">Explore Collection</span>
-                <div class="absolute inset-0 bg-gold transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
-            </a>
+    <section class="min-h-screen flex items-center justify-center text-center px-4 pt-20 bg-gradient-to-br from-charcoal to-dark relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22none%22 stroke=%22%23d4af37%22 stroke-width=%220.5%22 opacity=%220.1%22/></svg>')] bg-cover opacity-20"></div>
+        <div class="max-w-3xl mx-auto relative z-10">
+            <p class="font-playfair text-gold italic text-lg mb-4 tracking-widest animate-fade-in">Est. 2024 • Kenya Coast</p>
+            <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent leading-tight animate-fade-in-up">THE REALONES<br>STORE</h1>
+            <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto leading-relaxed animate-fade-in-up delay-200">Where luxury meets innovation. Curated fashion for the modern woman who demands excellence. Premium dresses, exclusive sets, and statement pieces delivered from Mombasa to Nairobi and beyond.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-300">
+                <a href="shop.html" class="px-8 py-4 bg-gold text-dark font-bold uppercase tracking-widest hover:bg-gold-light transition-all duration-300 rounded-lg">Shop Now</a>
+                <a href="#featured" class="px-8 py-4 border-2 border-gold text-gold hover:bg-gold hover:text-dark transition-all duration-300 uppercase tracking-widest font-semibold rounded-lg">View Collection</a>
+            </div>
         </div>
     </section>
 
-    <!-- Products -->
-    <section id="collection" class="py-20 px-4 max-w-7xl mx-auto">
+    <!-- Featured Products -->
+    <section id="featured" class="py-20 px-4 max-w-7xl mx-auto">
         <div class="text-center mb-16">
             <p class="font-playfair text-gold italic text-xl tracking-widest mb-2">Curated Excellence</p>
-            <h2 class="font-playfair text-4xl font-semibold text-white">The Collection</h2>
+            <h2 class="font-playfair text-4xl font-semibold text-white">Featured Collection</h2>
             <div class="w-24 h-0.5 bg-gradient-to-r from-gold to-gold-light mx-auto mt-4 shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
         </div>
-        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        <div id="featuredGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Populated by JS -->
+        </div>
+        <div class="text-center mt-12">
+            <a href="shop.html" class="inline-block px-8 py-4 border-2 border-gold text-gold hover:bg-gold hover:text-dark transition-all duration-300 uppercase tracking-widest font-semibold rounded-lg">View All Products</a>
+        </div>
     </section>
 
-    <!-- About -->
-    <section class="py-20 px-4 bg-charcoal">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div class="h-80 md:h-96 bg-gradient-to-br from-gold/10 to-dark/50 border border-gold/30 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                <div class="text-center text-gold">
-                    <div class="text-6xl mb-4 animate-pulse">✦</div>
-                    <div class="font-playfair text-3xl tracking-widest">THE REALONES</div>
-                </div>
+    <!-- Features -->
+    <section class="py-20 px-4 bg-gradient-to-b from-gold/5 to-dark">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div class="feature-card bg-charcoal/80 backdrop-blur-sm p-8 border border-gold/30 rounded-2xl text-center">
+                <div class="text-4xl mb-4 text-gold">🚚</div>
+                <h3 class="font-playfair text-xl mb-3">Nationwide Delivery</h3>
+                <p class="text-white/70">Fast delivery to all major towns across Kenya</p>
+            </div>
+            <div class="feature-card bg-charcoal/80 backdrop-blur-sm p-8 border border-gold/30 rounded-2xl text-center">
+                <div class="text-4xl mb-4 text-gold">📱</div>
+                <h3 class="font-playfair text-xl mb-3">M-Pesa Accepted</h3>
+                <p class="text-white/70">Secure mobile payments via Paybill or Till</p>
+            </div>
+            <div class="feature-card bg-charcoal/80 backdrop-blur-sm p-8 border border-gold/30 rounded-2xl text-center">
+                <div class="text-4xl mb-4 text-gold">✨</div>
+                <h3 class="font-playfair text-xl mb-3">Premium Quality</h3>
+                <p class="text-white/70">Every item hand-selected. Quality guaranteed</p>
+            </div>
+            <div class="feature-card bg-charcoal/80 backdrop-blur-sm p-8 border border-gold/30 rounded-2xl text-center">
+                <div class="text-4xl mb-4 text-gold">💬</div>
+                <h3 class="font-playfair text-xl mb-3">WhatsApp Support</h3>
+                <p class="text-white/70">Direct support for sizing and styling</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-charcoal/95 backdrop-blur-xl border-l border-gold/30 z-50 transform translate-x-full transition-transform duration-300 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6 border-b border-gold/30 pb-4">
+            <h3 class="font-playfair text-gold text-2xl uppercase tracking-widest">Your Cart</h3>
+            <button onclick="toggleCart()" class="text-gold text-3xl hover:rotate-90 transition-transform">×</button>
+        </div>
+        <div id="cartItems" class="space-y-4">
+            <p class="text-white/50 text-center italic mt-8">Your cart is empty</p>
+        </div>
+        <div class="mt-6 pt-6 border-t border-gold/30">
+            <div id="cartTotal" class="font-playfair text-gold text-3xl text-center mb-4">KES 0</div>
+            <button onclick="checkout()" id="checkoutBtn" disabled class="w-full py-4 border-2 border-gold text-gold font-bold uppercase tracking-widest hover:bg-gold hover:text-dark transition-all disabled:opacity-30">Checkout via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark border-t border-gold/30 py-12 px-4">
+        <div class="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <div>
+                <h3 class="font-playfair text-gold text-xl mb-4">THE REALONES STORE</h3>
+                <p class="text-white/60 text-sm">Premium women's fashion boutique based in Mombasa, serving all of Kenya.</p>
             </div>
             <div>
-                <h2 class="font-playfair text-gold text-3xl md:text-4xl mb-6 leading-tight">Crafted for the Kenyan Woman</h2>
-                <p class="text-white/80 text-lg mb-4 leading-relaxed">THE REALONES STORE represents the pinnacle of coastal fashion. Born in Mombasa and designed for the discerning woman across Kenya, we bring you exclusive pieces that blend international luxury with local elegance.</p>
-                <p class="text-white/80 text-lg mb-6 leading-relaxed">Every piece in our collection is selected to ensure you stand out—whether you're attending a boardroom meeting in Nairobi, a beach wedding in Diani, or a gala in Kisumu.</p>
-                <ul class="space-y-3 text-gold-light">
-                    <li class="flex items-center gap-3"><span class="text-gold text-xl">✦</span> Authentic designer pieces & quality guaranteed</li>
+                <h3 class="font-playfair text-gold text-xl mb-4">Quick Links</h3>
+                <a href="shop.html" class="text-white/60 text-sm hover:text-gold block py-1">Shop</a>
+                <a href="about.html" class="text-white/60 text-sm hover:text-gold block py-1">About</a>
+                <a href="contact.html" class="text-white/60 text-sm hover:text-gold block py-1">Contact</a>
+            </div>
+            <div>
+                <h3 class="font-playfair text-gold text-xl mb-4">Contact</h3>
+                <p class="text-white/60 text-sm">Phone: +254111636725</p>
+                <p class="text-white/60 text-sm">Mombasa, Kenya</p>
+            </div>
+            <div>
+                <h3 class="font-playfair text-gold text-xl mb-4">Payment</h3>
+                <div class="inline-block px-4 py-2 bg-gold/10 border border-gold/30 rounded-lg text-gold font-bold text-sm">M-Pesa</div>
+            </div>
+        </div>
+        <div class="border-t border-gold/20 pt-6 text-center">
+            <p class="text-white/40 text-sm">&copy; 2024 THE REALONES STORE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Load featured products only (first 4)
+        document.addEventListener('DOMContentLoaded', () => {
+            const featured = products.slice(0, 4);
+            const grid = document.getElementById('featuredGrid');
+            grid.innerHTML = featured.map(product => createProductCard(product)).join('');
+        });
+    </script>
+</body>
+</html>
                     <li class="flex items-center gap-3"><span class="text-gold text-xl">✦</span> Same-day delivery available in Mombasa & Nairobi</li>
                     <li class="flex items-center gap-3"><span class="text-gold text-xl">✦</span> Secure M-Pesa payments accepted</li>
                     <li class="flex items-center gap-3"><span class="text-gold text-xl">✦</span> Personal styling consultations available</li>
