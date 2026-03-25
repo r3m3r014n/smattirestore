@@ -217,7 +217,7 @@ function toggleMobileMenu() {
 function checkout() {
     if (cart.length === 0) return;
     
-    let message = `👑 THE REALONES STORE - Order Request 👑%0A%0A`;
+    let message = `👑 THE SMATTIRE STORE - Order Request 👑%0A%0A`;
     let total = 0;
     
     cart.forEach(item => {
