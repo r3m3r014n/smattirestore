@@ -62,6 +62,15 @@
         <button onclick="loadProducts('Neatfit Collection')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">The Neatfit Collection</button>
     </div>
 
+    <div id="neatfit-collection" class="hidden max-w-7xl mx-auto px-6 pb-10 text-center">
+        <div class="flex items-center justify-center gap-4 mb-3">
+            <span class="w-12 h-[1px] bg-gold/50"></span>
+            <p class="text-[10px] font-bold tracking-[0.4em] text-gold uppercase">The Neatfit Collection</p>
+            <span class="w-12 h-[1px] bg-gold/50"></span>
+        </div>
+        <p class="font-playfair text-2xl md:text-3xl italic text-white/80 tracking-wide">For Every Step of Life</p>
+    </div>
+
     <main class="max-w-7xl mx-auto px-6 pb-40">
         <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             </div>
@@ -102,6 +111,10 @@
 
         function loadProducts(filter = 'all') {
             const grid = document.getElementById('productGrid');
+            const neatfitBanner = document.getElementById('neatfit-collection');
+            if (neatfitBanner) {
+                neatfitBanner.classList.toggle('hidden', filter !== 'Neatfit Collection');
+            }
             
             const filtered = filter === 'all' 
                 ? inventory 
@@ -148,7 +161,13 @@
             }).join('');
         }
 
-        document.addEventListener('DOMContentLoaded', () => loadProducts());
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.hash === '#neatfit-collection') {
+                loadProducts('Neatfit Collection');
+            } else {
+                loadProducts();
+            }
+        });
     </script>
 </body>
 </html>
