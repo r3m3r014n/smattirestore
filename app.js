@@ -1,31 +1,31 @@
 // Product Data - 20 Items
 const products = [
-    { id: 1, name: "Designer Cargo Set - Dior Tee", category: "Streetwear", price: 4500, image: "1.jpg", badge: "Bestseller", desc: "Premium streetwear set featuring authentic Dior tee paired with tactical cargo pants. Perfect for urban fashion statements." },
-    { id: 2, name: "Elegant Off-Shoulder Two-Piece", category: "Formal Sets", price: 3800, image: "2.jpg", badge: "New", desc: "Sophisticated off-shoulder top with matching skirt. Ideal for cocktail parties and evening events." },
-    { id: 3, name: "Abstract Print Lounge Set", category: "Loungewear", price: 3200, image: "3.jpg", badge: "", desc: "Comfortable yet stylish lounge set with contemporary abstract prints for the modern home." },
-    { id: 4, name: "Premium Bodycon Collection", category: "Dresses", price: 2800, image: "4.jpg", badge: "Hot", desc: "Figure-hugging bodycon dress that accentuates your curves with premium stretch fabric." },
-    { id: 5, name: "Embroidered Maxi Dress", category: "Evening Wear", price: 5500, image: "5.jpg", badge: "Luxury", desc: "Hand-embroidered maxi dress with intricate details. A showstopper for any formal occasion." },
-    { id: 6, name: "Floral Milkmaid Dress", category: "Casual", price: 2500, image: "6.jpg", badge: "", desc: "Romantic milkmaid-style dress with delicate floral patterns. Perfect for brunches and daytime events." },
-    { id: 7, name: "Monochrome Abstract Gown", category: "Evening", price: 6000, image: "7.jpg", badge: "Exclusive", desc: "Stunning monochrome gown featuring artistic abstract design. Limited edition piece." },
-    { id: 8, name: "Street Style Bucket Hat Set", category: "Streetwear", price: 4200, image: "8.jpg", badge: "", desc: "Complete street style set including designer bucket hat, coordinated top and bottoms." },
-    { id: 9, name: "Tie-Dye Coord Set Collection", category: "Trending", price: 3500, image: "9.jpg", badge: "Trending", desc: "Vibrant tie-dye coordinated set in premium cotton blend. Currently trending across Kenya." },
-    { id: 10, name: "Athleisure Stussy Set", category: "Activewear", price: 4800, image: "10.jpg", badge: "", desc: "High-end athleisure set featuring Stussy branding. Gym-to-street versatility." },
-    { id: 11, name: "Velvet Leopard Gown", category: "Luxury", price: 7500, image: "11.jpg", badge: "Premium", desc: "Opulent velvet gown with subtle leopard print. For those who dare to stand out." },
-    { id: 12, name: "Executive Power Suit", category: "Business", price: 6800, image: "12.jpg", badge: "Professional", desc: "Sharp executive suit tailored for the modern businesswoman. Command the boardroom." },
-    { id: 13, name: "Green Print Summer Dress", category: "Casual", price: 2900, image: "13.jpg", badge: "", desc: "Breezy summer dress with tropical green prints. Perfect for coastal getaways." },
-    { id: 14, name: "Alo Yoga Active Set", category: "Fitness", price: 4200, image: "14.jpg", badge: "", desc: "Premium yoga and fitness set by Alo. High-performance fabric with luxury feel." },
-    { id: 15, name: "Graphic Tee Cargo Combo", category: "Streetwear", price: 3800, image: "15.jpg", badge: "", desc: "Edgy graphic tee paired with utility cargo pants. Urban fashion at its finest." },
-    { id: 16, name: "Satin Evening Collection", category: "Formal", price: 5800, image: "16.jpg", badge: "Elegant", desc: "Luxurious satin evening wear that drapes beautifully. Timeless elegance." },
-    { id: 17, name: "Traditional Print Maxi", category: "Cultural", price: 4500, image: "17.jpg", badge: "", desc: "Maxi dress featuring traditional African prints with modern silhouette." },
-    { id: 18, name: "Artistic Brushstroke Set", category: "Casual", price: 3400, image: "18.jpg", badge: "", desc: "Wearable art featuring bold brushstroke patterns. Unique and eye-catching." },
-    { id: 19, name: "Neon Pink Street Set", category: "Urban", price: 3200, image: "19.jpg", badge: "", desc: "Bold neon pink set for the fashion-forward. Make a statement wherever you go." },
-    { id: 20, name: "Corporate Sheath Dress", category: "Office", price: 3600, image: "20.jpg", badge: "", desc: "Classic sheath dress for professional settings. Polished and sophisticated." }
+    { id: 1, name: "Designer Cargo Set - Dior Tee", category: "Casual Streetwear", price: 4500, image: "1.jpg", badge: "Bestseller", desc: "Premium streetwear set featuring authentic Dior tee paired with tactical cargo pants. Perfect for urban fashion statements." },
+    { id: 2, name: "Elegant Off-Shoulder Two-Piece", category: "Neatfit Collection", price: 3800, image: "2.jpg", badge: "New", desc: "Sophisticated off-shoulder top with matching skirt. Ideal for cocktail parties and evening events." },
+    { id: 3, name: "Abstract Print Lounge Set", category: "Casual Streetwear", price: 3200, image: "3.jpg", badge: "", desc: "Comfortable yet stylish lounge set with contemporary abstract prints for the modern home." },
+    { id: 4, name: "Premium Bodycon Collection", category: "Neatfit Collection", price: 2800, image: "4.jpg", badge: "Hot", desc: "Figure-hugging bodycon dress that accentuates your curves with premium stretch fabric." },
+    { id: 5, name: "Embroidered Maxi Dress", category: "Neatfit Collection", price: 5500, image: "5.jpg", badge: "Luxury", desc: "Hand-embroidered maxi dress with intricate details. A showstopper for any formal occasion." },
+    { id: 6, name: "Floral Milkmaid Dress", category: "Casual Streetwear", price: 2500, image: "6.jpg", badge: "", desc: "Romantic milkmaid-style dress with delicate floral patterns. Perfect for brunches and daytime events." },
+    { id: 7, name: "Monochrome Abstract Gown", category: "Neatfit Collection", price: 6000, image: "7.jpg", badge: "Exclusive", desc: "Stunning monochrome gown featuring artistic abstract design. Limited edition piece." },
+    { id: 8, name: "Street Style Bucket Hat Set", category: "Casual Streetwear", price: 4200, image: "8.jpg", badge: "", desc: "Complete street style set including designer bucket hat, coordinated top and bottoms." },
+    { id: 9, name: "Tie-Dye Coord Set Collection", category: "Casual Streetwear", price: 3500, image: "9.jpg", badge: "Trending", desc: "Vibrant tie-dye coordinated set in premium cotton blend. Currently trending across Kenya." },
+    { id: 10, name: "Athleisure Stussy Set", category: "Casual Streetwear", price: 4800, image: "10.jpg", badge: "", desc: "High-end athleisure set featuring Stussy branding. Gym-to-street versatility." },
+    { id: 11, name: "Velvet Leopard Gown", category: "Neatfit Collection", price: 7500, image: "11.jpg", badge: "Premium", desc: "Opulent velvet gown with subtle leopard print. For those who dare to stand out." },
+    { id: 12, name: "Executive Power Suit", category: "Neatfit Collection", price: 6800, image: "12.jpg", badge: "Professional", desc: "Sharp executive suit tailored for the modern businesswoman. Command the boardroom." },
+    { id: 13, name: "Green Print Summer Dress", category: "Casual Streetwear", price: 2900, image: "13.jpg", badge: "", desc: "Breezy summer dress with tropical green prints. Perfect for coastal getaways." },
+    { id: 14, name: "Alo Yoga Active Set", category: "Casual Streetwear", price: 4200, image: "14.jpg", badge: "", desc: "Premium yoga and fitness set by Alo. High-performance fabric with luxury feel." },
+    { id: 15, name: "Graphic Tee Cargo Combo", category: "Casual Streetwear", price: 3800, image: "15.jpg", badge: "", desc: "Edgy graphic tee paired with utility cargo pants. Urban fashion at its finest." },
+    { id: 16, name: "Satin Evening Collection", category: "Neatfit Collection", price: 5800, image: "16.jpg", badge: "Elegant", desc: "Luxurious satin evening wear that drapes beautifully. Timeless elegance." },
+    { id: 17, name: "Traditional Print Maxi", category: "Neatfit Collection", price: 4500, image: "17.jpg", badge: "", desc: "Maxi dress featuring traditional African prints with modern silhouette." },
+    { id: 18, name: "Artistic Brushstroke Set", category: "Casual Streetwear", price: 3400, image: "18.jpg", badge: "", desc: "Wearable art featuring bold brushstroke patterns. Unique and eye-catching." },
+    { id: 19, name: "Neon Pink Street Set", category: "Casual Streetwear", price: 3200, image: "19.jpg", badge: "", desc: "Bold neon pink set for the fashion-forward. Make a statement wherever you go." },
+    { id: 20, name: "Corporate Sheath Dress", category: "Neatfit Collection", price: 3600, image: "20.jpg", badge: "", desc: "Classic sheath dress for professional settings. Polished and sophisticated." }
 ];
 
 // State
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let currentProduct = null;
-const WHATSAPP_NUMBER = '254111636725';
+const WHATSAPP_NUMBER = '254701226084';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize shop page if product grid exists
     const productGrid = document.getElementById('productGrid');
     if (productGrid && typeof renderAllProducts === 'function') {
-        renderAllProducts();
+        applyHashFilter();
     }
     
     // Initialize featured products on homepage
@@ -217,7 +217,7 @@ function toggleMobileMenu() {
 function checkout() {
     if (cart.length === 0) return;
     
-    let message = `👑 THE REALONES STORE - Order Request 👑%0A%0A`;
+    let message = `✨ SM ATTIRE - Order Request ✨%0A%0A`;
     let total = 0;
     
     cart.forEach(item => {
@@ -263,7 +263,7 @@ function renderAllProducts() {
     
     const filtered = currentFilter === 'all' 
         ? products 
-        : products.filter(p => p.category === currentFilter || p.category.includes(currentFilter));
+        : products.filter(p => p.category === currentFilter);
     
     grid.innerHTML = filtered.map(product => createProductCard(product)).join('');
 }
@@ -279,4 +279,16 @@ function filterProducts(category) {
         }
     });
     renderAllProducts();
+}
+
+// Apply hash-based filter on shop page load
+function applyHashFilter() {
+    const hash = window.location.hash;
+    if (hash === '#casual-streetwear') {
+        filterProducts('Casual Streetwear');
+    } else if (hash === '#neatfit-collection') {
+        filterProducts('Neatfit Collection');
+    } else {
+        filterProducts('all');
+    }
 }

@@ -35,11 +35,11 @@
 
     <nav class="fixed w-full z-50 glass-panel border-b border-gold/10 transition-all duration-500">
         <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="index.html" class="font-playfair text-2xl tracking-[0.15em] text-gold hover:text-gold-light transition-colors">THE REALONES</a>
+            <a href="index.html" class="font-playfair text-2xl tracking-[0.15em] text-gold hover:text-gold-light transition-colors">SM ATTIRE</a>
             <div class="flex gap-8 text-[11px] font-semibold tracking-[0.2em] uppercase">
-                <a href="index.html" class="hover:text-gold transition-colors">Home</a>
-                <a href="shop.html" class="text-gold border-b border-gold pb-1">The Vault</a>
-                <a href="about.html" class="hover:text-gold transition-colors">House</a>
+                <a href="shop.html" class="text-gold border-b border-gold pb-1">All Collections</a>
+                <a href="shop.html#casual-streetwear" class="hover:text-gold transition-colors">Casual Streetwear</a>
+                <a href="shop.html#neatfit-collection" class="hover:text-gold transition-colors">The Neatfit Collection</a>
             </div>
         </div>
     </nav>
@@ -47,10 +47,10 @@
     <header class="pt-48 pb-16 px-6 relative overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.15)_0%,rgba(10,10,10,0)_70%)] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto text-center relative z-10">
-            <h1 class="font-playfair text-6xl md:text-8xl mb-6 tracking-tighter text-white">The Vault</h1>
+            <h1 class="font-playfair text-6xl md:text-8xl mb-6 tracking-tighter text-white">SM ATTIRE</h1>
             <div class="flex items-center justify-center gap-4 text-gold uppercase tracking-[0.6em] text-[10px] font-semibold">
                 <span class="w-8 h-[1px] bg-gold/50"></span>
-                <p>Exclusive Masterpieces</p>
+                <p>All Collections</p>
                 <span class="w-8 h-[1px] bg-gold/50"></span>
             </div>
         </div>
@@ -58,9 +58,8 @@
 
     <div class="max-w-7xl mx-auto px-6 py-8 flex flex-wrap justify-center gap-4">
         <button onclick="loadProducts('all')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">All Collections</button>
-        <button onclick="loadProducts('Dresses')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Dresses</button>
-        <button onclick="loadProducts('Streetwear')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Streetwear</button>
-        <button onclick="loadProducts('Loungewear')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Loungewear</button>
+        <button onclick="loadProducts('Casual Streetwear')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Casual Streetwear</button>
+        <button onclick="loadProducts('Neatfit Collection')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">The Neatfit Collection</button>
     </div>
 
     <main class="max-w-7xl mx-auto px-6 pb-40">
@@ -70,7 +69,7 @@
 
     <footer class="bg-black border-t border-gold/20 py-16 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-            <h2 class="font-playfair text-2xl text-gold mb-4 tracking-widest">THE REALONES STORE</h2>
+            <h2 class="font-playfair text-2xl text-gold mb-4 tracking-widest">SM ATTIRE</h2>
             <p class="text-[9px] tracking-[0.4em] text-white/40 uppercase">&copy; 2026 Crafted for Royalty &bull; Nairobi, Kenya</p>
         </div>
     </footer>
@@ -79,26 +78,26 @@
     
     <script>
         const inventory = [
-            { id: 1, name: "Masterpiece 01", price: 15000, category: "Dresses", image_url: "1.jpg" },
-            { id: 2, name: "Masterpiece 02", price: 12500, category: "Dresses", image_url: "2.jpg" },
-            { id: 3, name: "Masterpiece 03", price: 8000, category: "Streetwear", image_url: "3.jpg" },
-            { id: 4, name: "Masterpiece 04", price: 9500, category: "Dresses", image_url: "4.jpg" },
-            { id: 5, name: "Masterpiece 05", price: 7000, category: "Loungewear", image_url: "5.jpg" },
-            { id: 6, name: "Masterpiece 06", price: 18000, category: "Dresses", image_url: "6.jpg" },
-            { id: 7, name: "Masterpiece 07", price: 11000, category: "Streetwear", image_url: "7.jpg" },
-            { id: 8, name: "Masterpiece 08", price: 22000, category: "Dresses", image_url: "8.jpg" },
-            { id: 9, name: "Masterpiece 09", price: 13500, category: "Streetwear", image_url: "9.jpg" },
-            { id: 10, name: "Masterpiece 10", price: 10500, category: "Dresses", image_url: "10.jpg" },
-            { id: 11, name: "Masterpiece 11", price: 19000, category: "Dresses", image_url: "11.jpg" },
-            { id: 12, name: "Masterpiece 12", price: 14000, category: "Loungewear", image_url: "12.jpg" },
-            { id: 13, name: "Masterpiece 13", price: 9000, category: "Streetwear", image_url: "13.jpg" },
-            { id: 14, name: "Masterpiece 14", price: 16500, category: "Dresses", image_url: "14.jpg" },
-            { id: 15, name: "Masterpiece 15", price: 8500, category: "Streetwear", image_url: "15.jpg" },
-            { id: 16, name: "Masterpiece 16", price: 25000, category: "Dresses", image_url: "16.jpg" },
-            { id: 17, name: "Masterpiece 17", price: 6500, category: "Loungewear", image_url: "17.jpg" },
-            { id: 18, name: "Masterpiece 18", price: 12000, category: "Streetwear", image_url: "18.jpg" },
-            { id: 19, name: "Masterpiece 19", price: 17500, category: "Dresses", image_url: "19.jpg" },
-            { id: 20, name: "The Realones Exclusive", price: 30000, category: "Dresses", image_url: "20.jpg" }
+            { id: 1, name: "Masterpiece 01", price: 15000, category: "Neatfit Collection", image_url: "1.jpg" },
+            { id: 2, name: "Masterpiece 02", price: 12500, category: "Neatfit Collection", image_url: "2.jpg" },
+            { id: 3, name: "Masterpiece 03", price: 8000, category: "Casual Streetwear", image_url: "3.jpg" },
+            { id: 4, name: "Masterpiece 04", price: 9500, category: "Neatfit Collection", image_url: "4.jpg" },
+            { id: 5, name: "Masterpiece 05", price: 7000, category: "Casual Streetwear", image_url: "5.jpg" },
+            { id: 6, name: "Masterpiece 06", price: 18000, category: "Neatfit Collection", image_url: "6.jpg" },
+            { id: 7, name: "Masterpiece 07", price: 11000, category: "Casual Streetwear", image_url: "7.jpg" },
+            { id: 8, name: "Masterpiece 08", price: 22000, category: "Neatfit Collection", image_url: "8.jpg" },
+            { id: 9, name: "Masterpiece 09", price: 13500, category: "Casual Streetwear", image_url: "9.jpg" },
+            { id: 10, name: "Masterpiece 10", price: 10500, category: "Neatfit Collection", image_url: "10.jpg" },
+            { id: 11, name: "Masterpiece 11", price: 19000, category: "Neatfit Collection", image_url: "11.jpg" },
+            { id: 12, name: "Masterpiece 12", price: 14000, category: "Casual Streetwear", image_url: "12.jpg" },
+            { id: 13, name: "Masterpiece 13", price: 9000, category: "Casual Streetwear", image_url: "13.jpg" },
+            { id: 14, name: "Masterpiece 14", price: 16500, category: "Neatfit Collection", image_url: "14.jpg" },
+            { id: 15, name: "Masterpiece 15", price: 8500, category: "Casual Streetwear", image_url: "15.jpg" },
+            { id: 16, name: "Masterpiece 16", price: 25000, category: "Neatfit Collection", image_url: "16.jpg" },
+            { id: 17, name: "Masterpiece 17", price: 6500, category: "Casual Streetwear", image_url: "17.jpg" },
+            { id: 18, name: "Masterpiece 18", price: 12000, category: "Casual Streetwear", image_url: "18.jpg" },
+            { id: 19, name: "Masterpiece 19", price: 17500, category: "Neatfit Collection", image_url: "19.jpg" },
+            { id: 20, name: "The Neatfit Exclusive", price: 30000, category: "Neatfit Collection", image_url: "20.jpg" }
         ];
 
         function loadProducts(filter = 'all') {
