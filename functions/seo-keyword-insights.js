@@ -17,7 +17,7 @@ function buildKeywordClusters(seed = 'mitumba nairobi') {
     transactional: [
       `buy ${seed}`,
       `grade a mitumba ${city}`,
-      `second hand sneakers ${city}`,
+      `neatfit collection sneakers ${city}`,
       `thrift clothes ${city} delivery`,
       `cheap mitumba shoes ${city}`
     ],

@@ -23,7 +23,7 @@ exports.handler = async (event) => {
   const target = String(payload.targetName || 'Editor').trim();
   const site = String(payload.targetSite || 'Local Kenya Lifestyle Blog').trim();
 
-  const emailTemplate = `Subject: Collaboration idea for ${site} + SM ATTIRE\n\nHi ${target},\n\nI enjoyed your recent coverage on affordable fashion in Kenya. I run SM ATTIRE, a Nairobi-based thrift and mitumba store focused on Grade A streetwear and second-hand sneakers.\n\nI would love to contribute a practical piece for your audience (e.g., \"How to Buy Quality Mitumba Shoes in Nairobi on a Budget\"). In return, we can include original visuals and data-backed buyer tips your readers can use immediately.\n\nIf this sounds useful, I can send a short outline today.\n\nBest,\nSM ATTIRE`; 
+  const emailTemplate = `Subject: Collaboration idea for ${site} + SM ATTIRE\n\nHi ${target},\n\nI enjoyed your recent coverage on affordable fashion in Kenya. I run SM ATTIRE, a Nairobi-based thrift and mitumba store focused on Grade A streetwear and Neatfit Collection sneakers.\n\nI would love to contribute a practical piece for your audience (e.g., \"How to Buy Quality Mitumba Shoes in Nairobi on a Budget\"). In return, we can include original visuals and data-backed buyer tips your readers can use immediately.\n\nIf this sounds useful, I can send a short outline today.\n\nBest,\nSM ATTIRE`; 
 
   return {
     statusCode: 200,

@@ -35,7 +35,7 @@ exports.handler = async (event) => {
   const faq = [
     { q: 'How do I order from SM ATTIRE?', a: 'Add products to cart and checkout via WhatsApp. We confirm availability and payment via M-Pesa.' },
     { q: 'Do you deliver outside Nairobi?', a: 'Yes, we support delivery across Kenya with rates shared on WhatsApp during confirmation.' },
-    { q: 'Are the shoes original second-hand pairs?', a: 'We curate Grade A second-hand options and disclose visible condition before purchase.' }
+    { q: 'Are the shoes original curated pairs?', a: 'We curate Grade A Neatfit Collection options and disclose visible condition before purchase.' }
   ];
 
   return {
@@ -70,7 +70,7 @@ exports.handler = async (event) => {
       socialCopy: {
         instagram: `Fresh thrift drop alert 🔥 ${topic}. DM/WhatsApp now for fast Nairobi delivery. #mitumba #nairobi #streetwear`,
         x: `New on SM ATTIRE: ${topic}. Quality Grade A pieces + M-Pesa checkout. ${keyword}`,
-        facebook: `Need affordable fits and clean second-hand kicks? ${topic}. Chat us on WhatsApp to order.`
+        facebook: `Need affordable fits and clean Neatfit Collection kicks? ${topic}. Chat us on WhatsApp to order.`
       }
     })
   };

@@ -51,7 +51,7 @@ exports.handler = async (event) => {
     outrankPlay: [
       'Publish 2 localized guides per month + internal links to shop filters',
       'Embed FAQ schema with buyer-intent questions',
-      'Add comparison tables for second-hand sneakers by budget band'
+      'Add comparison tables for Neatfit Collection sneakers by budget band'
     ]
   }));
 
