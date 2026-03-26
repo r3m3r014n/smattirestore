@@ -275,6 +275,25 @@ select {
     contain: content;
 }
 
+.facade-thumb {
+    height: 220px;
+}
+
+@media (min-width: 640px) {
+    .facade-thumb {
+        height: 260px;
+    }
+}
+
+@media (max-width: 480px) {
+    .facade-badge {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+        left: 10px;
+        bottom: 10px;
+    }
+}
+
 .avatar-cloud {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
