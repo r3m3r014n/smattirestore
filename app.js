@@ -21,6 +21,7 @@ const LANG_KEY = 'smattire_lang';
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let currentProduct = null;
 let currentFilter = 'all';
+let conversionPromptShown = false;
 
 const copyDictionary = {
     en: {
@@ -98,6 +99,30 @@ function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+function postNetlifyForm(formName, payload) {
+    const data = new URLSearchParams({
+        'form-name': formName,
+        ...payload
+    });
+    return fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data.toString()
+    }).catch(() => {});
+}
+
+function trackProductInteraction(eventName, data = {}) {
+    const payload = {
+        event_name: eventName,
+        page_path: window.location.pathname,
+        page_title: document.title,
+        cart_count: String(cart.reduce((sum, item) => sum + item.quantity, 0)),
+        ts_utc: new Date().toISOString(),
+        ...data
+    };
+    postNetlifyForm('product-interactions', payload);
+}
+
 function updateCart() {
     const cartItems = document.getElementById('cartItems');
     const cartCount = document.getElementById('cartCount');
@@ -146,6 +171,7 @@ function addToCart(product) {
     }
     saveCart();
     updateCart();
+    trackProductInteraction('add_to_cart', { product_id: String(product.id), product_name: product.name, product_category: product.category });
 }
 
 function quickAddToCartById(id, event) {
@@ -178,6 +204,7 @@ function toggleCart() {
     const sidebar = document.getElementById('cartSidebar');
     if (!sidebar) return;
     sidebar.classList.toggle('translate-x-full');
+    trackProductInteraction('cart_toggle', { sidebar_open: String(!sidebar.classList.contains('translate-x-full')) });
 }
 
 function openModal(id) {
@@ -212,6 +239,7 @@ function openModal(id) {
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     document.body.style.overflow = 'hidden';
+    trackProductInteraction('product_view', { product_id: String(currentProduct.id), product_name: currentProduct.name, product_category: currentProduct.category });
 }
 
 function closeModal() {
@@ -257,12 +285,14 @@ function filterProducts(category) {
     if (category === 'all') {
         renderProducts(products);
         updateProductListSchema(products, 'All SM ATTIRE Products');
+        trackProductInteraction('filter_products', { category: 'all', result_count: String(products.length) });
         return;
     }
 
     const filtered = products.filter(product => product.category === category);
     renderProducts(filtered);
     updateProductListSchema(filtered, `${category} - SM ATTIRE`);
+    trackProductInteraction('filter_products', { category, result_count: String(filtered.length) });
 }
 
 function applyHashFilter() {
@@ -294,7 +324,58 @@ function checkout() {
     lines.push('Delivery Location: Nairobi / Kenya');
 
     const message = encodeURIComponent(lines.join('\n'));
+    trackProductInteraction('checkout_intent', {
+        total_kes: String(total),
+        items_count: String(cart.reduce((sum, item) => sum + item.quantity, 0))
+    });
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+}
+
+function showExitIntentPrompt() {
+    const modal = document.getElementById('exitIntentModal');
+    if (!modal || conversionPromptShown) return;
+    conversionPromptShown = true;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    trackProductInteraction('exit_intent_prompt_shown');
+}
+
+function closeExitIntentPrompt() {
+    const modal = document.getElementById('exitIntentModal');
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+function initializeConversionPrompts() {
+    const sticky = document.getElementById('stickyBuyBar');
+    const closeSticky = document.getElementById('closeStickyBuyBar');
+    const modal = document.getElementById('exitIntentModal');
+
+    if (sticky) {
+        setTimeout(() => sticky.classList.remove('hidden'), 3500);
+    }
+    if (closeSticky && sticky) {
+        closeSticky.addEventListener('click', () => {
+            sticky.classList.add('hidden');
+            trackProductInteraction('sticky_bar_closed');
+        });
+    }
+
+    if (modal) {
+        modal.addEventListener('click', event => {
+            if (event.target === modal) closeExitIntentPrompt();
+        });
+    }
+
+    document.addEventListener('mouseout', event => {
+        if (event.clientY <= 0) showExitIntentPrompt();
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+            trackProductInteraction('tab_hidden');
+        }
+    });
 }
 
 function setLanguage(lang) {
@@ -471,6 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
     syncFeedbackForms();
     initializeSocialFacades();
     initializeCookieConsent();
+    initializeConversionPrompts();
 
     const productGrid = document.getElementById('productGrid');
     if (productGrid) {
@@ -493,5 +575,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', () => {
         const shopGrid = document.getElementById('productGrid');
         if (shopGrid) applyHashFilter();
+    });
+
+    document.querySelectorAll('a[data-track]').forEach(anchor => {
+        anchor.addEventListener('click', () => {
+            trackProductInteraction(anchor.dataset.track || 'cta_click', { cta_text: anchor.textContent.trim() });
+        });
     });
 });
