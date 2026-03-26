@@ -350,7 +350,7 @@
         <div class="glass-panel border border-gold/20 rounded-2xl p-6 md:p-8">
             <h2 class="font-playfair text-3xl md:text-4xl mb-3">Join the Drop List</h2>
             <p class="text-white/75 mb-6">Lightweight Netlify form for market intelligence, translation demand, and VIP restock alerts.</p>
-            <form name="drop-insights" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="grid md:grid-cols-2 gap-4">
+            <form name="drop-insights" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="grid md:grid-cols-2 gap-4" onsubmit="handleDropInsightsSubmit(event)">
                 <input type="hidden" name="form-name" value="drop-insights">
                 <p class="hidden">
                     <label>Don’t fill this out: <input name="bot-field"></label>
@@ -391,6 +391,7 @@
                 <input type="hidden" name="primary_intent" value="ai-ar-commerce-growth">
                 <input type="hidden" name="omnichannel_capture" value="web_social_vr">
                 <button type="submit" class="md:col-span-2 bg-gold text-dark py-3 rounded-full font-bold uppercase tracking-[0.14em] hover:bg-gold-light transition-colors">Submit Insights</button>
+                <p class="md:col-span-2 hidden text-gold text-sm text-center" id="dropInsightsMsg"></p>
             </form>
         </div>
     </section>
@@ -576,6 +577,28 @@
 
     <script id="productListSchema" type="application/ld+json"></script>
     <script src="app.js"></script>
+    <script>
+        function handleDropInsightsSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const btn = form.querySelector('button[type="submit"]');
+            const msg = document.getElementById('dropInsightsMsg');
+            const originalText = btn ? btn.textContent : '';
+            if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            }).then(() => {
+                form.reset();
+                if (msg) { msg.textContent = 'You\'re on the list! We\'ll notify you on the next drop.'; msg.classList.remove('hidden'); }
+            }).catch(() => {
+                if (msg) { msg.textContent = 'Received. You can also reach us on WhatsApp.'; msg.classList.remove('hidden'); }
+            }).finally(() => {
+                if (btn) { btn.disabled = false; btn.textContent = originalText; }
+            });
+        }
+    </script>
     <div id="cookieConsent" role="dialog" aria-modal="false" aria-labelledby="cookieConsentTitle" class="cookie-consent hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-[90] w-[95%] max-w-3xl bg-charcoal border border-gold/30 rounded-2xl p-4 md:p-5">
         <p id="cookieConsentTitle" class="text-white/80 text-sm">We use essential cookies for cart and optional cookies for analytics + social feed enhancements. Allow optional cookies?</p>
         <div class="mt-3 flex flex-wrap gap-3">

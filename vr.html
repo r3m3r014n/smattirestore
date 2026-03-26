@@ -264,7 +264,7 @@
 
         <section class="section-card" style="margin-top:14px;">
             <h2 class="section-title">VR Branch Access Capture</h2>
-            <form class="lead-form" name="vr-showroom-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <form class="lead-form" name="vr-showroom-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleVrFormSubmit(event, this, 'vrShowroomMsg')">
                 <input type="hidden" name="form-name" value="vr-showroom-interest">
                 <p style="display:none;"><label>Don’t fill this out: <input name="bot-field"></label></p>
                 <input required name="name" type="text" placeholder="Your Name">
@@ -277,13 +277,14 @@
                 </select>
                 <input type="hidden" name="source_path" value="/vr.html">
                 <button type="submit" class="btn gold">Join VR Branch Access</button>
+                <p id="vrShowroomMsg" style="display:none;color:#d4af37;font-size:13px;margin-top:8px;"></p>
             </form>
         </section>
 
         <section class="section-card" style="margin-top:14px;">
             <h2 class="section-title">Marketplace Bridge in VR Branch</h2>
             <p class="sub" style="margin-top:0;">Expand this branch reality to online marketplaces with standardized product feed and inventory-sync intent capture.</p>
-            <form class="lead-form" name="vr-marketplace-bridge" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <form class="lead-form" name="vr-marketplace-bridge" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleVrFormSubmit(event, this, 'vrMarketplaceMsg')">
                 <input type="hidden" name="form-name" value="vr-marketplace-bridge">
                 <p style="display:none;"><label>Don’t fill this out: <input name="bot-field"></label></p>
                 <input required name="name" type="text" placeholder="Name">
@@ -297,10 +298,31 @@
                 <input type="hidden" name="source_path" value="/vr.html">
                 <input type="hidden" name="primary_intent" value="vr-marketplace-compatibility">
                 <button type="submit" class="btn gold">Activate Marketplace Bridge</button>
+                <p id="vrMarketplaceMsg" style="display:none;color:#d4af37;font-size:13px;margin-top:8px;"></p>
             </form>
         </section>
     </main>
     <script>
+        function handleVrFormSubmit(event, form, msgId) {
+            event.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            const msg = document.getElementById(msgId);
+            const originalText = btn ? btn.textContent : '';
+            if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            }).then(() => {
+                form.reset();
+                if (msg) { msg.textContent = 'Received! We\'ll be in touch soon.'; msg.style.display = 'block'; }
+            }).catch(() => {
+                if (msg) { msg.textContent = 'Received. You can also reach us on WhatsApp.'; msg.style.display = 'block'; }
+            }).finally(() => {
+                if (btn) { btn.disabled = false; btn.textContent = originalText; }
+            });
+        }
+
         (async function () {
             const status = document.getElementById('xrStatus');
             if (!status) return;
