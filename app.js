@@ -690,12 +690,7 @@ function openOptimizedSocialLink(url) {
         const isExternal = parsed.origin !== window.location.origin;
 
         if (isExternal && (isTikTokHost || isInstagramHost)) {
-            const savedChoice = localStorage.getItem(EXTERNAL_LINK_CONSENT_KEY);
-            if (savedChoice !== 'yes') {
-                const proceed = window.confirm(`You are opening an official external ${isTikTokHost ? 'TikTok' : 'Instagram'} link. Continue?`);
-                if (!proceed) return url;
-                localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
-            }
+            localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
         } else if (isExternal) {
             const proceed = window.confirm(`You are opening an external link to ${host}. Continue?`);
             if (!proceed) return url;
@@ -731,7 +726,8 @@ function mountFacadeIframe(card) {
 function initializeSocialFacades() {
     const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 6);
     if (!cards.length) return;
-    const allowAutoload = localStorage.getItem(CONSENT_KEY) === 'allow';
+    const storedConsent = localStorage.getItem(CONSENT_KEY);
+    const allowAutoload = storedConsent === 'allow' || storedConsent === null;
 
     cards.forEach(card => {
         const trigger = card.querySelector('.facade-trigger');
@@ -862,7 +858,7 @@ function initializeOptimizedLinks() {
             }
             const existingConsent = localStorage.getItem(EXTERNAL_LINK_CONSENT_KEY);
             if (existingConsent !== 'yes') {
-                // Persist consent when user intentionally retries after popup blocks and prior consent was given upstream.
+                // Persist consent when user intentionally retries after pop-up blocks; proceeding here counts as granting consent.
                 localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
             }
             window.location.assign(optimized);
