@@ -61,7 +61,7 @@
     <section class="glass-panel border border-gold/20 rounded-2xl p-5 space-y-4">
       <h2 class="font-playfair text-2xl text-gold">2) Technical SEO Audit</h2>
       <div class="flex flex-wrap gap-3">
-        <input id="auditBaseUrl" class="bg-dark/70 border border-gold/30 rounded-lg px-3 py-2 min-w-[260px]" placeholder="https://smattirestore.com" value="https://smattirestore.com" />
+        <input id="auditBaseUrl" class="bg-dark/70 border border-gold/30 rounded-lg px-3 py-2 min-w-[260px]" placeholder="https://smattirestore.com" value="" />
         <button onclick="runTechnicalAudit()" class="bg-gold text-dark px-4 py-2 rounded-lg font-bold">Run Audit</button>
       </div>
       <pre id="auditOutput" class="bg-dark/70 border border-gold/20 rounded-xl p-3 text-sm"></pre>
@@ -99,6 +99,13 @@
   </main>
 
   <script>
+    const DEFAULT_SITE_URL = 'https://smattirestore.com';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const auditInput = document.getElementById('auditBaseUrl');
+      if (auditInput && !auditInput.value) auditInput.value = DEFAULT_SITE_URL;
+    });
+
     async function callApi(endpoint, payload) {
       const response = await fetch(`/api/${endpoint}`, {
         method: 'POST',

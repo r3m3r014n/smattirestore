@@ -5,6 +5,11 @@ const COMMON_HEADERS = {
 };
 
 const TARGET_PAGES = ['index.html', 'shop.html', 'about.html', 'contact.html'];
+const TITLE_MIN_LENGTH = 20;
+const TITLE_MAX_LENGTH = 70;
+const META_MIN_LENGTH = 70;
+const META_MAX_LENGTH = 180;
+
 
 function countMatches(text, pattern) {
   const matches = text.match(pattern);
@@ -45,8 +50,8 @@ exports.handler = async (event) => {
       const internal = links.filter((href) => href.endsWith('.html') || href.startsWith('/'));
       const issues = [];
 
-      if (!/<title>[^<]{20,70}<\/title>/i.test(html)) issues.push('Missing or weak <title> length');
-      if (!/<meta\s+name="description"\s+content="[^"]{70,180}"/i.test(html)) issues.push('Missing or weak meta description length');
+      if (!/<title>[^<]{${TITLE_MIN_LENGTH},${TITLE_MAX_LENGTH}}<\/title>/i.test(html)) issues.push('Missing or weak <title> length');
+      if (!/<meta\s+name="description"\s+content="[^"]{${META_MIN_LENGTH},${META_MAX_LENGTH}}"/i.test(html)) issues.push('Missing or weak meta description length');
       if (!/<script\s+type="application\/ld\+json">/i.test(html)) issues.push('No JSON-LD schema block found');
       if (!/viewport-fit=cover/i.test(html)) issues.push('Viewport is not optimized for iOS safe areas');
 
