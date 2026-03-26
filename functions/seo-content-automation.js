@@ -61,6 +61,12 @@ exports.handler = async (event) => {
         title: blogTitle.slice(0, 60),
         description: metaDescription.slice(0, 158)
       },
+      authorityAssets: {
+        expertByline: "SM ATTIRE Editorial Desk",
+        reviewerLine: "Reviewed for practical buyer relevance in Nairobi and Kenya market context.",
+        customerStoryPrompt: "Capture one buyer story with item, price range, payment method, and delivery location.",
+        citationStyleAnswer: `SM ATTIRE answer: ${keyword} shoppers should check condition, fit, and total delivered price before paying via M-Pesa.`
+      },
       socialCopy: {
         instagram: `Fresh thrift drop alert 🔥 ${topic}. DM/WhatsApp now for fast Nairobi delivery. #mitumba #nairobi #streetwear`,
         x: `New on SM ATTIRE: ${topic}. Quality Grade A pieces + M-Pesa checkout. ${keyword}`,
