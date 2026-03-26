@@ -2,167 +2,155 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Vault | THE REALONES STORE | Luxury Fashion</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Shop Premium Mitumba | SM ATTIRE Thrift Store Nairobi</title>
+    <meta name="description" content="Shop premium mitumba at SM ATTIRE Nairobi. Discover Grade A thrifted casual streetwear and Neatfit Collection sneakers with WhatsApp ordering and M-Pesa payment.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <link rel="canonical" href="https://smattirestore.com/shop.html">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SM ATTIRE">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="color-scheme" content="dark light">
+
+
+        <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="styles.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Rajdhani:wght@300;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { gold: '#d4af37', 'gold-light': '#f4e4ba', charcoal: '#1a1a1a', dark: '#0a0a0a' },
-                    fontFamily: { playfair: ['Playfair Display', 'serif'], rajdhani: ['Rajdhani', 'sans-serif'] },
-                    boxShadow: { 'gold-glow': '0 0 40px -10px rgba(212, 175, 55, 0.15)', 'gold-glow-hover': '0 0 50px -5px rgba(212, 175, 55, 0.3)' }
+                    colors: {
+                        gold: '#d4af37',
+                        'gold-light': '#f4e4ba',
+                        charcoal: '#1a1a1a',
+                        dark: '#0a0a0a'
+                    },
+                    fontFamily: {
+                        playfair: ['Playfair Display', 'serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif']
+                    }
                 }
             }
-        }
+        };
     </script>
-    <link rel="stylesheet" href="styles.css">
+
     <style>
         html { scroll-behavior: smooth; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #d4af37; }
-        .glass-panel { background: rgba(26, 26, 26, 0.4); backdrop-filter: blur(12px); }
-        .image-container { aspect-ratio: 3/4; background-color: #111; }
+        body {
+            background:
+                radial-gradient(circle at 12% 8%, rgba(206, 214, 226, 0.2), transparent 34%),
+                radial-gradient(circle at top, rgba(212,175,55,0.12), transparent 35%),
+                #0a0a0a;
+        }
+        .glass-panel {
+            background: rgba(180, 190, 206, 0.09);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
     </style>
 </head>
-<body class="bg-dark text-white font-rajdhani selection:bg-gold selection:text-dark antialiased">
-
-    <nav class="fixed w-full z-50 glass-panel border-b border-gold/10 transition-all duration-500">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="index.html" class="font-playfair text-2xl tracking-[0.15em] text-gold hover:text-gold-light transition-colors">SM ATTIRE</a>
-            <div class="flex gap-8 text-[11px] font-semibold tracking-[0.2em] uppercase">
-                <a href="shop.html" class="text-gold border-b border-gold pb-1">All Collections</a>
-                <a href="shop.html#casual-streetwear" class="hover:text-gold transition-colors">Casual Streetwear</a>
-                <a href="shop.html#neatfit-collection" class="hover:text-gold transition-colors">The Neatfit Collection</a>
+<body class="safe-area text-white font-rajdhani antialiased">
+    <nav id="navbar" class="sticky top-0 z-50 glass-panel border-b border-gold/20">
+        <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between gap-4">
+            <a href="index.html" class="font-playfair text-2xl tracking-[0.14em] text-gold hover:text-gold-light transition-colors">SM ATTIRE</a>
+            <div class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.18em] font-semibold">
+                <a href="#all" class="filter-btn" data-filter="all" onclick="filterProducts('all'); window.location.hash='all'; return false;">All Products</a>
+                <a href="#casual-streetwear" class="filter-btn" data-filter="Casual Streetwear" onclick="filterProducts('Casual Streetwear'); window.location.hash='casual-streetwear'; return false;">Casual Streetwear</a>
+                <a href="#neatfit-collection" class="filter-btn" data-filter="Neatfit Collection" onclick="filterProducts('Neatfit Collection'); window.location.hash='neatfit-collection'; return false;">Neatfit Collection</a>
             </div>
+            <a href="seo.html" class="hidden md:inline text-xs uppercase tracking-[0.16em] text-white/70 hover:text-gold">SEO</a>
+            <button onclick="toggleCart()" aria-label="Open Cart" class="relative border border-gold/60 text-gold rounded-full px-4 py-2 hover:bg-gold hover:text-dark transition-all">
+                🛒
+                <span id="cartCount" class="absolute -top-2 -right-2 min-w-[22px] h-[22px] px-1 rounded-full bg-gold text-dark text-xs font-bold flex items-center justify-center">0</span>
+            </button>
         </div>
     </nav>
 
-    <header class="pt-48 pb-16 px-6 relative overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.15)_0%,rgba(10,10,10,0)_70%)] pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto text-center relative z-10">
-            <h1 class="font-playfair text-6xl md:text-8xl mb-6 tracking-tighter text-white">SM ATTIRE</h1>
-            <div class="flex items-center justify-center gap-4 text-gold uppercase tracking-[0.6em] text-[10px] font-semibold">
-                <span class="w-8 h-[1px] bg-gold/50"></span>
-                <p>All Collections</p>
-                <span class="w-8 h-[1px] bg-gold/50"></span>
-            </div>
-        </div>
+    <header class="max-w-7xl mx-auto px-5 md:px-8 pt-20 pb-10 text-center">
+        <p class="text-gold uppercase tracking-[0.35em] text-xs mb-4">Classy, Elegant, Style</p>
+        <h1 class="font-playfair text-5xl md:text-7xl leading-none mb-4">THE NEATFIT DROP</h1>
+        <p class="text-white/75 max-w-2xl mx-auto text-lg">Your Ultimate Fashion Guide to fresh weekly arrivals, standout streetwear, and polished sneaker picks.</p>
     </header>
 
-    <div class="max-w-7xl mx-auto px-6 py-8 flex flex-wrap justify-center gap-4">
-        <button onclick="loadProducts('all')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">All Collections</button>
-        <button onclick="loadProducts('Casual Streetwear')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">Casual Streetwear</button>
-        <button onclick="loadProducts('Neatfit Collection')" class="px-6 py-2 text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70 border border-white/10 hover:border-gold hover:text-gold transition-all duration-300">The Neatfit Collection</button>
-    </div>
-
-    <div id="neatfit-collection" class="hidden max-w-7xl mx-auto px-6 pb-10 text-center">
-        <div class="flex items-center justify-center gap-4 mb-3">
-            <span class="w-12 h-[1px] bg-gold/50"></span>
-            <p class="text-[10px] font-bold tracking-[0.4em] text-gold uppercase">The Neatfit Collection</p>
-            <span class="w-12 h-[1px] bg-gold/50"></span>
+    <section class="max-w-7xl mx-auto px-5 md:px-8 pb-16">
+        <div class="md:hidden flex flex-wrap gap-3 mb-8">
+            <button class="filter-btn border border-gold/60 text-gold px-4 py-2 rounded-full text-xs uppercase tracking-[0.14em]" data-filter="all" onclick="filterProducts('all'); window.location.hash='all';">All Products</button>
+            <button class="filter-btn border border-gold/60 text-gold px-4 py-2 rounded-full text-xs uppercase tracking-[0.14em]" data-filter="Casual Streetwear" onclick="filterProducts('Casual Streetwear'); window.location.hash='casual-streetwear';">Casual Streetwear</button>
+            <button class="filter-btn border border-gold/60 text-gold px-4 py-2 rounded-full text-xs uppercase tracking-[0.14em]" data-filter="Neatfit Collection" onclick="filterProducts('Neatfit Collection'); window.location.hash='neatfit-collection';">Neatfit Collection</button>
         </div>
-        <p class="font-playfair text-2xl md:text-3xl italic text-white/80 tracking-wide">For Every Step of Life</p>
+
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+        <noscript>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
+                <article class="glass-panel border border-gold/20 rounded-2xl p-4"><h3 class="font-playfair text-xl">Grade A Vintage Graphic Tee</h3><p class="text-white/70">KES 800</p></article>
+                <article class="glass-panel border border-gold/20 rounded-2xl p-4"><h3 class="font-playfair text-xl">Gently Used Air Force 1s</h3><p class="text-white/70">KES 3500</p></article>
+                <article class="glass-panel border border-gold/20 rounded-2xl p-4"><h3 class="font-playfair text-xl">Premium Neatfit Jordans</h3><p class="text-white/70">KES 4200</p></article>
+                <article class="glass-panel border border-gold/20 rounded-2xl p-4"><h3 class="font-playfair text-xl">Slip-On Casual Vans</h3><p class="text-white/70">KES 1900</p></article>
+            </div>
+        </noscript>
+    </section>
+
+    <aside id="cartSidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-charcoal/95 backdrop-blur-xl border-l border-gold/30 z-[70] transform translate-x-full transition-transform duration-300">
+        <div class="h-full flex flex-col">
+            <div class="p-5 border-b border-gold/20 flex items-center justify-between">
+                <h2 class="font-playfair text-2xl text-gold">Your Cart</h2>
+                <button onclick="toggleCart()" class="text-white/80 hover:text-gold text-2xl leading-none">&times;</button>
+            </div>
+            <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+            <div class="p-5 border-t border-gold/20 space-y-4">
+                <div class="flex items-center justify-between text-lg">
+                    <span class="text-white/80">Total</span>
+                    <span id="cartTotal" class="font-bold text-gold">KES 0</span>
+                </div>
+                <button id="checkoutBtn" onclick="checkout()" class="w-full bg-gold text-dark font-bold py-3 rounded-full uppercase tracking-[0.14em] hover:bg-gold-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed">Checkout via WhatsApp</button>
+            </div>
+        </div>
+    </aside>
+
+    <div id="productModal" class="fixed inset-0 bg-black/80 z-[80] hidden items-center justify-center p-4">
+        <div class="w-full max-w-3xl bg-charcoal border border-gold/30 rounded-2xl overflow-hidden">
+            <div class="grid md:grid-cols-2">
+                <div class="bg-dark">
+                    <img id="modalImg" src="" alt="Product image" class="w-full h-full object-cover min-h-[320px]">
+                </div>
+                <div class="p-6 md:p-7">
+                    <div class="flex items-start justify-between gap-3 mb-4">
+                        <div>
+                            <p id="modalCategory" class="text-gold text-xs uppercase tracking-[0.2em] mb-1"></p>
+                            <h3 id="modalName" class="font-playfair text-3xl leading-tight"></h3>
+                        </div>
+                        <button onclick="closeModal()" class="text-white/80 hover:text-gold text-2xl leading-none">&times;</button>
+                    </div>
+                    <span id="modalBadge" class="hidden inline-block bg-gold text-dark text-xs uppercase tracking-wider font-bold px-3 py-1 rounded-full mb-4"></span>
+                    <p id="modalDesc" class="text-white/75 mb-6"></p>
+                    <p id="modalPrice" class="text-gold text-2xl font-bold mb-6"></p>
+                    <button onclick="addFromModal()" class="w-full bg-gold text-dark py-3 rounded-full font-bold uppercase tracking-[0.14em] hover:bg-gold-light transition-colors">Add to Cart</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-6 pb-40">
-        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            </div>
-    </main>
-
-    <footer class="bg-black border-t border-gold/20 py-16 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-            <h2 class="font-playfair text-2xl text-gold mb-4 tracking-widest">SM ATTIRE</h2>
-            <p class="text-[9px] tracking-[0.4em] text-white/40 uppercase">&copy; 2026 Crafted for Royalty &bull; International Online Store</p>
+    <footer class="border-t border-gold/20 py-10">
+        <div class="max-w-7xl mx-auto px-5 md:px-8 text-center">
+            <p class="font-playfair text-2xl text-gold mb-2">SM ATTIRE</p>
+            <p class="text-white/70">Nairobi, Kenya • WhatsApp: <a href="https://wa.me/254701226084" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">+254 701 226 084</a> • Instagram: <a href="https://instagram.com/sm_attire_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sm_attire_</a> • TikTok: <a href="https://tiktok.com/@sera_muthoni_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sera_muthoni_</a> • M-Pesa Payments Accepted</p>
+            <p class="text-white/70 mt-2">Classy, Elegant, Style • Delivery Services Available At A Fee</p>
+            <p class="text-white/50 text-sm mt-3">&copy; 2026 SM ATTIRE — Premium Mitumba</p>
         </div>
     </footer>
 
+    <script id="productListSchema" type="application/ld+json"></script>
     <script src="app.js"></script>
-    
-    <script>
-        const inventory = [
-            { id: 1, name: "Masterpiece 01", price: 15000, category: "Casual Streetwear", image_url: "1.jpg" },
-            { id: 2, name: "Masterpiece 02", price: 12500, category: "Casual Streetwear", image_url: "2.jpg" },
-            { id: 3, name: "Masterpiece 03", price: 8000, category: "Casual Streetwear", image_url: "3.jpg" },
-            { id: 4, name: "Masterpiece 04", price: 9500, category: "Casual Streetwear", image_url: "4.jpg" },
-            { id: 5, name: "Masterpiece 05", price: 7000, category: "Casual Streetwear", image_url: "5.jpg" },
-            { id: 6, name: "Masterpiece 06", price: 18000, category: "Casual Streetwear", image_url: "6.jpg" },
-            { id: 7, name: "Masterpiece 07", price: 11000, category: "Casual Streetwear", image_url: "7.jpg" },
-            { id: 8, name: "Masterpiece 08", price: 22000, category: "Neatfit Collection", image_url: "8.jpg" },
-            { id: 9, name: "Masterpiece 09", price: 13500, category: "Neatfit Collection", image_url: "9.jpg" },
-            { id: 10, name: "Masterpiece 10", price: 10500, category: "Neatfit Collection", image_url: "10.jpg" },
-            { id: 11, name: "Masterpiece 11", price: 19000, category: "Neatfit Collection", image_url: "11.jpg" },
-            { id: 12, name: "Masterpiece 12", price: 14000, category: "Neatfit Collection", image_url: "12.jpg" },
-            { id: 13, name: "Masterpiece 13", price: 9000, category: "Neatfit Collection", image_url: "13.jpg" },
-            { id: 14, name: "Masterpiece 14", price: 16500, category: "Neatfit Collection", image_url: "14.jpg" }
-        ];
-
-        function loadProducts(filter = 'all') {
-            const grid = document.getElementById('productGrid');
-            const neatfitBanner = document.getElementById('neatfit-collection');
-            if (neatfitBanner) {
-                neatfitBanner.classList.toggle('hidden', filter !== 'Neatfit Collection');
-            }
-            
-            const filtered = filter === 'all' 
-                ? inventory 
-                : inventory.filter(p => p.category === filter);
-
-            if (filtered.length === 0) {
-                grid.innerHTML = '<div class="col-span-full py-20 text-center"><p class="text-white/50 font-playfair text-2xl italic">The vault is currently empty.</p></div>';
-                return;
-            }
-
-            grid.innerHTML = filtered.map(p => {
-                const productData = {
-                    id: p.id,
-                    name: p.name.replace(/'/g, "\\'"),
-                    price: p.price,
-                    image: p.image_url,
-                    category: p.category
-                };
-                const jsonString = JSON.stringify(productData).replace(/"/g, '&quot;');
-
-                return `
-                <div class="group relative bg-charcoal border border-white/5 rounded-sm overflow-hidden shadow-gold-glow hover:shadow-gold-glow-hover hover:border-gold/40 transition-all duration-700 hover:-translate-y-2">
-                    <div class="relative image-container overflow-hidden">
-                        <img src="${p.image_url}" 
-                             alt="${p.name}" 
-                             loading="lazy"
-                             decoding="async"
-                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                             onerror="this.src='https://via.placeholder.com/600x800/1a1a1a/d4af37?text=Image+Missing'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-transparent to-transparent opacity-80"></div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 w-full p-8 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                        <p class="text-[9px] font-bold tracking-[0.4em] text-gold uppercase mb-2">${p.category}</p>
-                        <h3 class="font-playfair text-3xl mb-4 text-white">${p.name}</h3>
-                        <div class="flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                            <span class="font-rajdhani text-xl tracking-tight text-white/90">KES ${Number(p.price).toLocaleString()}</span>
-                            <button onclick="if(typeof addToCart === 'function') addToCart(${jsonString});" 
-                                    class="text-[10px] tracking-[0.2em] uppercase text-gold border-b border-gold pb-1 hover:text-white hover:border-white transition-all">
-                                Acquire
-                            </button>
-                        </div>
-                    </div>
-                </div>`;
-            }).join('');
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.location.hash === '#neatfit-collection') {
-                loadProducts('Neatfit Collection');
-            } else {
-                loadProducts();
-            }
-        });
-    </script>
 </body>
 </html>
-

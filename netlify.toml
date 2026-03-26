@@ -2,7 +2,79 @@
   publish = "."
   functions = "functions"
 
+[functions]
+  node_bundler = "esbuild"
+
+[[plugins]]
+  package = "@netlify/plugin-sitemap"
+
+# API routing
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+# Canonical route hygiene
+[[redirects]]
+  from = "/index"
+  to = "/index.html"
+  status = 301
+
+[[redirects]]
+  from = "/shop"
+  to = "/shop.html"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 301
+
+# Security + performance headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://via.placeholder.com https://smattirestore.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;"
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' https://fonts.googleapis.com; img-src 'self' data: https://via.placeholder.com https://smattirestore.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;"
+
+# Static assets cache policy
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
+[[headers]]
+  for = "/*.webmanifest"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/app.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Dynamic/API should not be browser-cached by default
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-store"

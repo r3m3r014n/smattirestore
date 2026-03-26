@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>VR Branch Reality Showroom | SM ATTIRE</title>
+    <meta name="description" content="Visit SM ATTIRE's VR branch reality showroom for masterclass immersive shopping, including sensory fabric texture storytelling and multi-showroom links.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 12% 8%, rgba(206, 214, 226, 0.2), transparent 34%),
+                radial-gradient(circle at 85% 18%, rgba(212,175,55,0.12), transparent 36%),
+                #0a0a0a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 24px 20px 70px;
+        }
+        .hero, .section-card {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(180, 190, 206, 0.09);
+            border-radius: 20px;
+            padding: 28px;
+        }
+        .title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin: 0 0 10px;
+            color: #d4af37;
+        }
+        .sub {
+            color: rgba(255,255,255,0.8);
+            max-width: 760px;
+            line-height: 1.65;
+        }
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .btn {
+            border-radius: 9999px;
+            padding: 11px 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 1px solid rgba(212, 175, 55, 0.6);
+        }
+        .btn.gold {
+            background: #d4af37;
+            color: #0a0a0a;
+            border-color: #d4af37;
+        }
+        .btn.clear {
+            color: #d4af37;
+            background: transparent;
+        }
+        .btn:hover {
+            filter: brightness(1.08);
+        }
+        .meta {
+            margin-top: 8px;
+            color: rgba(255,255,255,0.72);
+            font-size: 12px;
+            letter-spacing: 0.04em;
+        }
+        .panel-grid {
+            margin-top: 20px;
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+        .panel {
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            background: rgba(180, 190, 206, 0.07);
+            border-radius: 16px;
+            padding: 16px;
+        }
+        .panel h3 {
+            margin: 0 0 8px;
+            color: #d4af37;
+            font-size: 18px;
+        }
+        .panel p {
+            margin: 0;
+            font-size: 14px;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.6;
+        }
+        #xrStatus {
+            margin-top: 14px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+        }
+        .section-title {
+            margin: 0 0 14px;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: #d4af37;
+        }
+        .product-grid {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+        .product {
+            border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(180,190,206,0.06);
+        }
+        .product img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+        .product-body {
+            padding: 14px;
+        }
+        .product h3 {
+            margin: 0;
+            color: #fff;
+            font-size: 18px;
+        }
+        .price {
+            margin: 6px 0 10px;
+            color: #d4af37;
+            font-weight: bold;
+        }
+        .showroom-links {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+        .showroom-link {
+            border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 12px;
+            padding: 12px;
+            background: rgba(180,190,206,0.05);
+            text-decoration: none;
+            color: rgba(255,255,255,0.86);
+            font-size: 14px;
+        }
+        .showroom-link strong {
+            color: #d4af37;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .lead-form {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        .lead-form input, .lead-form select {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid rgba(212,175,55,0.35);
+            background: rgba(10,10,10,0.6);
+            color: #fff;
+            padding: 11px 12px;
+        }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <section class="hero">
+            <h1 class="title">SM ATTIRE VR BRANCH REALITY SHOWROOM</h1>
+            <p class="sub">Classy, Elegant, Style — Your Ultimate Fashion Guide now extends into a parallel branch reality where immersive storytelling simulates how fabrics feel, drape, and move before checkout.</p>
+            <div class="cta-row">
+                <a href="index.html" class="btn clear">Back Home</a>
+                <a href="shop.html" class="btn clear">Open Classic Shop</a>
+                <a href="https://arvr.google.com/scene-viewer/1.0?file=https://modelviewer.dev/shared-assets/models/Astronaut.glb&mode=ar_preferred" target="_blank" rel="noopener" class="btn gold">Launch AR Demo</a>
+                <a href="https://wa.me/254701226084?text=Hi%20SM%20ATTIRE%2C%20I%20want%20the%20VR%20branch%20reality%20shopping%20concierge." target="_blank" rel="noopener" class="btn gold">VR Concierge</a>
+            </div>
+            <p class="meta">Delivery Services Available At A Fee • XR fallback enabled • Mobile-first performance maintained</p>
+            <p id="xrStatus">Checking XR support…</p>
+        </section>
+
+        <section class="section-card" style="margin-top:14px;" aria-label="VR commerce benefits">
+            <h2 class="section-title">Masterclass VR Experience Zones</h2>
+            <div class="panel-grid">
+                <article class="panel">
+                    <h3>Fabric Texture Reality</h3>
+                    <p>Experience masterclass texture narratives that simulate cotton weight, knit density, and fabric flow.</p>
+                </article>
+                <article class="panel">
+                    <h3>Virtual Fit Vision</h3>
+                    <p>Guide customers toward fit confidence with movement-aware previews before checkout.</p>
+                </article>
+                <article class="panel">
+                    <h3>Branch Reality Commerce</h3>
+                    <p>Treat this VR branch as a premium destination to discover and reserve limited capsules.</p>
+                </article>
+                <article class="panel">
+                    <h3>Creator Zones</h3>
+                    <p>Launch branded drops with interactive VR shelves and social-linked releases.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-card" style="margin-top:14px;">
+            <h2 class="section-title">VR Online Shop Capsules</h2>
+            <div class="product-grid">
+                <article class="product">
+                    <img src="3.jpg" alt="Neatfit Air Force capsule">
+                    <div class="product-body">
+                        <h3>Neatfit Air Force Capsule</h3>
+                        <p class="price">KES 3,500</p>
+                        <div class="cta-row">
+                            <a class="btn gold" href="https://wa.me/254701226084?text=I%20want%20Neatfit%20Air%20Force%20Capsule%20(KES%203500)%20from%20VR%20branch%20reality." target="_blank" rel="noopener">Buy via WhatsApp</a>
+                            <a class="btn clear" href="https://arvr.google.com/scene-viewer/1.0?file=https://modelviewer.dev/shared-assets/models/Astronaut.glb&mode=ar_preferred" target="_blank" rel="noopener">AR Quick View</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="product">
+                    <img src="9.jpg" alt="Premium Jordans capsule">
+                    <div class="product-body">
+                        <h3>Premium Jordan Capsule</h3>
+                        <p class="price">KES 4,200</p>
+                        <div class="cta-row">
+                            <a class="btn gold" href="https://wa.me/254701226084?text=I%20want%20Premium%20Jordan%20Capsule%20(KES%204200)%20from%20VR%20branch%20reality." target="_blank" rel="noopener">Buy via WhatsApp</a>
+                            <a class="btn clear" href="shop.html#neatfit-collection">View Product Page</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="product">
+                    <img src="8.jpg" alt="Streetwear hoodie capsule">
+                    <div class="product-body">
+                        <h3>Streetwear Hoodie Capsule</h3>
+                        <p class="price">KES 1,300</p>
+                        <div class="cta-row">
+                            <a class="btn gold" href="https://wa.me/254701226084?text=I%20want%20Streetwear%20Hoodie%20Capsule%20(KES%201300)%20from%20VR%20branch%20reality." target="_blank" rel="noopener">Buy via WhatsApp</a>
+                            <a class="btn clear" href="shop.html#casual-streetwear">View Product Page</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-card" style="margin-top:14px;">
+            <h2 class="section-title">Multi-Showroom Market Network</h2>
+            <p class="sub" style="margin-top:0;">Promote this flagship showroom across multiple discovery channels to expand market reach and conversion touchpoints.</p>
+            <div class="showroom-links">
+                <a class="showroom-link" href="index.html#immersive-social"><strong>Immersive Social Feed</strong>Home showroom social experience entry.</a>
+                <a class="showroom-link" href="shop.html"><strong>Core Ecommerce Showroom</strong>Classic product grid purchase path.</a>
+                <a class="showroom-link" href="https://instagram.com/sm_attire_" target="_blank" rel="noopener"><strong>Instagram Showroom</strong>Visual discovery and style storytelling.</a>
+                <a class="showroom-link" href="https://tiktok.com/@sera_muthoni_" target="_blank" rel="noopener"><strong>TikTok Showroom</strong>Short-form drop campaigns and trends.</a>
+                <a class="showroom-link" href="index.html#marketplace-sync"><strong>Marketplace Hub</strong>Compatibility routing for multi-channel expansion.</a>
+                <a class="showroom-link" href="https://wa.me/254701226084?text=Hi%20SM%20ATTIRE%2C%20I%20need%20the%20VR%20showroom%20catalog." target="_blank" rel="noopener"><strong>WhatsApp Concierge Showroom</strong>Direct conversion support channel.</a>
+                <a class="showroom-link" href="contact.html"><strong>Feedback Showroom</strong>Collect buyer intent and SEO-friendly demand data.</a>
+            </div>
+        </section>
+
+        <section class="section-card" style="margin-top:14px;">
+            <h2 class="section-title">VR Branch Access Capture</h2>
+            <form class="lead-form" name="vr-showroom-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="vr-showroom-interest">
+                <p style="display:none;"><label>Don’t fill this out: <input name="bot-field"></label></p>
+                <input required name="name" type="text" placeholder="Your Name">
+                <input required name="email" type="email" placeholder="Email Address">
+                <select name="preferred_zone">
+                    <option value="sneakers">Sneaker Zone</option>
+                    <option value="streetwear">Streetwear Zone</option>
+                    <option value="texture">Fabric Texture Reality Zone</option>
+                    <option value="diaspora">Diaspora Shopping Zone</option>
+                </select>
+                <input type="hidden" name="source_path" value="/vr.html">
+                <button type="submit" class="btn gold">Join VR Branch Access</button>
+            </form>
+        </section>
+
+        <section class="section-card" style="margin-top:14px;">
+            <h2 class="section-title">Marketplace Bridge in VR Branch</h2>
+            <p class="sub" style="margin-top:0;">Expand this branch reality to online marketplaces with standardized product feed and inventory-sync intent capture.</p>
+            <form class="lead-form" name="vr-marketplace-bridge" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="vr-marketplace-bridge">
+                <p style="display:none;"><label>Don’t fill this out: <input name="bot-field"></label></p>
+                <input required name="name" type="text" placeholder="Name">
+                <input required name="email" type="email" placeholder="Email">
+                <select name="marketplace_channel">
+                    <option value="jumia">Jumia</option>
+                    <option value="kilimall">Kilimall</option>
+                    <option value="shopify_markets">Shopify Markets</option>
+                    <option value="social_shops">Social Shops</option>
+                </select>
+                <input type="hidden" name="source_path" value="/vr.html">
+                <input type="hidden" name="primary_intent" value="vr-marketplace-compatibility">
+                <button type="submit" class="btn gold">Activate Marketplace Bridge</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        (async function () {
+            const status = document.getElementById('xrStatus');
+            if (!status) return;
+            if (!('xr' in navigator)) {
+                status.textContent = 'WebXR not available on this device. Fallback mode active.';
+                return;
+            }
+            try {
+                const supported = await navigator.xr.isSessionSupported('immersive-vr');
+                status.textContent = supported
+                    ? 'WebXR immersive VR is supported on this device.'
+                    : 'WebXR detected, but immersive VR session is not supported here.';
+            } catch (error) {
+                status.textContent = 'XR capability check unavailable. Fallback mode active.';
+            }
+        })();
+    </script>
+</body>
+</html>

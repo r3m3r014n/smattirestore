@@ -128,6 +128,13 @@ html {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
+    .immersive-orb,
+    .avatar-icon {
+        animation: none !important;
+    }
+    .facade-trigger::after {
+        transition: none !important;
+    }
 }
 
 /* Print Styles */
@@ -135,4 +142,178 @@ html {
     nav, .cart-sidebar, footer {
         display: none;
     }
+}
+
+
+/* iOS Safari + Android browser hardening */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overscroll-behavior-y: contain;
+}
+
+.safe-area {
+    padding-top: env(safe-area-inset-top);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+}
+
+a,
+button,
+input,
+textarea,
+select {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+input,
+textarea,
+select {
+    /* Prevents iOS Safari auto-zoom on focused form controls. */
+    font-size: 16px;
+}
+
+@media (hover: none) {
+    .product-card:hover,
+    .feature-card:hover,
+    .contact-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+
+.content-visibility-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 420px;
+}
+
+.immersive-orb {
+    position: fixed;
+    border-radius: 9999px;
+    filter: blur(55px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+    animation: floatDrift 16s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    .immersive-orb {
+        filter: blur(42px);
+        opacity: 0.25;
+    }
+}
+
+.immersive-orb-1 {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.55), rgba(212, 175, 55, 0));
+    top: 8vh;
+    left: -40px;
+}
+
+.immersive-orb-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(86, 154, 255, 0.35), rgba(86, 154, 255, 0));
+    right: -80px;
+    top: 38vh;
+    animation-delay: 1.3s;
+}
+
+@keyframes floatDrift {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(0, -18px, 0) scale(1.06); }
+}
+
+.social-facade {
+    position: relative;
+    overflow: hidden;
+}
+
+.facade-trigger {
+    position: relative;
+    display: block;
+}
+
+.facade-trigger::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,10,0) 35%, rgba(10,10,10,0.85) 100%);
+}
+
+.facade-badge {
+    position: absolute;
+    left: 14px;
+    bottom: 12px;
+    z-index: 1;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #0a0a0a;
+    background: #d4af37;
+    border-radius: 9999px;
+    padding: 6px 10px;
+}
+
+.facade-frame iframe {
+    width: 100%;
+    height: 420px;
+    border: 0;
+    display: block;
+    background: #0a0a0a;
+    contain: content;
+}
+
+.avatar-cloud {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+}
+
+.avatar-card {
+    position: relative;
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    background: rgba(26, 26, 26, 0.75);
+    border-radius: 18px;
+    padding: 16px;
+    overflow: hidden;
+}
+
+.avatar-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(212,175,55,0.08));
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    animation: gestureBounce 2.4s ease-in-out infinite;
+}
+
+.avatar-card:nth-child(2) .avatar-icon { animation-delay: 0.2s; }
+.avatar-card:nth-child(3) .avatar-icon { animation-delay: 0.4s; }
+.avatar-card:nth-child(4) .avatar-icon { animation-delay: 0.6s; }
+
+@keyframes gestureBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    45% { transform: translateY(-6px) rotate(-4deg); }
+    70% { transform: translateY(-2px) rotate(3deg); }
+}
+
+.cookie-consent {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
