@@ -836,6 +836,7 @@ function initializeOptimizedLinks() {
             const optimized = openOptimizedSocialLink(href);
             const popup = window.open(optimized, '_blank', 'noopener,noreferrer');
             if (popup) popup.opener = null;
+            else window.location.href = optimized;
         });
     });
 }
