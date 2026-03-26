@@ -133,20 +133,80 @@ function trackProductInteraction(eventName, data = {}) {
     postNetlifyForm('product-interactions', payload);
 }
 
-function selectSeraVoice() {
-    const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
-    if (!voices.length) return;
+function normalizeLocale(locale) {
+    return (locale || '').toLowerCase().replace('_', '-');
+}
 
-    const englishVoices = voices.filter(voice => /en[-_]/i.test(voice.lang) || /^en$/i.test(voice.lang));
-    const africanEnglishLocales = new Set(['en-za', 'en-ng', 'en-ke', 'en-gh', 'en-tz', 'en-ug']);
-    const africanEnglish = englishVoices.find(voice => {
-        const locale = (voice.lang || '').toLowerCase().replace('_', '-');
-        return africanEnglishLocales.has(locale) || /(africa|nigeria|kenya|ghana|south africa)/i.test(voice.name);
+function localePrefix(locale) {
+    const normalized = normalizeLocale(locale);
+    return normalized.split('-')[0];
+}
+
+function getUserLocaleCandidates() {
+    const candidates = [];
+    if (typeof navigator === 'undefined') return candidates;
+    if (Array.isArray(navigator.languages)) candidates.push(...navigator.languages);
+    if (navigator.language) candidates.push(navigator.language);
+
+    const deduped = [];
+    const seen = new Set();
+    candidates.forEach(locale => {
+        const normalized = normalizeLocale(locale);
+        if (!normalized || seen.has(normalized)) return;
+        deduped.push(normalized);
+        seen.add(normalized);
     });
-    const femaleHint = englishVoices.find(voice => /(female|woman|zira|susan|aria|samantha|karen|lucy|serena)/i.test(voice.name));
-    const preferred = africanEnglish || femaleHint || englishVoices[0] || voices[0];
+    return deduped;
+}
+
+function selectSeraVoice(preferredLocale) {
+    const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+    if (!voices.length) return null;
+
+    const normalizedPreferredLocale = normalizeLocale(preferredLocale);
+    const userLocales = normalizedPreferredLocale
+        ? [normalizedPreferredLocale, ...getUserLocaleCandidates().filter(locale => locale !== normalizedPreferredLocale)]
+        : getUserLocaleCandidates();
+
+    const languagePreferences = [];
+    const seenLanguages = new Set();
+    userLocales.forEach(locale => {
+        const prefix = localePrefix(locale);
+        if (prefix && !seenLanguages.has(prefix)) {
+            languagePreferences.push(prefix);
+            seenLanguages.add(prefix);
+        }
+    });
+
+    const voiceLocale = voice => normalizeLocale(voice.lang);
+    const voiceLanguage = voice => localePrefix(voiceLocale(voice));
+
+    let preferred = null;
+    for (const locale of userLocales) {
+        preferred = voices.find(voice => voiceLocale(voice) === locale);
+        if (preferred) break;
+    }
+
+    if (!preferred) {
+        for (const language of languagePreferences) {
+            preferred = voices.find(voice => voiceLanguage(voice) === language);
+            if (preferred) break;
+        }
+    }
+
+    if (!preferred) {
+        const englishVoices = voices.filter(voice => voiceLanguage(voice) === 'en');
+        const africanEnglishLocales = new Set(['en-za', 'en-ng', 'en-ke', 'en-gh', 'en-tz', 'en-ug']);
+        const africanEnglish = englishVoices.find(voice => {
+            const locale = voiceLocale(voice);
+            return africanEnglishLocales.has(locale) || /(africa|nigeria|kenya|ghana|south africa)/i.test(voice.name);
+        });
+        preferred = africanEnglish || englishVoices[0] || voices[0];
+    }
+
     seraVoiceName = preferred ? preferred.name : null;
     seraVoiceReady = true;
+    return preferred;
 }
 
 function getSeraMessage() {
@@ -167,22 +227,30 @@ function stopSeraVoice() {
 
 function speakSeraAssistant() {
     if (!('speechSynthesis' in window) || typeof window.SpeechSynthesisUtterance === 'undefined') return;
-    if (!seraVoiceReady) selectSeraVoice();
 
     stopSeraVoice();
     const utterance = new SpeechSynthesisUtterance(getSeraMessage());
-    utterance.lang = 'en';
+    const voice = selectSeraVoice();
+    if (voice) {
+        utterance.voice = voice;
+        utterance.lang = voice.lang || 'en';
+    } else {
+        utterance.lang = normalizeLocale((typeof navigator !== 'undefined' && navigator.language) ? navigator.language : 'en') || 'en';
+    }
     utterance.rate = 0.95;
     utterance.pitch = 1.05;
     utterance.volume = 1;
 
-    if (seraVoiceName) {
-        const voice = window.speechSynthesis.getVoices().find(item => item.name === seraVoiceName);
-        if (voice) utterance.voice = voice;
+    if (!voice && seraVoiceName) {
+        const selected = window.speechSynthesis.getVoices().find(item => item.name === seraVoiceName);
+        if (selected) {
+            utterance.voice = selected;
+            utterance.lang = selected.lang || utterance.lang;
+        }
     }
 
     window.speechSynthesis.speak(utterance);
-    trackProductInteraction('sera_voice_play', { cta_text: 'Play Voice' });
+    trackProductInteraction('sera_voice_play', { cta_text: 'Play Voice', voice_lang: utterance.lang });
 }
 
 function saveRecentlyViewed(productId) {
