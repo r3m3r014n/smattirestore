@@ -9,6 +9,8 @@ const TITLE_MIN_LENGTH = 20;
 const TITLE_MAX_LENGTH = 70;
 const META_MIN_LENGTH = 70;
 const META_MAX_LENGTH = 180;
+const TITLE_PATTERN = new RegExp(`<title>[^<]{${TITLE_MIN_LENGTH},${TITLE_MAX_LENGTH}}</title>`, 'i');
+const META_PATTERN = new RegExp(`<meta\\s+name="description"\\s+content="[^"]{${META_MIN_LENGTH},${META_MAX_LENGTH}}"`, 'i');
 
 
 function countMatches(text, pattern) {
@@ -50,8 +52,8 @@ exports.handler = async (event) => {
       const internal = links.filter((href) => href.endsWith('.html') || href.startsWith('/'));
       const issues = [];
 
-      if (!/<title>[^<]{${TITLE_MIN_LENGTH},${TITLE_MAX_LENGTH}}<\/title>/i.test(html)) issues.push('Missing or weak <title> length');
-      if (!/<meta\s+name="description"\s+content="[^"]{${META_MIN_LENGTH},${META_MAX_LENGTH}}"/i.test(html)) issues.push('Missing or weak meta description length');
+      if (!TITLE_PATTERN.test(html)) issues.push('Missing or weak <title> length');
+      if (!META_PATTERN.test(html)) issues.push('Missing or weak meta description length');
       if (!/<script\s+type="application\/ld\+json">/i.test(html)) issues.push('No JSON-LD schema block found');
       if (!/viewport-fit=cover/i.test(html)) issues.push('Viewport is not optimized for iOS safe areas');
 

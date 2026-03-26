@@ -22,7 +22,7 @@ let currentFilter = 'all';
 
 function createProductCard(product) {
     return `
-        <article class="bg-charcoal/80 border border-gold/30 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer" onclick="openModal(${product.id})">
+        <article class="bg-charcoal/80 border border-gold/30 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})">
             <div class="relative h-72 overflow-hidden bg-dark">
                 ${product.badge ? `<span class="absolute top-3 left-3 z-10 bg-gold text-dark text-xs font-bold uppercase px-3 py-1 rounded-full">${product.badge}</span>` : ''}
                 <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x500/1a1a1a/d4af37?text=SM+ATTIRE';">
@@ -34,6 +34,41 @@ function createProductCard(product) {
             </div>
         </article>
     `;
+}
+
+
+
+function updateProductListSchema(list, pageName = 'Product Listing') {
+    const schemaNode = document.getElementById('productListSchema');
+    if (!schemaNode) return;
+
+    const itemListElement = list.map((product, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+            '@type': 'Product',
+            name: product.name,
+            image: `https://smattirestore.com/${product.image}`,
+            category: product.category,
+            description: product.desc,
+            offers: {
+                '@type': 'Offer',
+                priceCurrency: 'KES',
+                price: product.price,
+                availability: 'https://schema.org/InStock',
+                url: 'https://smattirestore.com/shop.html'
+            }
+        }
+    }));
+
+    const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: pageName,
+        itemListElement
+    };
+
+    schemaNode.textContent = JSON.stringify(schema);
 }
 
 function saveCart() {
@@ -191,10 +226,13 @@ function filterProducts(category) {
 
     if (category === 'all') {
         renderProducts(products);
+        updateProductListSchema(products, 'All SM ATTIRE Products');
         return;
     }
 
-    renderProducts(products.filter(product => product.category === category));
+    const filtered = products.filter(product => product.category === category);
+    renderProducts(filtered);
+    updateProductListSchema(filtered, `${category} - SM ATTIRE`);
 }
 
 function applyHashFilter() {
@@ -244,7 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const featuredGrid = document.getElementById('featuredGrid');
     if (featuredGrid) {
-        featuredGrid.innerHTML = products.slice(0, 4).map(createProductCard).join('');
+        const featured = products.slice(0, 4);
+        featuredGrid.innerHTML = featured.map(createProductCard).join('');
+        updateProductListSchema(featured, 'Featured SM ATTIRE Drops');
     }
 
     window.addEventListener('hashchange', () => {
