@@ -9,13 +9,33 @@ const TITLE_MIN_LENGTH = 20;
 const TITLE_MAX_LENGTH = 70;
 const META_MIN_LENGTH = 70;
 const META_MAX_LENGTH = 180;
-const TITLE_PATTERN = new RegExp(`<title>[^<]{${TITLE_MIN_LENGTH},${TITLE_MAX_LENGTH}}</title>`, 'i');
-const META_PATTERN = new RegExp(`<meta\\s+name="description"\\s+content="[^"]{${META_MIN_LENGTH},${META_MAX_LENGTH}}"`, 'i');
+const TITLE_PATTERN = new RegExp(
+  `<title>[\\s\\S]{${TITLE_MIN_LENGTH},${TITLE_MAX_LENGTH}}<\\/title>`,
+  'i'
+);
+const META_TAG_PATTERN = /<meta\b[^>]*>/gi;
 
 
 function countMatches(text, pattern) {
   const matches = text.match(pattern);
   return matches ? matches.length : 0;
+}
+
+function hasValidMetaDescription(html) {
+  const metaTags = html.match(META_TAG_PATTERN) || [];
+
+  for (const tag of metaTags) {
+    const hasDescriptionName = /\bname\s*=\s*["']description["']/i.test(tag);
+    if (!hasDescriptionName) continue;
+
+    const contentMatch = tag.match(/\bcontent\s*=\s*["']([\s\S]*?)["']/i);
+    if (!contentMatch) return false;
+
+    const contentLength = contentMatch[1].trim().length;
+    return contentLength >= META_MIN_LENGTH && contentLength <= META_MAX_LENGTH;
+  }
+
+  return false;
 }
 
 exports.handler = async (event) => {
@@ -53,7 +73,7 @@ exports.handler = async (event) => {
       const issues = [];
 
       if (!TITLE_PATTERN.test(html)) issues.push('Missing or weak <title> length');
-      if (!META_PATTERN.test(html)) issues.push('Missing or weak meta description length');
+      if (!hasValidMetaDescription(html)) issues.push('Missing or weak meta description length');
       if (!/<script\s+type="application\/ld\+json">/i.test(html)) issues.push('No JSON-LD schema block found');
       if (!/viewport-fit=cover/i.test(html)) issues.push('Viewport is not optimized for iOS safe areas');
 

@@ -38,6 +38,11 @@ function createProductCard(product) {
 
 
 
+/**
+ * Updates ItemList JSON-LD for currently rendered products to improve indexing of dynamic grids.
+ * @param {Array<{name:string,image:string,category:string,desc:string,price:number}>} list
+ * @param {string} pageName
+ */
 function updateProductListSchema(list, pageName = 'Product Listing') {
     const schemaNode = document.getElementById('productListSchema');
     if (!schemaNode) return;
