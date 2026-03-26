@@ -20,6 +20,7 @@ const CONSENT_KEY = 'smattire_cookie_choice';
 const LANG_KEY = 'smattire_lang';
 const RECENTLY_VIEWED_KEY = 'smattire_recently_viewed';
 const SITE_TUTORIAL_KEY = 'smattire_site_tutorial_seen';
+const STICKY_BAR_DELAY_MS = 3500;
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let currentProduct = null;
 let currentFilter = 'all';
@@ -201,7 +202,8 @@ function selectSeraVoice(preferredLocale) {
         const africanEnglishLocales = new Set(['en-za', 'en-ng', 'en-ke', 'en-gh', 'en-tz', 'en-ug']);
         const africanEnglish = englishVoices.find(voice => {
             const locale = voiceLocale(voice);
-            return africanEnglishLocales.has(locale) || /(africa|nigeria|kenya|ghana|south africa)/i.test(voice.name);
+            const normalizedVoiceName = String(voice.name || '').toLowerCase().replace(/[\s_-]+/g, '');
+            return africanEnglishLocales.has(locale) || /(africa|nigeria|kenya|ghana|southafrica)/i.test(normalizedVoiceName);
         });
         preferred = africanEnglish || englishVoices[0] || voices[0];
     }
@@ -533,7 +535,7 @@ function initializeConversionPrompts() {
     const modal = document.getElementById('exitIntentModal');
 
     if (sticky) {
-        setTimeout(() => sticky.classList.remove('hidden'), 3500);
+        setTimeout(() => sticky.classList.remove('hidden'), STICKY_BAR_DELAY_MS);
     }
     if (closeSticky && sticky) {
         closeSticky.addEventListener('click', () => {
@@ -636,14 +638,19 @@ function openOptimizedSocialLink(url) {
         if (!allowMirror) return url;
         const parsed = new URL(url);
         const host = parsed.hostname.toLowerCase();
-        const isTikTokHost = host === 'tiktok.com' || host === 'www.tiktok.com' || host.endsWith('.tiktok.com');
-        const isInstagramHost = host === 'instagram.com' || host === 'www.instagram.com' || host.endsWith('.instagram.com');
+        const hostParts = host.split('.').filter(Boolean);
+        const isTikTokHost = (host === 'tiktok.com' || host === 'www.tiktok.com' || host.endsWith('.tiktok.com')) && hostParts.slice(-2).join('.') === 'tiktok.com';
+        const isInstagramHost = (host === 'instagram.com' || host === 'www.instagram.com' || host.endsWith('.instagram.com')) && hostParts.slice(-2).join('.') === 'instagram.com';
 
         if (isTikTokHost) {
+            const proceed = window.confirm('You are leaving TikTok for the trusted SM ATTIRE mirror site tiktokez.com to improve compatibility. Continue?');
+            if (!proceed) return url;
             const path = `${parsed.pathname}${parsed.search || ''}`;
             return `https://tiktokez.com${path}`;
         }
         if (isInstagramHost) {
+            const proceed = window.confirm('You are leaving Instagram for the trusted SM ATTIRE mirror site xeezz.com to improve compatibility. Continue?');
+            if (!proceed) return url;
             const path = `${parsed.pathname}${parsed.search || ''}`;
             return `https://xeezz.com${path}`;
         }

@@ -10,8 +10,8 @@ const TITLE_MAX_LENGTH = 70;
 const META_MIN_LENGTH = 70;
 const META_MAX_LENGTH = 180;
 const TITLE_PATTERN = new RegExp(
-  `<title>[\\s\\S]{${TITLE_MIN_LENGTH},${TITLE_MAX_LENGTH}}<\\/title>`,
-  'i'
+  `<title>.{${TITLE_MIN_LENGTH},${TITLE_MAX_LENGTH}}<\\/title>`,
+  'is'
 );
 const META_TAG_PATTERN = /<meta\b[^>]*>/gi;
 
@@ -68,7 +68,7 @@ exports.handler = async (event) => {
       const response = await fetch(url);
       const html = await response.text();
 
-      const links = [...html.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
+      const links = [...html.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
       const internal = links.filter((href) => href.endsWith('.html') || href.startsWith('/'));
       const issues = [];
 
