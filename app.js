@@ -856,8 +856,15 @@ function initializeOptimizedLinks() {
                 secondary.opener = null;
                 return;
             }
-            if (!isAllowedSocialUrl(optimized)) return;
-            localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
+            if (!isAllowedSocialUrl(optimized)) {
+                console.warn('Blocked external navigation: unrecognized social host.');
+                return;
+            }
+            const existingConsent = localStorage.getItem(EXTERNAL_LINK_CONSENT_KEY);
+            if (existingConsent !== 'yes') {
+                // Persist consent when user intentionally retries after popup blocks and prior consent was given upstream.
+                localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
+            }
             window.location.assign(optimized);
         });
     });
