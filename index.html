@@ -459,8 +459,13 @@
         <p class="text-white/75 mb-6">Competing with modern web apps: personalized assistant roles are optimized for quick buying decisions and lower checkout friction.</p>
         <div class="avatar-cloud">
             <article class="avatar-card">
-                <div class="avatar-icon" aria-hidden="true">✨</div>
-                <h3 class="font-playfair text-xl mt-3">Sera</h3>
+                <div class="avatar-icon overflow-hidden p-0 bg-transparent border border-gold/40" aria-hidden="true">
+                    <img src="sera.jpg" alt="" loading="lazy" class="w-full h-full object-cover" onerror="this.classList.add('hidden'); this.parentElement.classList.add('flex','items-center','justify-center','bg-gold/10','text-gold'); this.parentElement.textContent='✨';">
+                </div>
+                <h3 class="font-playfair text-xl mt-3 inline-flex items-center gap-2">
+                    <span>Sera</span>
+                    <img src="sera.jpg" alt="Sera icon" loading="lazy" class="w-6 h-6 rounded-full object-cover border border-gold/40" onerror="this.classList.add('hidden')">
+                </h3>
                 <p class="text-white/70 text-sm mt-1">Sera is your primary technology computing assistant for product intent routing, conversion prompts, and smart catalog guidance.</p>
             </article>
             <article class="avatar-card">
@@ -523,9 +528,12 @@
         </div>
     </div>
 
-    <div id="journeyAssistant" class="fixed bottom-4 left-4 z-[84] hidden md:block max-w-[320px] glass-panel border border-gold/30 rounded-2xl p-4">
-        <p class="text-gold text-[11px] uppercase tracking-[0.14em] mb-2">Sera Assistant</p>
-        <p id="journeyAssistantText" aria-live="polite" class="text-white/80 text-sm">Start with top sellers, then add to cart to unlock faster checkout.</p>
+    <div id="journeyAssistant" class="fixed bottom-4 left-4 right-4 sm:right-auto z-[84] block w-auto sm:max-w-[320px] glass-panel border border-gold/30 rounded-2xl p-4">
+        <p class="text-gold text-[11px] uppercase tracking-[0.14em] mb-2 inline-flex items-center gap-2">
+            <img src="sera.jpg" alt="Sera assistant icon" loading="lazy" class="w-5 h-5 rounded-full object-cover border border-gold/40" onerror="this.classList.add('hidden')">
+            <span>Sera Assistant</span>
+        </p>
+        <p id="journeyAssistantText" aria-live="off" class="text-white/80 text-sm">Sera is on standby. Tap Discover, Cart, or Play Voice when you need help.</p>
         <div class="mt-3 flex gap-2">
             <a href="#featured" data-track="assistant_discover" class="px-3 py-2 bg-gold text-dark rounded-full text-[10px] uppercase tracking-[0.12em] font-bold">Discover</a>
             <button type="button" onclick="toggleCart()" class="px-3 py-2 border border-gold/60 text-gold rounded-full text-[10px] uppercase tracking-[0.12em] font-bold">Cart</button>
