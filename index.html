@@ -328,6 +328,54 @@
         </div>
     </section>
 
+    <section class="max-w-7xl mx-auto px-5 md:px-8 pb-16">
+        <div class="glass-panel border border-gold/20 rounded-2xl p-6 md:p-8">
+            <h2 class="font-playfair text-3xl md:text-4xl mb-3">Marketplace Compatibility Layer</h2>
+            <p class="text-white/75 mb-6">Syndicate SM ATTIRE inventory, pricing, and storytelling into major marketplaces for broader reach while keeping one source-of-truth demand capture.</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <article class="border border-gold/20 rounded-xl p-4 bg-dark/50"><h3 class="font-playfair text-xl text-gold mb-1">Jumia</h3><p class="text-white/70 text-sm">Regional catalog expansion and promo campaigns.</p></article>
+                <article class="border border-gold/20 rounded-xl p-4 bg-dark/50"><h3 class="font-playfair text-xl text-gold mb-1">Kilimall</h3><p class="text-white/70 text-sm">Price-sensitive reach and seasonal traffic boosts.</p></article>
+                <article class="border border-gold/20 rounded-xl p-4 bg-dark/50"><h3 class="font-playfair text-xl text-gold mb-1">Shopify Markets</h3><p class="text-white/70 text-sm">Cross-border storefront and localization growth.</p></article>
+                <article class="border border-gold/20 rounded-xl p-4 bg-dark/50"><h3 class="font-playfair text-xl text-gold mb-1">TikTok/IG Shops</h3><p class="text-white/70 text-sm">Social discovery to direct conversion loops.</p></article>
+            </div>
+            <form name="marketplace-sync" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="grid md:grid-cols-2 gap-4">
+                <input type="hidden" name="form-name" value="marketplace-sync">
+                <p class="hidden"><label>Don’t fill this out: <input name="bot-field"></label></p>
+                <input required name="brand_name" type="text" placeholder="Brand / Store Name" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                <input required name="contact_email" type="email" placeholder="Business Email" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                <select name="primary_marketplace" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <option value="jumia">Jumia</option>
+                    <option value="kilimall">Kilimall</option>
+                    <option value="shopify_markets">Shopify Markets</option>
+                    <option value="tiktok_shop">TikTok Shop</option>
+                    <option value="instagram_shop">Instagram Shop</option>
+                    <option value="multi">Multi-Channel</option>
+                </select>
+                <select name="integration_readiness" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <option value="catalog_ready">Catalog Ready</option>
+                    <option value="feed_mapping_needed">Feed Mapping Needed</option>
+                    <option value="pricing_sync_needed">Pricing Sync Needed</option>
+                    <option value="inventory_sync_needed">Inventory Sync Needed</option>
+                </select>
+                <select name="product_feed_format" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <option value="csv">CSV</option>
+                    <option value="xml">XML</option>
+                    <option value="json">JSON</option>
+                    <option value="api">API Feed</option>
+                </select>
+                <select name="payment_stack" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <option value="mpesa">M-Pesa</option>
+                    <option value="card">Card</option>
+                    <option value="bnpl">BNPL</option>
+                    <option value="mixed">Mixed</option>
+                </select>
+                <input type="hidden" name="primary_intent" value="marketplace-compatibility">
+                <input type="hidden" name="omnichannel_capture" value="web_social_marketplaces">
+                <button type="submit" class="md:col-span-2 bg-gold text-dark py-3 rounded-full font-bold uppercase tracking-[0.14em] hover:bg-gold-light transition-colors">Request Marketplace Sync</button>
+            </form>
+        </div>
+    </section>
+
     <section class="max-w-7xl mx-auto px-5 md:px-8 pb-20">
         <div class="glass-panel border border-gold/20 rounded-2xl p-6 md:p-8">
             <h2 class="font-playfair text-3xl md:text-4xl mb-3">Join the Drop List</h2>
