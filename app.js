@@ -704,40 +704,44 @@ function openOptimizedSocialLink(url) {
 }
 
 function mountFacadeIframe(card) {
-    if (!card || card.dataset.loaded === 'true') return;
-    const target = card.querySelector('.facade-frame');
-    if (!target) return;
-
-    const embedUrl = card.dataset.embedUrl;
-    if (!embedUrl) return;
-
-    const iframe = document.createElement('iframe');
-    iframe.src = embedUrl;
-    iframe.loading = 'lazy';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    iframe.title = `${card.dataset.platform || 'social'} embed`;
-
-    const trigger = card.querySelector('.facade-trigger');
-    if (trigger) trigger.classList.add('hidden');
-    target.classList.remove('hidden');
-    target.innerHTML = '';
-    target.appendChild(iframe);
-    card.dataset.loaded = 'true';
+    if (!card) return;
+    const postUrl = card.dataset.postUrl;
+    if (!postUrl) return;
+    window.open(postUrl, '_blank', 'noopener,noreferrer');
 }
 
-// Guard flag – initializeSocialFacades is called from DOMContentLoaded, cookie-consent accept,
-// and saved-consent restore; this prevents duplicate listeners and observer setups.
 let socialFacadesInitialized = false;
+
+function initializeSeraAssistant() {
+    const toggleBtn = document.getElementById('seraToggleBtn');
+    const panel = document.getElementById('seraPanel');
+    const closeBtn = document.getElementById('seraPanelClose');
+    if (!toggleBtn || !panel) return;
+
+    toggleBtn.addEventListener('click', () => {
+        const isOpen = !panel.hidden;
+        panel.hidden = isOpen;
+        toggleBtn.setAttribute('aria-expanded', String(!isOpen));
+        if (!isOpen) {
+            seraAssistantActivated = true;
+            updateJourneyAssistant();
+        }
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            panel.hidden = true;
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            toggleBtn.focus();
+        });
+    }
+}
 
 function initializeSocialFacades() {
     if (socialFacadesInitialized) return;
     socialFacadesInitialized = true;
     const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 6);
     if (!cards.length) return;
-    const storedConsent = localStorage.getItem(CONSENT_KEY);
-    // Default to autoload when consent is unset to prioritize showing social content, per user instruction.
-    const allowAutoload = storedConsent === 'allow' || storedConsent === null;
 
     cards.forEach(card => {
         const trigger = card.querySelector('.facade-trigger');
@@ -745,24 +749,6 @@ function initializeSocialFacades() {
             trigger.addEventListener('click', () => mountFacadeIframe(card));
         }
     });
-
-    if (!allowAutoload) return;
-    if (!('IntersectionObserver' in window)) {
-        cards.slice(0, 2).forEach(card => {
-            if (card.dataset.autoload === 'visible') mountFacadeIframe(card);
-        });
-        return;
-    }
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            const card = entry.target;
-            if (card.dataset.autoload === 'visible') mountFacadeIframe(card);
-            observer.unobserve(card);
-        });
-    }, { rootMargin: '120px 0px', threshold: 0.15 });
-
-    cards.forEach(card => observer.observe(card));
 }
 
 function syncFeedbackForms() {
@@ -920,6 +906,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeCookieConsent();
     initializeConversionPrompts();
     initializeSiteTutorial();
+    initializeSeraAssistant();
     renderRecentlyViewed();
     updateJourneyAssistant();
 

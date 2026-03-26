@@ -275,6 +275,25 @@ select {
     contain: content;
 }
 
+.facade-thumb {
+    height: 220px;
+}
+
+@media (min-width: 640px) {
+    .facade-thumb {
+        height: 260px;
+    }
+}
+
+@media (max-width: 480px) {
+    .facade-badge {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+        left: 10px;
+        bottom: 10px;
+    }
+}
+
 .avatar-cloud {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -316,4 +335,50 @@ select {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Developer Signature ─────────────────────────────────────── */
+@keyframes devShimmer {
+    0%   { background-position: -250% center; }
+    100% { background-position: 250% center; }
+}
+
+@keyframes devGlowPulse {
+    0%, 100% { text-shadow: 0 0 4px rgba(212,175,55,0.45), 0 0 10px rgba(212,175,55,0.2); }
+    50%       { text-shadow: 0 0 8px rgba(212,175,55,0.8), 0 0 20px rgba(212,175,55,0.4), 0 0 32px rgba(212,175,55,0.15); }
+}
+
+.dev-sig {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.28);
+    margin-top: 10px;
+    letter-spacing: 0.04em;
+}
+
+.dev-sig-link {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    background: linear-gradient(
+        90deg,
+        #8b6914 0%,
+        #d4af37 25%,
+        #f4e4ba 45%,
+        #fff8e7 50%,
+        #f4e4ba 55%,
+        #d4af37 75%,
+        #8b6914 100%
+    );
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: devShimmer 3.5s linear infinite;
+}
+
+.dev-sig-link:hover {
+    animation: devShimmer 1.2s linear infinite, devGlowPulse 1.4s ease-in-out infinite;
+    -webkit-text-fill-color: transparent;
 }
