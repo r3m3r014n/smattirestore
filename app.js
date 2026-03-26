@@ -48,6 +48,7 @@ function createProductCard(product) {
                 <p class="text-gold text-xs uppercase tracking-[0.18em] mb-2">${product.category}</p>
                 <h3 class="font-playfair text-xl mb-3 leading-tight">${product.name}</h3>
                 <p class="text-gold font-bold text-2xl">KES ${product.price.toLocaleString()}</p>
+                <button onclick="quickAddToCartById(${product.id}, event)" class="mt-4 w-full bg-gold text-dark py-2.5 rounded-full text-xs uppercase tracking-[0.12em] font-bold hover:bg-gold-light transition-colors">Quick Add to Cart</button>
             </div>
         </article>
     `;
@@ -145,6 +146,13 @@ function addToCart(product) {
     }
     saveCart();
     updateCart();
+}
+
+function quickAddToCartById(id, event) {
+    if (event) event.stopPropagation();
+    const product = products.find(item => item.id === id);
+    if (!product) return;
+    addToCart(product);
 }
 
 function removeFromCart(id) {
@@ -474,6 +482,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const featured = products.slice(0, 4);
         featuredGrid.innerHTML = featured.map(createProductCard).join('');
         updateProductListSchema(featured, 'Featured SM ATTIRE Drops');
+    }
+
+    const bestsellerGrid = document.getElementById('bestsellerGrid');
+    if (bestsellerGrid) {
+        const bestsellers = products.filter(product => Boolean(product.badge)).slice(0, 6);
+        bestsellerGrid.innerHTML = bestsellers.map(createProductCard).join('');
     }
 
     window.addEventListener('hashchange', () => {
