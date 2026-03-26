@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>SM ATTIRE SEO Console</title>
+  <meta name="description" content="Operational SEO console for SM ATTIRE covering keyword intelligence, technical audits, content automation, competitor analysis, and outreach planning.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SM ATTIRE">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="color-scheme" content="dark light">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { gold: '#d4af37', 'gold-light': '#f4e4ba', charcoal: '#1a1a1a', dark: '#0a0a0a' },
+          fontFamily: { playfair: ['Playfair Display', 'serif'], rajdhani: ['Rajdhani', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background: radial-gradient(circle at top, rgba(212,175,55,0.12), transparent 35%), #0a0a0a; }
+    .glass-panel { background: rgba(26, 26, 26, 0.7); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    pre { white-space: pre-wrap; word-break: break-word; }
+  </style>
+</head>
+<body class="safe-area text-white font-rajdhani antialiased">
+  <nav class="sticky top-0 z-50 glass-panel border-b border-gold/20">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between">
+      <a href="index.html" class="font-playfair text-2xl tracking-[0.14em] text-gold">SM ATTIRE</a>
+      <a href="shop.html" class="text-xs uppercase tracking-[0.18em] text-white/80 hover:text-gold">Back to Store</a>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-5 md:px-8 py-8 space-y-6">
+    <header>
+      <h1 class="font-playfair text-4xl mb-2">SEO Operations Console</h1>
+      <p class="text-white/70">Run real-time keyword, audit, competitor, content, and outreach workflows for SM ATTIRE.</p>
+    </header>
+
+    <section class="glass-panel border border-gold/20 rounded-2xl p-5 space-y-4">
+      <h2 class="font-playfair text-2xl text-gold">1) Keyword + Seasonal Insights</h2>
+      <div class="flex flex-wrap gap-3">
+        <input id="seedKeyword" class="bg-dark/70 border border-gold/30 rounded-lg px-3 py-2" value="mitumba shoes nairobi" />
+        <button onclick="runKeywordInsights()" class="bg-gold text-dark px-4 py-2 rounded-lg font-bold">Run</button>
+      </div>
+      <pre id="keywordOutput" class="bg-dark/70 border border-gold/20 rounded-xl p-3 text-sm"></pre>
+    </section>
+
+    <section class="glass-panel border border-gold/20 rounded-2xl p-5 space-y-4">
+      <h2 class="font-playfair text-2xl text-gold">2) Technical SEO Audit</h2>
+      <div class="flex flex-wrap gap-3">
+        <input id="auditBaseUrl" class="bg-dark/70 border border-gold/30 rounded-lg px-3 py-2 min-w-[260px]" placeholder="https://smattirestore.com" value="https://smattirestore.com" />
+        <button onclick="runTechnicalAudit()" class="bg-gold text-dark px-4 py-2 rounded-lg font-bold">Run Audit</button>
+      </div>
+      <pre id="auditOutput" class="bg-dark/70 border border-gold/20 rounded-xl p-3 text-sm"></pre>
+    </section>
+
+    <section class="glass-panel border border-gold/20 rounded-2xl p-5 space-y-4">
+      <h2 class="font-playfair text-2xl text-gold">3) Competitor Intelligence</h2>
+      <div class="flex flex-wrap gap-3">
+        <input id="competitors" class="bg-dark/70 border border-gold/30 rounded-lg px-3 py-2 min-w-[320px]" placeholder="comma-separated domains" value="example-thrift-1.co.ke,example-thrift-2.co.ke" />
+        <button onclick="runCompetitorIntel()" class="bg-gold text-dark px-4 py-2 rounded-lg font-bold">Analyze</button>
+      </div>
+      <pre id="competitorOutput" class="bg-dark/70 border border-gold/20 rounded-xl p-3 text-sm"></pre>
+    </section>
+
+    <section class="glass-panel border border-gold/20 rounded-2xl p-5 space-y-4">
+      <h2 class="font-playfair text-2xl text-gold">4) Automated Content Creation</h2>
+      <div class="grid sm:grid-cols-3 gap-3">
+        <input id="contentTopic" class="bg-dark/70 border border-gold/30 rounded-lg px-3 py-2" value="How to Buy Grade A Mitumba Shoes in Nairobi" />
+        <input id="contentAudience" class="bg-dark/70 border border-gold/30 rounded-lg px-3 py-2" value="Nairobi students and young professionals" />
+        <input id="contentKeyword" class="bg-dark/70 border border-gold/30 rounded-lg px-3 py-2" value="cheap mitumba shoes nairobi" />
+      </div>
+      <button onclick="runContentAutomation()" class="bg-gold text-dark px-4 py-2 rounded-lg font-bold">Generate</button>
+      <pre id="contentOutput" class="bg-dark/70 border border-gold/20 rounded-xl p-3 text-sm"></pre>
+    </section>
+
+    <section class="glass-panel border border-gold/20 rounded-2xl p-5 space-y-4">
+      <h2 class="font-playfair text-2xl text-gold">5) Outreach & Link Building</h2>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <input id="targetName" class="bg-dark/70 border border-gold/30 rounded-lg px-3 py-2" value="Editor" />
+        <input id="targetSite" class="bg-dark/70 border border-gold/30 rounded-lg px-3 py-2" value="Nairobi Lifestyle Hub" />
+      </div>
+      <button onclick="runOutreachPlan()" class="bg-gold text-dark px-4 py-2 rounded-lg font-bold">Generate Campaign</button>
+      <pre id="outreachOutput" class="bg-dark/70 border border-gold/20 rounded-xl p-3 text-sm"></pre>
+    </section>
+  </main>
+
+  <script>
+    async function callApi(endpoint, payload) {
+      const response = await fetch(`/api/${endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json();
+      return JSON.stringify(data, null, 2);
+    }
+
+    async function runKeywordInsights() {
+      document.getElementById('keywordOutput').textContent = 'Running...';
+      document.getElementById('keywordOutput').textContent = await callApi('seo-keyword-insights', {
+        seedKeyword: document.getElementById('seedKeyword').value
+      });
+    }
+
+    async function runTechnicalAudit() {
+      document.getElementById('auditOutput').textContent = 'Running...';
+      document.getElementById('auditOutput').textContent = await callApi('seo-technical-audit', {
+        baseUrl: document.getElementById('auditBaseUrl').value
+      });
+    }
+
+    async function runCompetitorIntel() {
+      document.getElementById('competitorOutput').textContent = 'Running...';
+      const competitors = document.getElementById('competitors').value.split(',').map(v => v.trim()).filter(Boolean);
+      document.getElementById('competitorOutput').textContent = await callApi('seo-competitor-intelligence', { competitors });
+    }
+
+    async function runContentAutomation() {
+      document.getElementById('contentOutput').textContent = 'Generating...';
+      document.getElementById('contentOutput').textContent = await callApi('seo-content-automation', {
+        topic: document.getElementById('contentTopic').value,
+        audience: document.getElementById('contentAudience').value,
+        keyword: document.getElementById('contentKeyword').value
+      });
+    }
+
+    async function runOutreachPlan() {
+      document.getElementById('outreachOutput').textContent = 'Generating...';
+      document.getElementById('outreachOutput').textContent = await callApi('seo-outreach-linkbuilding', {
+        targetName: document.getElementById('targetName').value,
+        targetSite: document.getElementById('targetSite').value
+      });
+    }
+  </script>
+</body>
+</html>
