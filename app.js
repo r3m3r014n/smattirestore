@@ -24,14 +24,14 @@ let currentFilter = 'all';
 
 const copyDictionary = {
     en: {
-        heroTagline: 'New Clothes • New Fits • Delivery Across Kenya',
-        heroSubtitle: "Nairobi's home for new clothes, new fits, Grade A mitumba, and Neatfit Collection sneakers at budget-friendly prices.",
+        heroTagline: 'Classy, Elegant, Style',
+        heroSubtitle: 'Your Ultimate Fashion Guide for elegant looks, smart pricing, and premium thrift confidence.',
         shopNow: 'Shop Now',
         viewCollection: 'View Collection'
     },
     sw: {
-        heroTagline: 'Nguo Mpya • Fit Mpya • Uwasilishaji Kenya Nzima',
-        heroSubtitle: 'Nyumbani pa mitindo Nairobi kwa Grade A mitumba na viatu vya Neatfit Collection kwa bei rafiki.',
+        heroTagline: 'Mtindo wa Kifahari, Elegance, Style',
+        heroSubtitle: 'Mwongozo wako kamili wa mitindo ya kifahari kwa bei rafiki na confidence ya thrift premium.',
         shopNow: 'Nunua Sasa',
         viewCollection: 'Tazama Mkusanyiko'
     }
@@ -342,6 +342,7 @@ function mountFacadeIframe(card) {
 function initializeSocialFacades() {
     const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 6);
     if (!cards.length) return;
+    const allowAutoload = localStorage.getItem(CONSENT_KEY) === 'allow';
 
     cards.forEach(card => {
         const trigger = card.querySelector('.facade-trigger');
@@ -350,6 +351,7 @@ function initializeSocialFacades() {
         }
     });
 
+    if (!allowAutoload) return;
     if (!('IntersectionObserver' in window)) return;
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -453,6 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeLangToggle();
     initializeOptimizedLinks();
     syncFeedbackForms();
+    initializeSocialFacades();
     initializeCookieConsent();
 
     const productGrid = document.getElementById('productGrid');

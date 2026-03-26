@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>VR Showroom | SM ATTIRE</title>
+    <meta name="description" content="Explore the SM ATTIRE VR Showroom with immersive previews and AR-ready fashion commerce experiences.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 12% 8%, rgba(206, 214, 226, 0.2), transparent 34%),
+                radial-gradient(circle at 85% 18%, rgba(212,175,55,0.12), transparent 36%),
+                #0a0a0a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 20px 64px;
+        }
+        .hero {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(180, 190, 206, 0.09);
+            border-radius: 20px;
+            padding: 28px;
+        }
+        .title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin: 0 0 10px;
+            color: #d4af37;
+        }
+        .sub {
+            color: rgba(255,255,255,0.8);
+            max-width: 760px;
+            line-height: 1.65;
+        }
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .btn {
+            border-radius: 9999px;
+            padding: 11px 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 1px solid rgba(212, 175, 55, 0.6);
+        }
+        .btn.gold {
+            background: #d4af37;
+            color: #0a0a0a;
+            border-color: #d4af37;
+        }
+        .btn.clear {
+            color: #d4af37;
+            background: transparent;
+        }
+        .panel-grid {
+            margin-top: 20px;
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+        .panel {
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            background: rgba(180, 190, 206, 0.07);
+            border-radius: 16px;
+            padding: 16px;
+        }
+        .panel h3 {
+            margin: 0 0 8px;
+            color: #d4af37;
+            font-size: 18px;
+        }
+        .panel p {
+            margin: 0;
+            font-size: 14px;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.6;
+        }
+        #xrStatus {
+            margin-top: 14px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+        }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <section class="hero">
+            <h1 class="title">SM ATTIRE VR SHOWROOM</h1>
+            <p class="sub">Classy, Elegant, Style — Your Ultimate Fashion Guide in immersive mode. This page uses progressive enhancement so non-XR devices still get a premium experience with AR launch paths.</p>
+            <div class="cta-row">
+                <a href="index.html" class="btn clear">Back Home</a>
+                <a href="https://arvr.google.com/scene-viewer/1.0?file=https://modelviewer.dev/shared-assets/models/Astronaut.glb&mode=ar_preferred" target="_blank" rel="noopener" class="btn gold">Launch AR Preview</a>
+            </div>
+            <p id="xrStatus">Checking XR support…</p>
+        </section>
+        <section class="panel-grid" aria-label="VR commerce benefits">
+            <article class="panel">
+                <h3>Immersive Styling</h3>
+                <p>Browse style capsules with motion-rich previews designed for high engagement.</p>
+            </article>
+            <article class="panel">
+                <h3>Virtual Fit Vision</h3>
+                <p>Guide customers toward fit confidence before committing via WhatsApp checkout.</p>
+            </article>
+            <article class="panel">
+                <h3>Diaspora Commerce</h3>
+                <p>Enable international shoppers to preview and buy for local Kenya delivery.</p>
+            </article>
+            <article class="panel">
+                <h3>Creator Zones</h3>
+                <p>Launch branded drops with interactive VR shelves and social-linked releases.</p>
+            </article>
+        </section>
+    </main>
+    <script>
+        (async function () {
+            const status = document.getElementById('xrStatus');
+            if (!status) return;
+            if (!('xr' in navigator)) {
+                status.textContent = 'WebXR not available on this device. Fallback mode active.';
+                return;
+            }
+            try {
+                const supported = await navigator.xr.isSessionSupported('immersive-vr');
+                status.textContent = supported
+                    ? 'WebXR immersive VR is supported on this device.'
+                    : 'WebXR detected, but immersive VR session is not supported here.';
+            } catch (error) {
+                status.textContent = 'XR capability check unavailable. Fallback mode active.';
+            }
+        })();
+    </script>
+</body>
+</html>

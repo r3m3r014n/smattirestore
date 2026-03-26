@@ -49,9 +49,14 @@
     </script>
 
     <style>
-        body { background: radial-gradient(circle at top, rgba(212,175,55,0.12), transparent 35%), #0a0a0a; }
+        body {
+            background:
+                radial-gradient(circle at 12% 8%, rgba(206, 214, 226, 0.2), transparent 34%),
+                radial-gradient(circle at top, rgba(212,175,55,0.12), transparent 35%),
+                #0a0a0a;
+        }
         .glass-panel {
-            background: rgba(26, 26, 26, 0.65);
+            background: rgba(180, 190, 206, 0.09);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
         }
@@ -96,9 +101,9 @@
 
     <main class="max-w-7xl mx-auto px-5 md:px-8 pt-16 pb-14">
         <header class="text-center mb-10">
-            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">WhatsApp First Support</p>
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">Classy, Elegant, Style</p>
             <h1 class="font-playfair text-4xl md:text-6xl mb-4">Talk to SM ATTIRE</h1>
-            <p class="max-w-2xl mx-auto text-white/75 text-lg">For product checks, sizing, delivery timelines, and M-Pesa checkout help, message us directly.</p>
+            <p class="max-w-2xl mx-auto text-white/75 text-lg">Your Ultimate Fashion Guide for product checks, sizing, delivery timelines, and polished shopping support.</p>
         </header>
 
         <section class="grid md:grid-cols-3 gap-5 mb-10">
@@ -122,15 +127,70 @@
             <p class="text-white/70">Instagram: <a href="https://instagram.com/sm_attire_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sm_attire_</a> • TikTok: <a href="https://tiktok.com/@sera_muthoni_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sera_muthoni_</a></p>
         </section>
 
+        <section class="mb-10">
+            <div class="avatar-cloud">
+                <article class="avatar-card">
+                    <div class="avatar-icon" aria-hidden="true">💫</div>
+                    <h3 class="font-playfair text-xl mt-3">Style Concierge</h3>
+                    <p class="text-white/70 text-sm mt-1">Friendly motion-guided support for polished purchase journeys.</p>
+                </article>
+                <article class="avatar-card">
+                    <div class="avatar-icon" aria-hidden="true">🧥</div>
+                    <h3 class="font-playfair text-xl mt-3">Wardrobe Match</h3>
+                    <p class="text-white/70 text-sm mt-1">Helps compare fit types and layering options in seconds.</p>
+                </article>
+            </div>
+        </section>
+
         <section class="glass-panel border border-gold/20 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto">
             <h2 class="font-playfair text-3xl text-gold mb-6 text-center">Quick WhatsApp Inquiry</h2>
-            <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+            <form id="whatsappInquiryForm" name="whatsapp-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <input type="hidden" name="form-name" value="whatsapp-inquiry">
+                <p class="hidden">
+                    <label>Don’t fill this out: <input name="bot-field"></label>
+                </p>
                 <div class="grid sm:grid-cols-2 gap-4">
-                    <input id="contactName" type="text" required placeholder="Your Name" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
-                    <input id="contactPhone" type="tel" required placeholder="Phone Number" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <input id="contactName" name="name" type="text" required placeholder="Your Name" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <input id="contactPhone" name="phone" type="tel" required placeholder="Phone Number" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
                 </div>
-                <textarea id="contactMessage" rows="4" required placeholder="Tell us what you're looking for (item type, size, budget)." class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none resize-none"></textarea>
+                <textarea id="contactMessage" name="request" rows="4" required placeholder="Tell us what you're looking for (item type, size, budget)." class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none resize-none"></textarea>
+                <input type="hidden" name="journey_stage" value="contact-whatsapp-inquiry">
+                <input type="hidden" name="primary_intent" value="product-support">
+                <input type="hidden" name="brand_strategy" value="Classy,Elegant,Style">
                 <button type="submit" class="w-full bg-gold text-dark font-bold py-3 rounded-full uppercase tracking-[0.14em] hover:bg-gold-light transition-colors">Send via WhatsApp</button>
+            </form>
+        </section>
+
+        <section class="glass-panel border border-gold/20 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto mt-8">
+            <h2 class="font-playfair text-3xl text-gold mb-4 text-center">Feedback & Growth Signals</h2>
+            <p class="text-white/70 text-center mb-6">Help us improve design, style curation, and market experience. Delivery Services Available At A Fee.</p>
+            <form name="customer-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-4">
+                <input type="hidden" name="form-name" value="customer-feedback">
+                <p class="hidden">
+                    <label>Don’t fill this out: <input name="bot-field"></label>
+                </p>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <input required name="name" type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <input required name="email" type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <select name="style_preference" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                        <option value="classy">Classy</option>
+                        <option value="elegant">Elegant</option>
+                        <option value="streetwear">Streetwear</option>
+                        <option value="neatfit">Neatfit</option>
+                    </select>
+                    <select name="language_preference" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                        <option value="en">English</option>
+                        <option value="sw">Kiswahili</option>
+                        <option value="both">English + Kiswahili</option>
+                    </select>
+                </div>
+                <input type="hidden" name="journey_stage" value="contact-feedback">
+                <input type="hidden" name="primary_intent" value="feedback-and-seo">
+                <input type="hidden" name="brand_strategy" value="Classy,Elegant,Style">
+                <textarea name="feedback" rows="4" required placeholder="What should we improve next?" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none resize-none"></textarea>
+                <button type="submit" class="w-full bg-gold text-dark font-bold py-3 rounded-full uppercase tracking-[0.14em] hover:bg-gold-light transition-colors">Submit Feedback</button>
             </form>
         </section>
     </main>
@@ -156,6 +216,7 @@
         <div class="max-w-7xl mx-auto px-5 md:px-8 text-center">
             <p class="font-playfair text-2xl text-gold mb-2">SM ATTIRE</p>
             <p class="text-white/70">Nairobi, Kenya • WhatsApp: <a href="https://wa.me/254701226084" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">+254 701 226 084</a> • Instagram: <a href="https://instagram.com/sm_attire_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sm_attire_</a> • TikTok: <a href="https://tiktok.com/@sera_muthoni_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sera_muthoni_</a> • M-Pesa Payments Accepted</p>
+            <p class="text-white/70 mt-2">Classy, Elegant, Style • Your Ultimate Fashion Guide • Delivery Services Available At A Fee</p>
             <p class="text-white/50 text-sm mt-3">&copy; 2026 SM ATTIRE — Premium Mitumba</p>
         </div>
     </footer>
@@ -164,6 +225,7 @@
     <script>
         function handleContactSubmit(event) {
             event.preventDefault();
+            const form = document.getElementById('whatsappInquiryForm');
             const name = document.getElementById('contactName').value.trim();
             const phone = document.getElementById('contactPhone').value.trim();
             const message = document.getElementById('contactMessage').value.trim();
@@ -176,6 +238,15 @@
                 `Request: ${message}`,
                 'Payment: M-Pesa'
             ].join('\n'));
+
+            if (form) {
+                const formData = new FormData(form);
+                fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                }).catch(() => {});
+            }
 
             window.open(`https://wa.me/254701226084?text=${text}`, '_blank');
         }
