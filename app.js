@@ -691,6 +691,7 @@ function openOptimizedSocialLink(url) {
 
         if (isExternal && (isTikTokHost || isInstagramHost)) {
             localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
+            console.info('Auto-granted consent for social link per user preference to prioritize content.');
         } else if (isExternal) {
             const proceed = window.confirm(`You are opening an external link to ${host}. Continue?`);
             if (!proceed) return url;
@@ -727,6 +728,7 @@ function initializeSocialFacades() {
     const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 6);
     if (!cards.length) return;
     const storedConsent = localStorage.getItem(CONSENT_KEY);
+    // Default to autoload when consent is unset to prioritize showing social content, per user instruction.
     const allowAutoload = storedConsent === 'allow' || storedConsent === null;
 
     cards.forEach(card => {
@@ -847,9 +849,9 @@ function initializeOptimizedLinks() {
                 popup.opener = null;
                 return;
             }
-            const secondary = window.open(optimized, '_blank');
-            if (secondary) {
-                secondary.opener = null;
+            const fallbackPopup = window.open(optimized, '_blank');
+            if (fallbackPopup) {
+                fallbackPopup.opener = null;
                 return;
             }
             if (!isAllowedSocialUrl(optimized)) {
@@ -858,7 +860,7 @@ function initializeOptimizedLinks() {
             }
             const existingConsent = localStorage.getItem(EXTERNAL_LINK_CONSENT_KEY);
             if (existingConsent !== 'yes') {
-                // Persist consent when user intentionally retries after pop-up blocks; proceeding here counts as granting consent.
+                // Auto-grant consent during fallback navigation to keep social links visible as prioritized by user.
                 localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
             }
             window.location.assign(optimized);
