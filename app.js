@@ -718,13 +718,21 @@ function mountFacadeIframe(card) {
     iframe.referrerPolicy = 'strict-origin-when-cross-origin';
     iframe.title = `${card.dataset.platform || 'social'} embed`;
 
+    const trigger = card.querySelector('.facade-trigger');
+    if (trigger) trigger.classList.add('hidden');
     target.classList.remove('hidden');
     target.innerHTML = '';
     target.appendChild(iframe);
     card.dataset.loaded = 'true';
 }
 
+// Guard flag – initializeSocialFacades is called from DOMContentLoaded, cookie-consent accept,
+// and saved-consent restore; this prevents duplicate listeners and observer setups.
+let socialFacadesInitialized = false;
+
 function initializeSocialFacades() {
+    if (socialFacadesInitialized) return;
+    socialFacadesInitialized = true;
     const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 6);
     if (!cards.length) return;
     const storedConsent = localStorage.getItem(CONSENT_KEY);
