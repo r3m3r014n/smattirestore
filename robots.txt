@@ -1,5 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /xmlrpc.php
+Disallow: /.env
+Disallow: /config.php
+Disallow: /admin/
+Disallow: /phpmyadmin/
+Disallow: /cgi-bin/
 
 User-agent: Googlebot
 Allow: /
@@ -11,5 +19,21 @@ Allow: /*.jpeg
 Allow: /*.png
 Allow: /*.webp
 Allow: /*.avif
+
+# Block known aggressive scrapers that contribute to scam-flagging signals
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
 
 Sitemap: https://smattirestore.com/sitemap.xml
