@@ -60,20 +60,20 @@
             border-color: rgba(17, 17, 16, 0.1) !important;
             box-shadow: 0 2px 24px rgba(17, 17, 16, 0.06);
         }
-        /* Base text colors for light editorial theme */
-        h1, h2, h3, h4, h5, h6 { color: #111110; }
-        p, li, blockquote, label { color: rgba(17, 17, 16, 0.68); }
-        /* Dark containers get white text back */
-        .bg-dark p, .bg-dark li, .bg-dark blockquote, .bg-dark h1,
-        .bg-dark h2, .bg-dark h3, [class*="bg-charcoal"] p,
-        [class*="bg-charcoal"] h1, [class*="bg-charcoal"] h2,
-        [class*="bg-charcoal"] h3, [class*="bg-charcoal"] li { 
-            color: rgba(255, 255, 255, 0.82); 
-        }
-        [class*="bg-charcoal"] h1, [class*="bg-charcoal"] h2,
-        [class*="bg-charcoal"] h3, .bg-dark h1, .bg-dark h2, .bg-dark h3 {
-            color: #ffffff;
-        }
+        /* ── Text colour: specificity beats Tailwind text-white/XX (0,1,0) ── */
+        /* body.safe-area p = 0,1,2 → wins over text-white/XX = 0,1,0       */
+        body.safe-area h1, body.safe-area h2, body.safe-area h3,
+        body.safe-area h4, body.safe-area h5, body.safe-area h6 { color: #111110; }
+        body.safe-area p, body.safe-area li,
+        body.safe-area blockquote, body.safe-area label { color: rgba(17, 17, 16, 0.65); }
+        /* Restore white text inside explicit dark containers (0,2,2 wins) */
+        body.safe-area .bg-dark p, body.safe-area .bg-dark li,
+        body.safe-area .bg-dark blockquote,
+        body.safe-area [class*="bg-charcoal"] p,
+        body.safe-area [class*="bg-charcoal"] li { color: rgba(255, 255, 255, 0.78); }
+        body.safe-area .bg-dark h1, body.safe-area .bg-dark h2, body.safe-area .bg-dark h3,
+        body.safe-area [class*="bg-charcoal"] h1, body.safe-area [class*="bg-charcoal"] h2,
+        body.safe-area [class*="bg-charcoal"] h3 { color: #ffffff; }
     </style>
 
     <script type="application/ld+json">
@@ -97,15 +97,15 @@
     </script>
 </head>
 <body class="safe-area text-charcoal font-rajdhani antialiased">
-    <nav id="navbar" class="sticky top-0 z-50 bg-dark border-b border-charcoal/20">
+    <nav id="navbar" class="sticky top-0 z-50 bg-white border-b border-charcoal/10 shadow-sm">
         <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between gap-4">
             <a href="index.html" class="font-playfair text-2xl tracking-[0.14em] text-gold hover:text-gold-light transition-colors">SM ATTIRE</a>
-            <div class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.18em] font-semibold text-white/80">
+            <div class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.18em] font-semibold text-charcoal/60">
                 <a href="shop.html" class="hover:text-gold transition-colors">Shop</a>
                 <a href="about.html" class="text-gold">About</a>
                 <a href="contact.html" class="hover:text-gold transition-colors">Contact</a>
             </div>
-            <a href="seo.html" class="hidden md:inline text-xs uppercase tracking-[0.16em] text-white/70 hover:text-gold">SEO</a>
+            <a href="seo.html" class="hidden md:inline text-xs uppercase tracking-[0.16em] text-charcoal/50 hover:text-gold">SEO</a>
             <button onclick="toggleCart()" aria-label="Open Cart" class="relative border border-gold/60 text-gold rounded-full px-4 py-2 hover:bg-gold hover:text-dark transition-all">
                 🛒
                 <span id="cartCount" class="absolute -top-2 -right-2 min-w-[22px] h-[22px] px-1 rounded-full bg-gold text-dark text-xs font-bold flex items-center justify-center">0</span>
