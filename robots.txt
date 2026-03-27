@@ -25,6 +25,14 @@ Allow: /
 Allow: /*.mp4
 Allow: /*.webm
 
+# Applebot — powers Siri Suggestions, Safari Reader, Spotlight, Apple Maps
+User-agent: Applebot
+Allow: /
+
+# Bingbot — used by Applebot index; allow full crawl
+User-agent: bingbot
+Allow: /
+
 # Block known aggressive scrapers that contribute to scam-flagging signals
 User-agent: AhrefsBot
 Disallow: /

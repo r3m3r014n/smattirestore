@@ -425,3 +425,33 @@ body {
     border-top: 1px solid rgba(17, 17, 16, 0.12);
     margin: 0;
 }
+
+/* ─── Nav Logo ─────────────────────────────────────────────────── */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+.nav-brand:hover {
+    opacity: 0.82;
+}
+
+.nav-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    /* Crop the square logo mark to circular — works for logo-sm.jpg (1004×1000) */
+    object-position: center center;
+    border: 1.5px solid rgba(184, 149, 63, 0.55);
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    .nav-logo {
+        width: 30px;
+        height: 30px;
+    }
+}
