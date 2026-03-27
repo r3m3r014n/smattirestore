@@ -37,6 +37,234 @@ const navigationPsychologyMessages = {
     commit: 'Commit mode active: reduce checkout friction with clear next-best-action prompts.'
 };
 
+// Grok-inspired AI: witty Sera responses
+const seraWittyResponses = {
+    greet: [
+        "Heyyy! Sera online. Ready to make your wardrobe legendary? 👑",
+        "Sup! I'm Sera — part AI, part fashion oracle. Let's find your fit!",
+        "Sera here. Fueled by good taste and zero budget shame. What are you hunting?"
+    ],
+    recommend: [
+        "Hot take: the {name} is literally flying off the shelves. Grab it before I do. 😅",
+        "Trend alert 🔥 — {name} is what everyone in Nairobi is rocking right now.",
+        "If style had a face it'd be {name}. Just saying."
+    ],
+    cart: [
+        "Your cart is looking *chef's kiss*. Finish the checkout before someone else does! 🚀",
+        "Nice haul! That's {count} items of pure drip. Time to seal the deal via WhatsApp.",
+        "Ooh, {count} items in cart? You have taste. Let's make it official — checkout awaits!"
+    ],
+    voice: [
+        "Try asking me: 'Show me shoes under 2000' or 'What's trending?' 🎙️",
+        "Voice mode activated. Speak to me like I'm your personal stylist — I'm listening!",
+        "Go ahead, ask me anything fashion. I'm unfiltered and opinionated. 😎"
+    ],
+    notFound: [
+        "Hmm, I couldn't decode that. Try: 'shoes', 'trending', or 'under 1500'. I'm good, not psychic. 😂",
+        "That stumped me! But hey — try 'cheap hoodies' or 'casual streetwear'. I'll nail it.",
+        "I understood zero of that. Let's try again: ask about a category, price, or vibe!"
+    ]
+};
+
+// Mock real-time social trends (simulated live feed)
+const mockSocialTrends = [
+    { tag: "#NairobiThrift", count: "12.4K posts", hot: true },
+    { tag: "#MitumabaStyle", count: "8.1K posts", hot: true },
+    { tag: "#StreetWearKE", count: "6.7K posts", hot: false },
+    { tag: "#GradeAFinds", count: "5.3K posts", hot: true },
+    { tag: "#ThriftFlips", count: "4.9K posts", hot: false },
+    { tag: "#NeatfitVibes", count: "3.8K posts", hot: false }
+];
+
+let seraChatHistory = [];
+let seraVoiceSearchActive = false;
+let seraSpeechRecognition = null;
+
+function getSeraWitty(key, data = {}) {
+    const pool = seraWittyResponses[key] || seraWittyResponses.notFound;
+    let msg = pool[Math.floor(Math.random() * pool.length)];
+    Object.keys(data).forEach(k => { msg = msg.replace(new RegExp(`\\{${k}\\}`, 'g'), data[k]); });
+    return msg;
+}
+
+function getPersonalizedRecommendations() {
+    const viewed = JSON.parse(localStorage.getItem(RECENTLY_VIEWED_KEY) || '[]');
+    if (!viewed.length) return products.slice(0, 3);
+    const viewedCategories = viewed.map(id => {
+        const p = products.find(item => item.id === id);
+        return p ? p.category : null;
+    }).filter(Boolean);
+    const topCategory = viewedCategories.sort((a, b) =>
+        viewedCategories.filter(c => c === b).length - viewedCategories.filter(c => c === a).length
+    )[0];
+    return products.filter(p => p.category === topCategory).slice(0, 3);
+}
+
+function handleSeraChat(userMessage) {
+    const msg = String(userMessage || '').trim().toLowerCase();
+    if (!msg) return '';
+
+    seraChatHistory.push({ role: 'user', text: userMessage });
+
+    let response = '';
+    const priceMatch = msg.match(/under\s+(\d+)/);
+    const keywordShoes = /shoe|sneaker|boot|jordan|vans|air force/i.test(msg);
+    const keywordHoodie = /hoodie|hooky/i.test(msg);
+    const keywordJeans = /jean|denim|pant|cargo/i.test(msg);
+    const keywordTrend = /trend|hot|popular|what.s new|viral/i.test(msg);
+    const keywordPrice = /cheap|affordable|budget|price/i.test(msg);
+    const keywordCart = /cart|checkout|buy|order/i.test(msg);
+    const keywordGreet = /hi|hello|hey|sup|yo/i.test(msg);
+
+    if (keywordGreet) {
+        response = getSeraWitty('greet');
+    } else if (keywordTrend) {
+        const trend = mockSocialTrends.find(t => t.hot);
+        response = `Trending right now: ${trend ? trend.tag + ' (' + trend.count + ')' : '#NairobiThrift'}. Check out our Casual Streetwear section — it's lit! 🔥`;
+    } else if (keywordCart) {
+        const count = cart.reduce((s, i) => s + i.quantity, 0);
+        response = count > 0 ? getSeraWitty('cart', { count }) : "Your cart is empty. Let me fix that! Try 'show me shoes' or 'what's trending'. 😏";
+    } else if (priceMatch) {
+        const maxPrice = parseInt(priceMatch[1], 10);
+        const affordable = products.filter(p => p.price <= maxPrice);
+        response = affordable.length
+            ? `Found ${affordable.length} items under KES ${maxPrice.toLocaleString()}: ${affordable.slice(0, 2).map(p => p.name).join(', ')}. Tap any to view! 🎯`
+            : `Nothing under KES ${maxPrice.toLocaleString()} right now. Try 'under 1500' — plenty of fire finds! 🔥`;
+    } else if (keywordShoes) {
+        const shoes = products.filter(p => p.category === 'Neatfit Collection');
+        const pick = shoes[Math.floor(Math.random() * shoes.length)];
+        response = pick ? getSeraWitty('recommend', { name: pick.name }) : "Check the Neatfit Collection for premium mitumba kicks!";
+    } else if (keywordHoodie) {
+        const hoodie = products.find(p => /hoodie/i.test(p.name));
+        response = hoodie ? getSeraWitty('recommend', { name: hoodie.name }) : "We've got hoodies in Casual Streetwear — super cozy and budget-friendly! 🧥";
+    } else if (keywordJeans) {
+        const jeans = products.find(p => /jean|cargo|pant/i.test(p.name));
+        response = jeans ? getSeraWitty('recommend', { name: jeans.name }) : "Baggy jeans alert in Casual Streetwear — Y2K vibes are back! 👖";
+    } else if (keywordPrice) {
+        response = "Budget king energy! We have fits from KES 700. Try asking 'under 1000' or 'cheapest shoes'. 💸";
+    } else {
+        const recs = getPersonalizedRecommendations();
+        const pick = recs[Math.floor(Math.random() * recs.length)];
+        response = pick ? getSeraWitty('recommend', { name: pick.name }) : getSeraWitty('notFound')[0];
+    }
+
+    seraChatHistory.push({ role: 'sera', text: response });
+    return response;
+}
+
+function renderSeraChatMessage(role, text) {
+    const chatLog = document.getElementById('seraChatLog');
+    if (!chatLog) return;
+    const el = document.createElement('div');
+    el.className = role === 'user'
+        ? 'text-right text-white/80 text-xs mb-2'
+        : 'text-left text-gold text-xs mb-2';
+    const bubble = document.createElement('span');
+    bubble.className = role === 'user'
+        ? 'inline-block bg-white/10 rounded-2xl rounded-tr-sm px-3 py-1.5 max-w-[90%]'
+        : 'inline-block bg-gold/10 border border-gold/20 rounded-2xl rounded-tl-sm px-3 py-1.5 max-w-[90%]';
+    bubble.textContent = text;
+    el.appendChild(bubble);
+    chatLog.appendChild(el);
+    chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+function submitSeraChat() {
+    const input = document.getElementById('seraChatInput');
+    if (!input) return;
+    const val = input.value.trim();
+    if (!val) return;
+    renderSeraChatMessage('user', val);
+    input.value = '';
+    const reply = handleSeraChat(val);
+    setTimeout(() => {
+        renderSeraChatMessage('sera', reply);
+        announceToScreenReader(reply);
+    }, 320);
+    trackProductInteraction('sera_chat_message', { query: val });
+}
+
+function initSeraVoiceSearch() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) return null;
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-KE';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    recognition.onresult = event => {
+        const transcript = event.results[0][0].transcript;
+        const input = document.getElementById('seraChatInput');
+        if (input) input.value = transcript;
+        submitSeraChat();
+        seraVoiceSearchActive = false;
+        updateVoiceSearchBtn(false);
+    };
+    recognition.onerror = () => {
+        seraVoiceSearchActive = false;
+        updateVoiceSearchBtn(false);
+    };
+    recognition.onend = () => {
+        seraVoiceSearchActive = false;
+        updateVoiceSearchBtn(false);
+    };
+    return recognition;
+}
+
+function updateVoiceSearchBtn(active) {
+    const btn = document.getElementById('seraVoiceSearchBtn');
+    if (!btn) return;
+    btn.setAttribute('aria-pressed', String(active));
+    btn.classList.toggle('text-gold', active);
+    btn.classList.toggle('text-white/60', !active);
+    btn.title = active ? 'Listening...' : 'Voice search';
+}
+
+function toggleSeraVoiceSearch() {
+    if (!seraSpeechRecognition) {
+        seraSpeechRecognition = initSeraVoiceSearch();
+    }
+    if (!seraSpeechRecognition) {
+        renderSeraChatMessage('sera', "Voice search isn't supported in your browser. Try Chrome! 🎙️");
+        return;
+    }
+    if (seraVoiceSearchActive) {
+        seraSpeechRecognition.stop();
+        seraVoiceSearchActive = false;
+        updateVoiceSearchBtn(false);
+    } else {
+        seraVoiceSearchActive = true;
+        updateVoiceSearchBtn(true);
+        renderSeraChatMessage('sera', getSeraWitty('voice'));
+        seraSpeechRecognition.start();
+    }
+    trackProductInteraction('sera_voice_search_toggle', { active: String(seraVoiceSearchActive) });
+}
+
+function renderSocialTrends() {
+    const container = document.getElementById('seraTrendsContainer');
+    if (!container) return;
+    container.innerHTML = mockSocialTrends.map(t =>
+        `<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full border ${t.hot ? 'border-gold/60 text-gold' : 'border-white/20 text-white/60'} text-[10px] cursor-default" title="${t.count}">${t.hot ? '🔥' : ''}${t.tag}</span>`
+    ).join('');
+}
+
+function toggleDarkMode() {
+    const isDark = document.documentElement.classList.toggle('light-mode');
+    localStorage.setItem('smattire_theme', isDark ? 'light' : 'dark');
+    const btn = document.getElementById('darkModeBtn');
+    if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+    announceToScreenReader(isDark ? 'Light mode enabled' : 'Dark mode enabled');
+}
+
+function initDarkMode() {
+    const saved = localStorage.getItem('smattire_theme');
+    if (saved === 'light') {
+        document.documentElement.classList.add('light-mode');
+        const btn = document.getElementById('darkModeBtn');
+        if (btn) btn.textContent = '☀️';
+    }
+}
+
 const copyDictionary = {
     en: {
         heroTagline: 'Classy, Elegant, Style',
@@ -52,17 +280,31 @@ const copyDictionary = {
     }
 };
 
+function productAltText(product) {
+    return `${product.name} — ${product.category}, KES ${product.price.toLocaleString()} | Grade A Mitumba, SM ATTIRE Nairobi`;
+}
+
 function createProductCard(product) {
     return `
-        <article class="bg-charcoal/80 border border-gold/30 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})">
+        <article class="bg-charcoal/80 border border-gold/30 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})" itemscope itemtype="https://schema.org/Product">
+            <meta itemprop="name" content="${product.name}">
+            <meta itemprop="description" content="${product.desc}">
+            <meta itemprop="sku" content="SM-${String(product.id).padStart(3, '0')}">
             <div class="relative h-72 overflow-hidden bg-dark">
                 ${product.badge ? `<span class="absolute top-3 left-3 z-10 bg-gold text-dark text-xs font-bold uppercase px-3 py-1 rounded-full">${product.badge}</span>` : ''}
-                <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x500/1a1a1a/d4af37?text=SM+ATTIRE';">
+                <img src="${product.image}" alt="${productAltText(product)}" loading="lazy" itemprop="image" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x500/1a1a1a/d4af37?text=SM+ATTIRE';">
             </div>
             <div class="p-5">
-                <p class="text-gold text-xs uppercase tracking-[0.18em] mb-2">${product.category}</p>
-                <h3 class="font-playfair text-xl mb-3 leading-tight">${product.name}</h3>
-                <p class="text-gold font-bold text-2xl">KES ${product.price.toLocaleString()}</p>
+                <p class="text-gold text-xs uppercase tracking-[0.18em] mb-2" itemprop="category">${product.category}</p>
+                <h3 class="font-playfair text-xl mb-3 leading-tight" itemprop="name">${product.name}</h3>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <meta itemprop="priceCurrency" content="KES">
+                    <meta itemprop="price" content="${product.price}">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="itemCondition" content="https://schema.org/UsedCondition">
+                    <meta itemprop="url" content="https://smattirestore.com/shop.html">
+                    <p class="text-gold font-bold text-2xl">KES ${product.price.toLocaleString()}</p>
+                </div>
                 <button onclick="quickAddToCartById(${product.id}, event)" class="mt-4 w-full bg-gold text-dark py-2.5 rounded-full text-xs uppercase tracking-[0.12em] font-bold hover:bg-gold-light transition-colors">Quick Add to Cart</button>
             </div>
         </article>
@@ -72,7 +314,118 @@ function createProductCard(product) {
 
 
 /**
+ * Builds a complete Product JSON-LD object for a single product.
+ * Includes all Google Shopping-required fields: itemCondition, brand, sku,
+ * seller, ImageObject, and potentialAction BuyAction.
+ * @param {{id:number,name:string,image:string,category:string,desc:string,price:number,badge:string}} product
+ * @returns {Object}
+ */
+function buildProductSchema(product) {
+    const productUrl = `https://smattirestore.com/shop.html#product-${product.id}`;
+    const imageUrl = `https://smattirestore.com/${product.image}`;
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        '@id': productUrl,
+        name: product.name,
+        description: `${product.desc} Available at SM ATTIRE — Grade A Mitumba store in Nairobi, Kenya. M-Pesa checkout via WhatsApp.`,
+        sku: `SM-${String(product.id).padStart(3, '0')}`,
+        productID: `SM-${String(product.id).padStart(3, '0')}`,
+        category: product.category,
+        brand: {
+            '@type': 'Brand',
+            name: 'SM ATTIRE'
+        },
+        image: {
+            '@type': 'ImageObject',
+            '@id': imageUrl,
+            contentUrl: imageUrl,
+            url: imageUrl,
+            name: productAltText(product),
+            description: `${product.name} — ${product.category} available at SM ATTIRE Nairobi. KES ${product.price.toLocaleString()}.`,
+            width: { '@type': 'QuantitativeValue', value: 800, unitCode: 'E37' },
+            height: { '@type': 'QuantitativeValue', value: 1000, unitCode: 'E37' }
+        },
+        offers: {
+            '@type': 'Offer',
+            '@id': `${productUrl}#offer`,
+            url: 'https://smattirestore.com/shop.html',
+            priceCurrency: 'KES',
+            price: product.price,
+            priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            availability: 'https://schema.org/InStock',
+            itemCondition: 'https://schema.org/UsedCondition',
+            seller: {
+                '@type': 'Organization',
+                name: 'SM ATTIRE',
+                url: 'https://smattirestore.com',
+                telephone: '+254701226084',
+                areaServed: 'Nairobi, Kenya'
+            },
+            shippingDetails: {
+                '@type': 'OfferShippingDetails',
+                shippingRate: {
+                    '@type': 'MonetaryAmount',
+                    value: 0,
+                    currency: 'KES'
+                },
+                deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 1,
+                        unitCode: 'DAY'
+                    },
+                    transitTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 2,
+                        unitCode: 'DAY'
+                    }
+                },
+                shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'KE',
+                    addressRegion: 'Nairobi'
+                }
+            },
+            hasMerchantReturnPolicy: {
+                '@type': 'MerchantReturnPolicy',
+                applicableCountry: 'KE',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                merchantReturnDays: 3,
+                returnMethod: 'https://schema.org/ReturnByMail',
+                returnFees: 'https://schema.org/FreeReturn'
+            }
+        },
+        potentialAction: {
+            '@type': 'BuyAction',
+            target: {
+                '@type': 'EntryPoint',
+                urlTemplate: `https://wa.me/254701226084?text=${encodeURIComponent(`Hi, I want to order: ${product.name} (KES ${product.price.toLocaleString()})`)}`
+            }
+        }
+    };
+}
+
+/**
+ * Injects individual Product JSON-LD scripts for all products into the page.
+ * Called once on DOMContentLoaded so Googlebot can index every product.
+ */
+function injectAllProductSchemas() {
+    const container = document.getElementById('allProductsSchema');
+    if (!container) return;
+    const schemas = products.map(buildProductSchema);
+    container.textContent = JSON.stringify(schemas.length === 1 ? schemas[0] : {
+        '@context': 'https://schema.org',
+        '@graph': schemas
+    });
+}
+
+/**
  * Updates ItemList JSON-LD for currently rendered products to improve indexing of dynamic grids.
+ * Also refreshes individual Product schemas for the visible subset.
  * @param {Array<{name:string,image:string,category:string,desc:string,price:number}>} list
  * @param {string} pageName
  */
@@ -83,26 +436,16 @@ function updateProductListSchema(list, pageName = 'Product Listing') {
     const itemListElement = list.map((product, index) => ({
         '@type': 'ListItem',
         position: index + 1,
-        item: {
-            '@type': 'Product',
-            name: product.name,
-            image: `https://smattirestore.com/${product.image}`,
-            category: product.category,
-            description: product.desc,
-            offers: {
-                '@type': 'Offer',
-                priceCurrency: 'KES',
-                price: product.price,
-                availability: 'https://schema.org/InStock',
-                url: 'https://smattirestore.com/shop.html'
-            }
-        }
+        url: `https://smattirestore.com/shop.html#product-${product.id}`,
+        item: buildProductSchema(product)
     }));
 
     const schema = {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
         name: pageName,
+        description: `${pageName} — Grade A mitumba and thrift clothing from SM ATTIRE Nairobi`,
+        numberOfItems: list.length,
         itemListElement
     };
 
@@ -435,7 +778,10 @@ function openModal(id) {
     const modalBadge = document.getElementById('modalBadge');
     const modalCategory = document.getElementById('modalCategory');
 
-    if (modalImg) modalImg.src = currentProduct.image;
+    if (modalImg) {
+        modalImg.src = currentProduct.image;
+        modalImg.alt = productAltText(currentProduct);
+    }
     if (modalName) modalName.textContent = currentProduct.name;
     if (modalPrice) modalPrice.textContent = `KES ${currentProduct.price.toLocaleString()}`;
     if (modalDesc) modalDesc.textContent = currentProduct.desc;
@@ -691,23 +1037,68 @@ function openOptimizedSocialLink(url) {
 
         if (isExternal && (isTikTokHost || isInstagramHost)) {
             localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
-            console.info('Auto-granted consent for social link per user preference to prioritize content.');
-        } else if (isExternal) {
-            const proceed = window.confirm(`You are opening an external link to ${host}. Continue?`);
-            if (!proceed) return url;
         }
         return parsed.href;
     } catch (error) {
         return url;
     }
-    return url;
+}
+
+function buildSocialEmbedUrl(postUrl, platform) {
+    try {
+        const parsed = new URL(postUrl);
+        if (platform === 'tiktok') {
+            const match = parsed.pathname.match(/\/video\/(\d+)/);
+            if (match) return `https://www.tiktok.com/embed/v2/${match[1]}`;
+        } else if (platform === 'instagram') {
+            const match = parsed.pathname.match(/\/p\/([^/]+)/);
+            if (match) return `https://www.instagram.com/p/${match[1]}/embed/`;
+        }
+    } catch (e) { /* noop */ }
+    return '';
+}
+
+function openSocialModal(embedUrl, postUrl, platform) {
+    const modal = document.getElementById('socialPostModal');
+    const container = document.getElementById('socialPostIframeContainer');
+    const link = document.getElementById('socialPostOpenLink');
+    if (!modal || !container) {
+        window.open(postUrl, '_blank', 'noopener,noreferrer');
+        return;
+    }
+    const label = platform === 'tiktok' ? 'TikTok' : 'Instagram';
+    container.innerHTML = `<iframe src="${embedUrl}" title="SM ATTIRE social drop on ${label}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    if (link) {
+        link.href = postUrl;
+        link.textContent = `Open on ${label} \u2197`;
+    }
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSocialModal() {
+    const modal = document.getElementById('socialPostModal');
+    const container = document.getElementById('socialPostIframeContainer');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+    if (container) container.innerHTML = '';
+    document.body.style.overflow = '';
 }
 
 function mountFacadeIframe(card) {
     if (!card) return;
     const postUrl = card.dataset.postUrl;
     if (!postUrl) return;
-    window.open(postUrl, '_blank', 'noopener,noreferrer');
+    const platform = card.dataset.platform || '';
+    const embedUrl = buildSocialEmbedUrl(postUrl, platform);
+    if (embedUrl) {
+        openSocialModal(embedUrl, postUrl, platform);
+    } else {
+        window.open(postUrl, '_blank', 'noopener,noreferrer');
+    }
 }
 
 let socialFacadesInitialized = false;
@@ -725,6 +1116,11 @@ function initializeSeraAssistant() {
         if (!isOpen) {
             seraAssistantActivated = true;
             updateJourneyAssistant();
+            renderSocialTrends();
+            // Greet on first open
+            if (seraChatHistory.length === 0) {
+                setTimeout(() => renderSeraChatMessage('sera', getSeraWitty('greet')), 200);
+            }
         }
     });
 
@@ -734,6 +1130,29 @@ function initializeSeraAssistant() {
             toggleBtn.setAttribute('aria-expanded', 'false');
             toggleBtn.focus();
         });
+    }
+
+    // Chat input enter key
+    const chatInput = document.getElementById('seraChatInput');
+    if (chatInput) {
+        chatInput.addEventListener('keydown', event => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                submitSeraChat();
+            }
+        });
+    }
+
+    // Chat submit button
+    const chatSubmit = document.getElementById('seraChatSubmit');
+    if (chatSubmit) {
+        chatSubmit.addEventListener('click', submitSeraChat);
+    }
+
+    // Voice search button
+    const voiceBtn = document.getElementById('seraVoiceSearchBtn');
+    if (voiceBtn) {
+        voiceBtn.addEventListener('click', toggleSeraVoiceSearch);
     }
 }
 
@@ -864,8 +1283,10 @@ function initializeOptimizedLinks() {
 }
 
 document.addEventListener('click', event => {
-    const modal = document.getElementById('productModal');
-    if (modal && event.target === modal) closeModal();
+    const productModal = document.getElementById('productModal');
+    if (productModal && event.target === productModal) closeModal();
+    const socialModal = document.getElementById('socialPostModal');
+    if (socialModal && event.target === socialModal) closeSocialModal();
 });
 
 document.addEventListener('keydown', event => {
@@ -873,7 +1294,12 @@ document.addEventListener('keydown', event => {
     const modal = document.getElementById('productModal');
     const exitIntentModal = document.getElementById('exitIntentModal');
     const tutorialModal = document.getElementById('siteTutorialModal');
+    const socialModal = document.getElementById('socialPostModal');
     const cartSidebar = document.getElementById('cartSidebar');
+    if (socialModal && !socialModal.classList.contains('hidden')) {
+        closeSocialModal();
+        return;
+    }
     if (modal && !modal.classList.contains('hidden')) {
         closeModal();
         return;
@@ -902,6 +1328,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeLangToggle();
     initializeOptimizedLinks();
     syncFeedbackForms();
+    injectAllProductSchemas();
     initializeSocialFacades();
     initializeCookieConsent();
     initializeConversionPrompts();

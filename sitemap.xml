@@ -1,32 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://smattirestore.com/</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://smattirestore.com/1.jpg</image:loc>
+      <image:title>Grade A Vintage Graphic Tee — Casual Streetwear, KES 800 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Premium Grade A mitumba graphic t-shirt. Clean, trendy, and perfect for the Nairobi streetwear scene.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/3.jpg</image:loc>
+      <image:title>Gently Used Air Force 1s — Neatfit Collection, KES 3500 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Top-tier Neatfit Collection sneakers. Carefully cleaned and restored. Delivery within Nairobi.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://smattirestore.com/index.html</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://smattirestore.com/shop.html</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://smattirestore.com/1.jpg</image:loc>
+      <image:title>Grade A Vintage Graphic Tee — Casual Streetwear, KES 800 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Premium Grade A mitumba graphic t-shirt available at SM ATTIRE Nairobi thrift store.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/2.jpg</image:loc>
+      <image:title>Thrifted Cargo Pants Olive — Casual Streetwear, KES 1500 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Gently used tactical cargo pants. High-quality thrift wear for a rugged, casual look.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/3.jpg</image:loc>
+      <image:title>Gently Used Air Force 1s — Neatfit Collection, KES 3500 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Top-tier Neatfit Collection sneakers. Carefully cleaned and restored for Nairobi delivery.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/4.jpg</image:loc>
+      <image:title>Oversized Flannel Shirt — Casual Streetwear, KES 900 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Classic thrifted flannel shirt. Perfect for layering during cold Nairobi mornings.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/5.jpg</image:loc>
+      <image:title>Retro Running Sneakers — Neatfit Collection, KES 2800 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Affordable, high-quality mitumba running shoes. Grade A condition with plenty of life left.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/6.jpg</image:loc>
+      <image:title>Classic Denim Jacket — Casual Streetwear, KES 1800 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Vintage mitumba denim jacket. A timeless casual staple handpicked for quality.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/7.jpg</image:loc>
+      <image:title>High-Top Canvas Shoes — Neatfit Collection, KES 1800 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Clean Neatfit Collection canvas shoes. A budget-friendly addition to your sneaker rotation.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/8.jpg</image:loc>
+      <image:title>Thrifted Streetwear Hoodie — Casual Streetwear, KES 1300 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Heavyweight Grade A hoodie. Stay warm and stylish without breaking the bank in Nairobi.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/9.jpg</image:loc>
+      <image:title>Premium Neatfit Jordans — Neatfit Collection, KES 4200 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Rare find! Highly sought-after mitumba sneakers for true Nairobi shoe lovers.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/10.jpg</image:loc>
+      <image:title>Y2K Baggy Jeans — Casual Streetwear, KES 1400 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Authentic vintage baggy denim. The ultimate thrift find for casual streetwear fans in Nairobi.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/11.jpg</image:loc>
+      <image:title>Vintage Windbreaker — Casual Streetwear, KES 1600 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Lightweight retro windbreaker jacket. Grade A mitumba perfect for the Nairobi rainy season.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/12.jpg</image:loc>
+      <image:title>Mitumba Chelsea Boots — Neatfit Collection, KES 2500 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Gently used leather Chelsea boots. Look sharp on a budget at SM ATTIRE Nairobi.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/13.jpg</image:loc>
+      <image:title>Casual Summer Shorts — Casual Streetwear, KES 700 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Comfortable thrifted shorts for weekend wear. Affordable and high quality.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://smattirestore.com/14.jpg</image:loc>
+      <image:title>Slip-On Casual Vans — Neatfit Collection, KES 1900 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Easy, everyday Neatfit Collection slip-on sneakers. Cleaned, prepped, and ready to wear.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://smattirestore.com/about.html</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://smattirestore.com/contact.html</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://smattirestore.com/seo.html</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

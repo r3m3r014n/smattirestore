@@ -78,3 +78,39 @@
   for = "/api/*"
   [headers.values]
     Cache-Control = "no-store"
+
+# Product images — long cache + indexable by Googlebot-Image
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+    X-Robots-Tag = "index, imageindex"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "/*.jpeg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+    X-Robots-Tag = "index, imageindex"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+    X-Robots-Tag = "index, imageindex"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "/*.avif"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+    X-Robots-Tag = "index, imageindex"
+    Vary = "Accept-Encoding"
+
+# Sitemap — daily refresh hint for crawlers
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "application/xml; charset=utf-8"
