@@ -1044,63 +1044,6 @@ function openOptimizedSocialLink(url) {
     }
 }
 
-function buildSocialEmbedUrl(postUrl, platform) {
-    try {
-        const parsed = new URL(postUrl);
-        if (platform === 'tiktok') {
-            const match = parsed.pathname.match(/\/video\/(\d+)/);
-            if (match) return `https://www.tiktok.com/embed/v2/${match[1]}`;
-        } else if (platform === 'instagram') {
-            const match = parsed.pathname.match(/\/p\/([^/]+)/);
-            if (match) return `https://www.instagram.com/p/${match[1]}/embed/`;
-        }
-    } catch (e) { /* noop */ }
-    return '';
-}
-
-function openSocialModal(embedUrl, postUrl, platform) {
-    const modal = document.getElementById('socialPostModal');
-    const container = document.getElementById('socialPostIframeContainer');
-    const link = document.getElementById('socialPostOpenLink');
-    if (!modal || !container) {
-        window.open(postUrl, '_blank', 'noopener,noreferrer');
-        return;
-    }
-    const label = platform === 'tiktok' ? 'TikTok' : 'Instagram';
-    container.innerHTML = `<iframe src="${embedUrl}" title="SM ATTIRE social drop on ${label}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    if (link) {
-        link.href = postUrl;
-        link.textContent = `Open on ${label} \u2197`;
-    }
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeSocialModal() {
-    const modal = document.getElementById('socialPostModal');
-    const container = document.getElementById('socialPostIframeContainer');
-    if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
-    if (container) container.innerHTML = '';
-    document.body.style.overflow = '';
-}
-
-function mountFacadeIframe(card) {
-    if (!card) return;
-    const postUrl = card.dataset.postUrl;
-    if (!postUrl) return;
-    const platform = card.dataset.platform || '';
-    const embedUrl = buildSocialEmbedUrl(postUrl, platform);
-    if (embedUrl) {
-        openSocialModal(embedUrl, postUrl, platform);
-    } else {
-        window.open(postUrl, '_blank', 'noopener,noreferrer');
-    }
-}
-
 let socialFacadesInitialized = false;
 
 function initializeSeraAssistant() {
@@ -1157,17 +1100,55 @@ function initializeSeraAssistant() {
 }
 
 function initializeSocialFacades() {
-    if (socialFacadesInitialized) return;
-    socialFacadesInitialized = true;
-    const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 6);
-    if (!cards.length) return;
+    // Facade cards now use native anchor links; no JS wiring required.
+}
 
-    cards.forEach(card => {
-        const trigger = card.querySelector('.facade-trigger');
-        if (trigger) {
-            trigger.addEventListener('click', () => mountFacadeIframe(card));
+/**
+ * Lazy-load <video data-src> and <iframe data-src> elements via IntersectionObserver.
+ * Videos use WebM-first / MP4-fallback <source data-src> children.
+ * All lazy targets are observed with a 200 px root-margin so assets start
+ * fetching just before the user reaches them.
+ */
+function initLazyVideos() {
+    const lazyEls = Array.from(document.querySelectorAll('video[data-src], iframe[data-src]'));
+    if (!lazyEls.length) return;
+
+    function activateElement(el) {
+        if (el.tagName === 'IFRAME') {
+            if (el.dataset.src) {
+                el.src = el.dataset.src;
+                delete el.dataset.src;
+            }
+        } else {
+            Array.from(el.querySelectorAll('source[data-src]')).forEach(source => {
+                source.src = source.dataset.src;
+                delete source.dataset.src;
+            });
+            if (el.dataset.src) {
+                el.src = el.dataset.src;
+                delete el.dataset.src;
+            }
+            el.load();
+            el.play().catch(() => {});
         }
-    });
+        el.classList.remove('lazy-video');
+    }
+
+    if (!('IntersectionObserver' in window)) {
+        // Fallback for older browsers: activate all immediately.
+        lazyEls.forEach(activateElement);
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            activateElement(entry.target);
+            obs.unobserve(entry.target);
+        });
+    }, { rootMargin: '200px' });
+
+    lazyEls.forEach(el => observer.observe(el));
 }
 
 function syncFeedbackForms() {
@@ -1285,8 +1266,6 @@ function initializeOptimizedLinks() {
 document.addEventListener('click', event => {
     const productModal = document.getElementById('productModal');
     if (productModal && event.target === productModal) closeModal();
-    const socialModal = document.getElementById('socialPostModal');
-    if (socialModal && event.target === socialModal) closeSocialModal();
 });
 
 document.addEventListener('keydown', event => {
@@ -1294,12 +1273,7 @@ document.addEventListener('keydown', event => {
     const modal = document.getElementById('productModal');
     const exitIntentModal = document.getElementById('exitIntentModal');
     const tutorialModal = document.getElementById('siteTutorialModal');
-    const socialModal = document.getElementById('socialPostModal');
     const cartSidebar = document.getElementById('cartSidebar');
-    if (socialModal && !socialModal.classList.contains('hidden')) {
-        closeSocialModal();
-        return;
-    }
     if (modal && !modal.classList.contains('hidden')) {
         closeModal();
         return;
@@ -1334,6 +1308,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeConversionPrompts();
     initializeSiteTutorial();
     initializeSeraAssistant();
+    initLazyVideos();
     renderRecentlyViewed();
     updateJourneyAssistant();
 
