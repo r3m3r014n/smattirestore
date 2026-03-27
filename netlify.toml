@@ -8,6 +8,12 @@
 [[plugins]]
   package = "@netlify/plugin-sitemap"
 
+# Custom 404 error page
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
 # API routing
 [[redirects]]
   from = "/api/*"
