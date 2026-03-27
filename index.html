@@ -36,11 +36,13 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: '#c4a26a',
-                        'gold-light': '#e8d5b0',
-                        cream: '#f8f2e8',
-                        charcoal: '#1a1917',
-                        dark: '#0e0d0b'
+                        gold: '#b8953f',
+                        'gold-light': '#cfab60',
+                        cream: '#faf9f7',
+                        charcoal: '#111110',
+                        dark: '#111110',
+                        muted: '#6b6860',
+                        pearl: '#ffffff'
                     },
                     fontFamily: {
                         playfair: ['Cormorant Garamond', 'serif'],
@@ -54,12 +56,25 @@
     <style>
         html { scroll-behavior: smooth; }
         body {
-            background: #0e0d0b;
+            background: #faf9f7;
         }
         .glass-panel {
-            background: rgba(26, 25, 23, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.97);
+            border-color: rgba(17, 17, 16, 0.1) !important;
+        }
+        /* Base text colors for light editorial theme */
+        h1, h2, h3, h4, h5, h6 { color: #111110; }
+        p, li, blockquote, label { color: rgba(17, 17, 16, 0.68); }
+        /* Dark containers get white text back */
+        .bg-dark p, .bg-dark li, .bg-dark blockquote, .bg-dark h1,
+        .bg-dark h2, .bg-dark h3, [class*="bg-charcoal"] p,
+        [class*="bg-charcoal"] h1, [class*="bg-charcoal"] h2,
+        [class*="bg-charcoal"] h3, [class*="bg-charcoal"] li { 
+            color: rgba(255, 255, 255, 0.82); 
+        }
+        [class*="bg-charcoal"] h1, [class*="bg-charcoal"] h2,
+        [class*="bg-charcoal"] h3, .bg-dark h1, .bg-dark h2, .bg-dark h3 {
+            color: #ffffff;
         }
     </style>
 
@@ -159,15 +174,15 @@
     }
     </script>
 </head>
-<body class="safe-area text-white font-rajdhani antialiased">
+<body class="safe-area text-charcoal font-rajdhani antialiased">
     <div id="srStatus" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
     <a href="#featured" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[120] focus:bg-gold focus:text-dark focus:px-4 focus:py-2 focus:rounded-full focus:font-bold">Skip to products</a>
     <div class="immersive-orb immersive-orb-1" aria-hidden="true"></div>
     <div class="immersive-orb immersive-orb-2" aria-hidden="true"></div>
-    <nav id="navbar" class="sticky top-0 z-50 glass-panel border-b border-gold/20">
+    <nav id="navbar" class="sticky top-0 z-50 bg-dark border-b border-charcoal/20">
         <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between gap-4">
             <a href="index.html" class="font-playfair text-2xl tracking-[0.14em] text-gold hover:text-gold-light transition-colors">SM ATTIRE</a>
-            <div class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.18em] font-semibold">
+            <div class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.18em] font-semibold text-white/80">
                 <a href="shop.html#casual-streetwear" class="hover:text-gold transition-colors">Casual Streetwear</a>
                 <a href="shop.html#neatfit-collection" class="hover:text-gold transition-colors">Neatfit Collection</a>
                 <a href="shop.html" class="hover:text-gold transition-colors">All Products</a>
@@ -210,14 +225,17 @@
             <span aria-hidden="true">◆</span>
         </div>
     </div>
+    <header class="bg-dark text-white px-5 md:px-8 pt-24 pb-16 text-center">
+        <div class="max-w-7xl mx-auto">
         <p data-i18n="heroTagline" class="text-gold uppercase tracking-[0.35em] text-xs mb-5">Classy, Elegant, Style</p>
-        <h1 class="font-playfair text-5xl md:text-7xl leading-none mb-5">SM ATTIRE</h1>
+        <h1 class="font-playfair text-5xl md:text-7xl leading-none mb-5 text-white">SM ATTIRE</h1>
         <p data-i18n="heroSubtitle" class="max-w-2xl mx-auto text-white/75 text-lg md:text-xl mb-10">Your Ultimate Fashion Guide for elegant looks, smart pricing, and premium thrift confidence.</p>
-        <p class="max-w-3xl mx-auto text-white/50 text-sm md:text-base mb-8 tracking-[0.06em] uppercase">Est. 2021 &nbsp;·&nbsp; Nairobi, Kenya &nbsp;·&nbsp; Premium Thrift</p>
+        <p class="max-w-3xl mx-auto text-white/60 text-sm md:text-base mb-8 tracking-[0.06em] uppercase">Est. 2021 &nbsp;·&nbsp; Nairobi, Kenya &nbsp;·&nbsp; Premium Thrift</p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="shop.html" data-track="hero_shop_now" data-i18n="shopNow" class="px-7 py-3 bg-gold text-dark font-bold uppercase tracking-[0.14em] rounded-full hover:bg-gold-light transition-colors">Shop Now</a>
-            <a href="#featured" data-track="hero_view_collection" data-i18n="viewCollection" class="px-7 py-3 border border-gold/70 text-gold font-bold uppercase tracking-[0.14em] rounded-full hover:bg-gold hover:text-dark transition-all">View Collection</a>
+            <a href="#featured" data-track="hero_view_collection" data-i18n="viewCollection" class="px-7 py-3 border border-white/40 text-white font-bold uppercase tracking-[0.14em] rounded-full hover:bg-white hover:text-dark transition-all">View Collection</a>
             <a href="#immersive-social" data-track="hero_social_feed" class="px-7 py-3 border border-gold/40 text-white/90 font-bold uppercase tracking-[0.14em] rounded-full hover:border-gold hover:text-gold transition-all">Immersive Social Feed</a>
+        </div>
         </div>
     </header>
 
@@ -602,7 +620,7 @@
         </div>
     </section>
 
-    <footer class="border-t border-gold/20 py-10">
+    <footer class="bg-dark border-t border-white/10 py-10">
         <div class="max-w-7xl mx-auto px-5 md:px-8 text-center">
             <p class="font-playfair text-2xl text-gold mb-2">SM ATTIRE</p>
             <p class="text-white/70">Nairobi, Kenya • WhatsApp: <a href="https://wa.me/254701226084" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">+254 701 226 084</a> • Instagram: <a href="https://instagram.com/sm_attire_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sm_attire_</a> • TikTok: <a href="https://tiktok.com/@sera_muthoni_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sera_muthoni_</a> • M-Pesa &amp; Pay on Delivery</p>

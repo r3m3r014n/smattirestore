@@ -31,11 +31,13 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: '#c4a26a',
-                        'gold-light': '#e8d5b0',
-                        cream: '#f8f2e8',
-                        charcoal: '#1a1917',
-                        dark: '#0e0d0b'
+                        gold: '#b8953f',
+                        'gold-light': '#cfab60',
+                        cream: '#faf9f7',
+                        charcoal: '#111110',
+                        dark: '#111110',
+                        muted: '#6b6860',
+                        pearl: '#ffffff'
                     },
                     fontFamily: {
                         playfair: ['Cormorant Garamond', 'serif'],
@@ -49,20 +51,33 @@
     <style>
         html { scroll-behavior: smooth; }
         body {
-            background: #0e0d0b;
+            background: #faf9f7;
         }
         .glass-panel {
-            background: rgba(26, 25, 23, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.97);
+            border-color: rgba(17, 17, 16, 0.1) !important;
+        }
+        /* Base text colors for light editorial theme */
+        h1, h2, h3, h4, h5, h6 { color: #111110; }
+        p, li, blockquote, label { color: rgba(17, 17, 16, 0.68); }
+        /* Dark containers get white text back */
+        .bg-dark p, .bg-dark li, .bg-dark blockquote, .bg-dark h1,
+        .bg-dark h2, .bg-dark h3, [class*="bg-charcoal"] p,
+        [class*="bg-charcoal"] h1, [class*="bg-charcoal"] h2,
+        [class*="bg-charcoal"] h3, [class*="bg-charcoal"] li { 
+            color: rgba(255, 255, 255, 0.82); 
+        }
+        [class*="bg-charcoal"] h1, [class*="bg-charcoal"] h2,
+        [class*="bg-charcoal"] h3, .bg-dark h1, .bg-dark h2, .bg-dark h3 {
+            color: #ffffff;
         }
     </style>
 </head>
-<body class="safe-area text-white font-rajdhani antialiased">
-    <nav id="navbar" class="sticky top-0 z-50 glass-panel border-b border-gold/20">
+<body class="safe-area text-charcoal font-rajdhani antialiased">
+    <nav id="navbar" class="sticky top-0 z-50 bg-dark border-b border-charcoal/20">
         <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between gap-4">
             <a href="index.html" class="font-playfair text-2xl tracking-[0.14em] text-gold hover:text-gold-light transition-colors">SM ATTIRE</a>
-            <div class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.18em] font-semibold">
+            <div class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.18em] font-semibold text-white/80">
                 <a href="#all" class="filter-btn" data-filter="all" onclick="filterProducts('all'); window.location.hash='all'; return false;">All Products</a>
                 <a href="#casual-streetwear" class="filter-btn" data-filter="Casual Streetwear" onclick="filterProducts('Casual Streetwear'); window.location.hash='casual-streetwear'; return false;">Casual Streetwear</a>
                 <a href="#neatfit-collection" class="filter-btn" data-filter="Neatfit Collection" onclick="filterProducts('Neatfit Collection'); window.location.hash='neatfit-collection'; return false;">Neatfit Collection</a>
@@ -168,7 +183,7 @@
         </div>
     </div>
 
-    <footer class="border-t border-gold/20 py-10">
+    <footer class="bg-dark border-t border-white/10 py-10">
         <div class="max-w-7xl mx-auto px-5 md:px-8 text-center">
             <p class="font-playfair text-2xl text-gold mb-2">SM ATTIRE</p>
             <p class="text-white/70">Nairobi, Kenya • WhatsApp: <a href="https://wa.me/254701226084" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">+254 701 226 084</a> • Instagram: <a href="https://instagram.com/sm_attire_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sm_attire_</a> • TikTok: <a href="https://tiktok.com/@sera_muthoni_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sera_muthoni_</a> • M-Pesa Payments Accepted</p>
