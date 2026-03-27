@@ -1037,23 +1037,68 @@ function openOptimizedSocialLink(url) {
 
         if (isExternal && (isTikTokHost || isInstagramHost)) {
             localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
-            console.info('Auto-granted consent for social link per user preference to prioritize content.');
-        } else if (isExternal) {
-            const proceed = window.confirm(`You are opening an external link to ${host}. Continue?`);
-            if (!proceed) return url;
         }
         return parsed.href;
     } catch (error) {
         return url;
     }
-    return url;
+}
+
+function buildSocialEmbedUrl(postUrl, platform) {
+    try {
+        const parsed = new URL(postUrl);
+        if (platform === 'tiktok') {
+            const match = parsed.pathname.match(/\/video\/(\d+)/);
+            if (match) return `https://www.tiktok.com/embed/v2/${match[1]}`;
+        } else if (platform === 'instagram') {
+            const match = parsed.pathname.match(/\/p\/([^/]+)/);
+            if (match) return `https://www.instagram.com/p/${match[1]}/embed/`;
+        }
+    } catch (e) { /* noop */ }
+    return '';
+}
+
+function openSocialModal(embedUrl, postUrl, platform) {
+    const modal = document.getElementById('socialPostModal');
+    const container = document.getElementById('socialPostIframeContainer');
+    const link = document.getElementById('socialPostOpenLink');
+    if (!modal || !container) {
+        window.open(postUrl, '_blank', 'noopener,noreferrer');
+        return;
+    }
+    const label = platform === 'tiktok' ? 'TikTok' : 'Instagram';
+    container.innerHTML = `<iframe src="${embedUrl}" title="SM ATTIRE social drop on ${label}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    if (link) {
+        link.href = postUrl;
+        link.textContent = `Open on ${label} \u2197`;
+    }
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSocialModal() {
+    const modal = document.getElementById('socialPostModal');
+    const container = document.getElementById('socialPostIframeContainer');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+    if (container) container.innerHTML = '';
+    document.body.style.overflow = '';
 }
 
 function mountFacadeIframe(card) {
     if (!card) return;
     const postUrl = card.dataset.postUrl;
     if (!postUrl) return;
-    window.open(postUrl, '_blank', 'noopener,noreferrer');
+    const platform = card.dataset.platform || '';
+    const embedUrl = buildSocialEmbedUrl(postUrl, platform);
+    if (embedUrl) {
+        openSocialModal(embedUrl, postUrl, platform);
+    } else {
+        window.open(postUrl, '_blank', 'noopener,noreferrer');
+    }
 }
 
 let socialFacadesInitialized = false;
@@ -1238,8 +1283,10 @@ function initializeOptimizedLinks() {
 }
 
 document.addEventListener('click', event => {
-    const modal = document.getElementById('productModal');
-    if (modal && event.target === modal) closeModal();
+    const productModal = document.getElementById('productModal');
+    if (productModal && event.target === productModal) closeModal();
+    const socialModal = document.getElementById('socialPostModal');
+    if (socialModal && event.target === socialModal) closeSocialModal();
 });
 
 document.addEventListener('keydown', event => {
@@ -1247,7 +1294,12 @@ document.addEventListener('keydown', event => {
     const modal = document.getElementById('productModal');
     const exitIntentModal = document.getElementById('exitIntentModal');
     const tutorialModal = document.getElementById('siteTutorialModal');
+    const socialModal = document.getElementById('socialPostModal');
     const cartSidebar = document.getElementById('cartSidebar');
+    if (socialModal && !socialModal.classList.contains('hidden')) {
+        closeSocialModal();
+        return;
+    }
     if (modal && !modal.classList.contains('hidden')) {
         closeModal();
         return;
