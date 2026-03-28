@@ -8,7 +8,7 @@
 [[plugins]]
   package = "@netlify/plugin-sitemap"
 
-# Block WordPress/CMS probe paths — return lightweight 410 Gone responses
+# Handle WordPress/CMS probe paths — return lightweight 410 Gone responses
 [[redirects]]
   from = "/wp-admin"
   to = "/gone.html"
