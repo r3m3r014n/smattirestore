@@ -1,12 +1,12 @@
-const CACHE_NAME = 'smattire-v2';
+const CACHE_NAME = 'smattire-v3';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
     '/shop.html',
     '/about.html',
     '/contact.html',
-    '/app.js',
-    '/styles.css',
+    '/app.js?v=20260328b',
+    '/styles.css?v=20260328b',
     '/manifest.webmanifest',
     '/icon-192.png',
     '/icon-512.png',
