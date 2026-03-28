@@ -803,6 +803,25 @@
         </div>
     </div>
 
+    <div id="cookieAuthModal" role="dialog" aria-modal="true" aria-labelledby="cookieAuthTitle" class="hidden fixed inset-0 bg-black/80 z-[95] items-center justify-center p-4">
+        <div class="w-full max-w-md bg-charcoal border border-gold/30 rounded-2xl shadow-2xl">
+            <div class="px-4 py-3 border-b border-gold/20">
+                <p id="cookieAuthTitle" class="text-gold text-xs uppercase tracking-[0.14em]">Confirm Consent</p>
+            </div>
+            <div class="px-4 py-4 space-y-3">
+                <p class="text-white/80 text-sm leading-relaxed">For your privacy, please confirm you authorize optional analytics and social feed cookies. This confirmation acts as an authentication step for consent.</p>
+                <label class="block text-white/70 text-xs uppercase tracking-[0.12em]">
+                    Email (optional for proof of consent)
+                    <input id="cookieAuthEmail" type="email" inputmode="email" autocomplete="email" class="mt-1 w-full px-3 py-2 rounded-lg bg-dark border border-gold/30 text-white/90 text-sm focus:outline-none focus:ring-2 focus:ring-gold/60" placeholder="you@example.com">
+                </label>
+            </div>
+            <div class="px-4 py-3 border-t border-gold/20 flex gap-2">
+                <button id="confirmCookieAuth" class="flex-1 px-4 py-2 bg-gold text-dark rounded-full text-xs font-bold uppercase tracking-[0.14em]">Confirm &amp; Allow</button>
+                <button id="cancelCookieAuth" class="px-4 py-2 border border-white/30 text-white/80 rounded-full text-xs font-bold uppercase tracking-[0.12em]">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",

@@ -1204,15 +1204,29 @@ function initializeCookieConsent() {
     const banner = document.getElementById('cookieConsent');
     const accept = document.getElementById('acceptCookies');
     const decline = document.getElementById('declineCookies');
+    const authModal = document.getElementById('cookieAuthModal');
+    const confirmAuth = document.getElementById('confirmCookieAuth');
+    const cancelAuth = document.getElementById('cancelCookieAuth');
+    const authEmail = document.getElementById('cookieAuthEmail');
     if (!banner || !accept || !decline) return;
 
     const saved = localStorage.getItem(CONSENT_KEY);
     if (!saved) banner.classList.remove('hidden');
 
+    const hideAuthModal = () => {
+        if (!authModal) return;
+        authModal.classList.add('hidden');
+        authModal.classList.remove('flex');
+    };
+
     const applyChoice = choice => {
         localStorage.setItem(CONSENT_KEY, choice);
         banner.classList.add('hidden');
+        hideAuthModal();
         if (choice === 'allow') {
+            if (authEmail && authEmail.value) {
+                localStorage.setItem('smattire_cookie_auth_email', authEmail.value.trim());
+            }
             initializeSocialFacades();
             const apiFeed = document.getElementById('officialApiFeed');
             if (apiFeed) {
@@ -1221,8 +1235,29 @@ function initializeCookieConsent() {
         }
     };
 
-    accept.addEventListener('click', () => applyChoice('allow'));
+    const showAuthModal = () => {
+        if (!authModal) {
+            applyChoice('allow');
+            return;
+        }
+        authModal.classList.remove('hidden');
+        authModal.classList.add('flex');
+        const emailValue = localStorage.getItem('smattire_cookie_auth_email');
+        if (authEmail && emailValue) authEmail.value = emailValue;
+    };
+
+    accept.addEventListener('click', showAuthModal);
     decline.addEventListener('click', () => applyChoice('essential'));
+    if (confirmAuth) confirmAuth.addEventListener('click', () => applyChoice('allow'));
+    if (cancelAuth) cancelAuth.addEventListener('click', hideAuthModal);
+    if (authModal) {
+        authModal.addEventListener('click', event => {
+            if (event.target === authModal) hideAuthModal();
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') hideAuthModal();
+        });
+    }
 
     if (saved === 'allow') initializeSocialFacades();
 }
