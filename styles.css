@@ -231,6 +231,19 @@ select {
     50% { transform: translate3d(0, -18px, 0) scale(1.06); }
 }
 
+.floating-whatsapp-chat {
+    z-index: 110 !important;
+    pointer-events: auto;
+}
+
+#notificationHub {
+    pointer-events: none;
+}
+
+#notificationHub > * {
+    pointer-events: auto;
+}
+
 
 .avatar-cloud {
     display: grid;
