@@ -1,18 +1,18 @@
 const products = [
-    { id: 1, name: "Grade A Vintage Graphic Tee", category: "Casual Streetwear", price: 800, image: "1.jpg", badge: "Bestseller", desc: "Premium Grade A mitumba graphic t-shirt. Clean, trendy, and perfect for the Nairobi streetwear scene." },
-    { id: 2, name: "Thrifted Cargo Pants - Olive", category: "Casual Streetwear", price: 1500, image: "2.jpg", badge: "Hot", desc: "Gently used tactical cargo pants. High-quality thrift wear for a rugged, casual look." },
-    { id: 3, name: "Gently Used Air Force 1s", category: "Neatfit Collection", price: 3500, image: "3.jpg", badge: "Shoe Lover", desc: "Top-tier Neatfit Collection sneakers. Carefully cleaned and restored. Delivery within Nairobi." },
-    { id: 4, name: "Oversized Flannel Shirt", category: "Casual Streetwear", price: 900, image: "4.jpg", badge: "", desc: "Classic thrifted flannel shirt. Perfect for layering during cold Nairobi mornings." },
-    { id: 5, name: "Retro Running Sneakers", category: "Neatfit Collection", price: 2800, image: "5.jpg", badge: "Trending", desc: "Affordable, high-quality mitumba running shoes. Grade A condition with plenty of life left." },
-    { id: 6, name: "Classic Denim Jacket", category: "Casual Streetwear", price: 1800, image: "6.jpg", badge: "", desc: "Vintage mitumba denim jacket. A timeless casual staple handpicked for quality." },
-    { id: 7, name: "High-Top Canvas Shoes", category: "Neatfit Collection", price: 1800, image: "7.jpg", badge: "Deal", desc: "Clean Neatfit Collection canvas shoes. A budget-friendly addition to your sneaker rotation." },
-    { id: 8, name: "Thrifted Streetwear Hoodie", category: "Casual Streetwear", price: 1300, image: "8.jpg", badge: "", desc: "Heavyweight Grade A hoodie. Stay warm and stylish without breaking the bank." },
-    { id: 9, name: "Premium Neatfit Jordans", category: "Neatfit Collection", price: 4200, image: "9.jpg", badge: "Exclusive", desc: "Rare find! Highly sought-after mitumba sneakers for true Nairobi shoe lovers." },
-    { id: 10, name: "Y2K Baggy Jeans", category: "Casual Streetwear", price: 1400, image: "10.jpg", badge: "Trending", desc: "Authentic vintage baggy denim. The ultimate thrift find for casual streetwear fans." },
-    { id: 11, name: "Vintage Windbreaker", category: "Casual Streetwear", price: 1600, image: "11.jpg", badge: "", desc: "Lightweight retro windbreaker jacket. Grade A mitumba perfect for the rainy season." },
-    { id: 12, name: "Mitumba Chelsea Boots", category: "Neatfit Collection", price: 2500, image: "12.jpg", badge: "Quality", desc: "Gently used leather Chelsea boots. Look sharp on a budget." },
-    { id: 13, name: "Casual Summer Shorts", category: "Casual Streetwear", price: 700, image: "13.jpg", badge: "", desc: "Comfortable thrifted shorts for weekend wear. Affordable and high quality." },
-    { id: 14, name: "Slip-On Casual Vans", category: "Neatfit Collection", price: 1900, image: "14.jpg", badge: "", desc: "Easy, everyday Neatfit Collection slip-on sneakers. Cleaned, prepped, and ready to wear." }
+    { id: 1, name: "Grade A Vintage Graphic Tee", category: "Casual Streetwear", price: 800, image: "/grade-a-vintage-graphic-tee.jpg", badge: "Bestseller", desc: "Premium Grade A mitumba graphic t-shirt. Clean, trendy, and perfect for the Nairobi streetwear scene." },
+    { id: 2, name: "Thrifted Cargo Pants - Olive", category: "Casual Streetwear", price: 1500, image: "/thrifted-cargo-pants-olive.jpg", badge: "Hot", desc: "Gently used tactical cargo pants. High-quality thrift wear for a rugged, casual look." },
+    { id: 3, name: "Gently Used Air Force 1s", category: "Neatfit Collection", price: 3500, image: "/gently-used-air-force-1s.jpg", badge: "Shoe Lover", desc: "Top-tier Neatfit Collection sneakers. Carefully cleaned and restored. Delivery within Nairobi." },
+    { id: 4, name: "Oversized Flannel Shirt", category: "Casual Streetwear", price: 900, image: "/oversized-flannel-shirt.jpg", badge: "", desc: "Classic thrifted flannel shirt. Perfect for layering during cold Nairobi mornings." },
+    { id: 5, name: "Retro Running Sneakers", category: "Neatfit Collection", price: 2800, image: "/retro-running-sneakers.jpg", badge: "Trending", desc: "Affordable, high-quality mitumba running shoes. Grade A condition with plenty of life left." },
+    { id: 6, name: "Classic Denim Jacket", category: "Casual Streetwear", price: 1800, image: "/classic-denim-jacket.jpg", badge: "", desc: "Vintage mitumba denim jacket. A timeless casual staple handpicked for quality." },
+    { id: 7, name: "High-Top Canvas Shoes", category: "Neatfit Collection", price: 1800, image: "/high-top-canvas-shoes.jpg", badge: "Deal", desc: "Clean Neatfit Collection canvas shoes. A budget-friendly addition to your sneaker rotation." },
+    { id: 8, name: "Thrifted Streetwear Hoodie", category: "Casual Streetwear", price: 1300, image: "/thrifted-streetwear-hoodie.jpg", badge: "", desc: "Heavyweight Grade A hoodie. Stay warm and stylish without breaking the bank." },
+    { id: 9, name: "Premium Neatfit Jordans", category: "Neatfit Collection", price: 4200, image: "/premium-neatfit-jordans.jpg", badge: "Exclusive", desc: "Rare find! Highly sought-after mitumba sneakers for true Nairobi shoe lovers." },
+    { id: 10, name: "Y2K Baggy Jeans", category: "Casual Streetwear", price: 1400, image: "/y2k-baggy-jeans.jpg", badge: "Trending", desc: "Authentic vintage baggy denim. The ultimate thrift find for casual streetwear fans." },
+    { id: 11, name: "Vintage Windbreaker", category: "Casual Streetwear", price: 1600, image: "/vintage-windbreaker.jpg", badge: "", desc: "Lightweight retro windbreaker jacket. Grade A mitumba perfect for the rainy season." },
+    { id: 12, name: "Mitumba Chelsea Boots", category: "Neatfit Collection", price: 2500, image: "/mitumba-chelsea-boots.jpg", badge: "Quality", desc: "Gently used leather Chelsea boots. Look sharp on a budget." },
+    { id: 13, name: "Casual Summer Shorts", category: "Casual Streetwear", price: 700, image: "/casual-summer-shorts.jpg", badge: "", desc: "Comfortable thrifted shorts for weekend wear. Affordable and high quality." },
+    { id: 14, name: "Slip-On Casual Vans", category: "Neatfit Collection", price: 1900, image: "/slip-on-casual-vans.jpg", badge: "", desc: "Easy, everyday Neatfit Collection slip-on sneakers. Cleaned, prepped, and ready to wear." }
 ];
 
 const WHATSAPP_NUMBER = '254701226084';
@@ -1044,64 +1044,6 @@ function openOptimizedSocialLink(url) {
     }
 }
 
-function buildSocialEmbedUrl(postUrl, platform) {
-    try {
-        const parsed = new URL(postUrl);
-        if (platform === 'tiktok') {
-            const match = parsed.pathname.match(/\/video\/(\d+)/);
-            if (match) return `https://www.tiktok.com/embed/v2/${match[1]}`;
-        } else if (platform === 'instagram') {
-            const match = parsed.pathname.match(/\/p\/([^/]+)/);
-            if (match) return `https://www.instagram.com/p/${match[1]}/embed/`;
-        }
-    } catch (e) { /* noop */ }
-    return '';
-}
-
-function openSocialModal(embedUrl, postUrl, platform) {
-    const modal = document.getElementById('socialPostModal');
-    const container = document.getElementById('socialPostIframeContainer');
-    const link = document.getElementById('socialPostOpenLink');
-    if (!modal || !container) {
-        window.open(postUrl, '_blank', 'noopener,noreferrer');
-        return;
-    }
-    const label = platform === 'tiktok' ? 'TikTok' : 'Instagram';
-    container.innerHTML = `<iframe src="${embedUrl}" title="SM ATTIRE social drop on ${label}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    if (link) {
-        link.href = postUrl;
-        link.textContent = `Open on ${label} \u2197`;
-    }
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeSocialModal() {
-    const modal = document.getElementById('socialPostModal');
-    const container = document.getElementById('socialPostIframeContainer');
-    if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
-    if (container) container.innerHTML = '';
-    document.body.style.overflow = '';
-}
-
-function mountFacadeIframe(card) {
-    if (!card) return;
-    const postUrl = card.dataset.postUrl;
-    if (!postUrl) return;
-    const platform = card.dataset.platform || '';
-    const embedUrl = buildSocialEmbedUrl(postUrl, platform);
-    if (embedUrl) {
-        openSocialModal(embedUrl, postUrl, platform);
-    } else {
-        window.open(postUrl, '_blank', 'noopener,noreferrer');
-    }
-}
-
-let socialFacadesInitialized = false;
 
 function initializeSeraAssistant() {
     const toggleBtn = document.getElementById('seraToggleBtn');
@@ -1156,19 +1098,6 @@ function initializeSeraAssistant() {
     }
 }
 
-function initializeSocialFacades() {
-    if (socialFacadesInitialized) return;
-    socialFacadesInitialized = true;
-    const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 6);
-    if (!cards.length) return;
-
-    cards.forEach(card => {
-        const trigger = card.querySelector('.facade-trigger');
-        if (trigger) {
-            trigger.addEventListener('click', () => mountFacadeIframe(card));
-        }
-    });
-}
 
 function syncFeedbackForms() {
     const forms = Array.from(document.querySelectorAll('form'));
@@ -1204,27 +1133,68 @@ function initializeCookieConsent() {
     const banner = document.getElementById('cookieConsent');
     const accept = document.getElementById('acceptCookies');
     const decline = document.getElementById('declineCookies');
+    const authModal = document.getElementById('cookieAuthModal');
+    const confirmAuth = document.getElementById('confirmCookieAuth');
+    const cancelAuth = document.getElementById('cancelCookieAuth');
+    const authEmail = document.getElementById('cookieAuthEmail');
     if (!banner || !accept || !decline) return;
 
+    const dismissBanner = () => {
+        banner.classList.add('hidden');
+        banner.setAttribute('aria-hidden', 'true');
+        banner.style.display = 'none';
+    };
+
     const saved = localStorage.getItem(CONSENT_KEY);
-    if (!saved) banner.classList.remove('hidden');
+    if (!saved) {
+        banner.classList.remove('hidden');
+        banner.style.display = '';
+        banner.removeAttribute('aria-hidden');
+    } else {
+        dismissBanner();
+    }
+
+    const hideAuthModal = () => {
+        if (!authModal) return;
+        authModal.classList.add('hidden');
+        authModal.classList.remove('flex');
+    };
 
     const applyChoice = choice => {
         localStorage.setItem(CONSENT_KEY, choice);
-        banner.classList.add('hidden');
+        dismissBanner();
+        hideAuthModal();
         if (choice === 'allow') {
-            initializeSocialFacades();
-            const apiFeed = document.getElementById('officialApiFeed');
-            if (apiFeed) {
-                apiFeed.innerHTML = '<p class="text-white/70 text-sm">Optional media integrations enabled. Add provider script settings to activate live API feed.</p>';
+            if (authEmail && authEmail.value) {
+                localStorage.setItem('smattire_cookie_auth_email', authEmail.value.trim());
             }
         }
     };
 
-    accept.addEventListener('click', () => applyChoice('allow'));
-    decline.addEventListener('click', () => applyChoice('essential'));
+    const showAuthModal = () => {
+        if (!authModal) {
+            applyChoice('allow');
+            return;
+        }
+        authModal.classList.remove('hidden');
+        authModal.classList.add('flex');
+        const emailValue = localStorage.getItem('smattire_cookie_auth_email');
+        if (authEmail && emailValue) authEmail.value = emailValue;
+    };
 
-    if (saved === 'allow') initializeSocialFacades();
+    accept.addEventListener('click', showAuthModal);
+    decline.addEventListener('click', () => applyChoice('essential'));
+    if (confirmAuth) confirmAuth.addEventListener('click', () => applyChoice('allow'));
+    if (cancelAuth) cancelAuth.addEventListener('click', hideAuthModal);
+    if (authModal) {
+        authModal.addEventListener('click', event => {
+            if (event.target === authModal) hideAuthModal();
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') hideAuthModal();
+        });
+    }
+
 }
 
 function initializeLangToggle() {
@@ -1285,8 +1255,6 @@ function initializeOptimizedLinks() {
 document.addEventListener('click', event => {
     const productModal = document.getElementById('productModal');
     if (productModal && event.target === productModal) closeModal();
-    const socialModal = document.getElementById('socialPostModal');
-    if (socialModal && event.target === socialModal) closeSocialModal();
 });
 
 document.addEventListener('keydown', event => {
@@ -1294,12 +1262,7 @@ document.addEventListener('keydown', event => {
     const modal = document.getElementById('productModal');
     const exitIntentModal = document.getElementById('exitIntentModal');
     const tutorialModal = document.getElementById('siteTutorialModal');
-    const socialModal = document.getElementById('socialPostModal');
     const cartSidebar = document.getElementById('cartSidebar');
-    if (socialModal && !socialModal.classList.contains('hidden')) {
-        closeSocialModal();
-        return;
-    }
     if (modal && !modal.classList.contains('hidden')) {
         closeModal();
         return;
@@ -1329,7 +1292,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeOptimizedLinks();
     syncFeedbackForms();
     injectAllProductSchemas();
-    initializeSocialFacades();
     initializeCookieConsent();
     initializeConversionPrompts();
     initializeSiteTutorial();
