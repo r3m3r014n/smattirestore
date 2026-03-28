@@ -286,26 +286,26 @@ function productAltText(product) {
 
 function createProductCard(product) {
     return `
-        <article class="bg-charcoal/80 border border-gold/30 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})" itemscope itemtype="https://schema.org/Product">
+        <article class="bg-white border border-charcoal/10 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})" itemscope itemtype="https://schema.org/Product">
             <meta itemprop="name" content="${product.name}">
             <meta itemprop="description" content="${product.desc}">
             <meta itemprop="sku" content="SM-${String(product.id).padStart(3, '0')}">
             <div class="relative h-72 overflow-hidden bg-dark">
                 ${product.badge ? `<span class="absolute top-3 left-3 z-10 bg-gold text-dark text-xs font-bold uppercase px-3 py-1 rounded-full">${product.badge}</span>` : ''}
-                <img src="${product.image}" alt="${productAltText(product)}" loading="lazy" itemprop="image" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x500/1a1a1a/d4af37?text=SM+ATTIRE';">
+                <img src="${product.image}" alt="${productAltText(product)}" loading="lazy" itemprop="image" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x500/faf9f7/111110?text=SM+ATTIRE';">
             </div>
             <div class="p-5">
-                <p class="text-gold text-xs uppercase tracking-[0.18em] mb-2" itemprop="category">${product.category}</p>
-                <h3 class="font-playfair text-xl mb-3 leading-tight" itemprop="name">${product.name}</h3>
+                <p class="text-gold text-xs uppercase tracking-[0.18em] mb-2 font-medium" itemprop="category">${product.category}</p>
+                <h3 class="font-playfair text-xl mb-3 leading-tight text-charcoal" itemprop="name">${product.name}</h3>
                 <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <meta itemprop="priceCurrency" content="KES">
                     <meta itemprop="price" content="${product.price}">
                     <meta itemprop="availability" content="https://schema.org/InStock">
                     <meta itemprop="itemCondition" content="https://schema.org/UsedCondition">
                     <meta itemprop="url" content="https://smattirestore.com/shop.html">
-                    <p class="text-gold font-bold text-2xl">KES ${product.price.toLocaleString()}</p>
+                    <p class="text-charcoal font-bold text-2xl">KES ${product.price.toLocaleString()}</p>
                 </div>
-                <button onclick="quickAddToCartById(${product.id}, event)" class="mt-4 w-full bg-gold text-dark py-2.5 rounded-full text-xs uppercase tracking-[0.12em] font-bold hover:bg-gold-light transition-colors">Quick Add to Cart</button>
+                <button onclick="quickAddToCartById(${product.id}, event)" class="mt-4 w-full bg-dark text-white py-2.5 rounded-full text-xs uppercase tracking-[0.12em] font-bold hover:bg-charcoal/80 transition-colors">Add to Cart</button>
             </div>
         </article>
     `;
@@ -1044,63 +1044,6 @@ function openOptimizedSocialLink(url) {
     }
 }
 
-function buildSocialEmbedUrl(postUrl, platform) {
-    try {
-        const parsed = new URL(postUrl);
-        if (platform === 'tiktok') {
-            const match = parsed.pathname.match(/\/video\/(\d+)/);
-            if (match) return `https://www.tiktok.com/embed/v2/${match[1]}`;
-        } else if (platform === 'instagram') {
-            const match = parsed.pathname.match(/\/p\/([^/]+)/);
-            if (match) return `https://www.instagram.com/p/${match[1]}/embed/`;
-        }
-    } catch (e) { /* noop */ }
-    return '';
-}
-
-function openSocialModal(embedUrl, postUrl, platform) {
-    const modal = document.getElementById('socialPostModal');
-    const container = document.getElementById('socialPostIframeContainer');
-    const link = document.getElementById('socialPostOpenLink');
-    if (!modal || !container) {
-        window.open(postUrl, '_blank', 'noopener,noreferrer');
-        return;
-    }
-    const label = platform === 'tiktok' ? 'TikTok' : 'Instagram';
-    container.innerHTML = `<iframe src="${embedUrl}" title="SM ATTIRE social drop on ${label}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    if (link) {
-        link.href = postUrl;
-        link.textContent = `Open on ${label} \u2197`;
-    }
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeSocialModal() {
-    const modal = document.getElementById('socialPostModal');
-    const container = document.getElementById('socialPostIframeContainer');
-    if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
-    if (container) container.innerHTML = '';
-    document.body.style.overflow = '';
-}
-
-function mountFacadeIframe(card) {
-    if (!card) return;
-    const postUrl = card.dataset.postUrl;
-    if (!postUrl) return;
-    const platform = card.dataset.platform || '';
-    const embedUrl = buildSocialEmbedUrl(postUrl, platform);
-    if (embedUrl) {
-        openSocialModal(embedUrl, postUrl, platform);
-    } else {
-        window.open(postUrl, '_blank', 'noopener,noreferrer');
-    }
-}
-
 let socialFacadesInitialized = false;
 
 function initializeSeraAssistant() {
@@ -1157,17 +1100,87 @@ function initializeSeraAssistant() {
 }
 
 function initializeSocialFacades() {
-    if (socialFacadesInitialized) return;
-    socialFacadesInitialized = true;
-    const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 6);
-    if (!cards.length) return;
+    // Facade cards now use native anchor links; no JS wiring required.
+}
 
+/**
+ * Progressive enhancement: replace static product-photo thumbnails on TikTok
+ * facade cards with real thumbnails fetched via the /api/oembed proxy.
+ * Falls back silently to the existing image if the fetch fails or the user
+ * is offline — the card remains fully usable either way.
+ *
+ * Instagram requires an authenticated access token for oEmbed, so those
+ * cards keep their static thumbnails.
+ */
+function initOembedCards() {
+    const cards = Array.from(document.querySelectorAll('.social-facade'));
     cards.forEach(card => {
-        const trigger = card.querySelector('.facade-trigger');
-        if (trigger) {
-            trigger.addEventListener('click', () => mountFacadeIframe(card));
-        }
+        const link = card.querySelector('a.facade-trigger');
+        if (!link) return;
+        const postUrl = link.href;
+        // Only TikTok video posts are supported by the proxy
+        if (!postUrl.includes('tiktok.com') || !postUrl.includes('/video/')) return;
+        const img = card.querySelector('img.facade-thumb');
+        if (!img) return;
+
+        fetch(`/api/oembed?url=${encodeURIComponent(postUrl)}`)
+            .then(r => (r.ok ? r.json() : null))
+            .then(data => {
+                if (data && data.thumbnail_url) {
+                    img.src = data.thumbnail_url;
+                    if (data.title) img.alt = data.title;
+                }
+            })
+            .catch(() => { /* keep existing static thumbnail */ });
     });
+}
+
+/**
+ * Lazy-load <video data-src> and <iframe data-src> elements via IntersectionObserver.
+ * Videos use WebM-first / MP4-fallback <source data-src> children.
+ * All lazy targets are observed with a 200 px root-margin so assets start
+ * fetching just before the user reaches them.
+ */
+function initLazyVideos() {
+    const lazyEls = Array.from(document.querySelectorAll('video[data-src], iframe[data-src]'));
+    if (!lazyEls.length) return;
+
+    function activateElement(el) {
+        if (el.tagName === 'IFRAME') {
+            if (el.dataset.src) {
+                el.src = el.dataset.src;
+                delete el.dataset.src;
+            }
+        } else {
+            Array.from(el.querySelectorAll('source[data-src]')).forEach(source => {
+                source.src = source.dataset.src;
+                delete source.dataset.src;
+            });
+            if (el.dataset.src) {
+                el.src = el.dataset.src;
+                delete el.dataset.src;
+            }
+            el.load();
+            el.play().catch(() => {});
+        }
+        el.classList.remove('lazy-video');
+    }
+
+    if (!('IntersectionObserver' in window)) {
+        // Fallback for older browsers: activate all immediately.
+        lazyEls.forEach(activateElement);
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            activateElement(entry.target);
+            obs.unobserve(entry.target);
+        });
+    }, { rootMargin: '200px' });
+
+    lazyEls.forEach(el => observer.observe(el));
 }
 
 function syncFeedbackForms() {
@@ -1285,8 +1298,6 @@ function initializeOptimizedLinks() {
 document.addEventListener('click', event => {
     const productModal = document.getElementById('productModal');
     if (productModal && event.target === productModal) closeModal();
-    const socialModal = document.getElementById('socialPostModal');
-    if (socialModal && event.target === socialModal) closeSocialModal();
 });
 
 document.addEventListener('keydown', event => {
@@ -1294,12 +1305,7 @@ document.addEventListener('keydown', event => {
     const modal = document.getElementById('productModal');
     const exitIntentModal = document.getElementById('exitIntentModal');
     const tutorialModal = document.getElementById('siteTutorialModal');
-    const socialModal = document.getElementById('socialPostModal');
     const cartSidebar = document.getElementById('cartSidebar');
-    if (socialModal && !socialModal.classList.contains('hidden')) {
-        closeSocialModal();
-        return;
-    }
     if (modal && !modal.classList.contains('hidden')) {
         closeModal();
         return;
@@ -1330,10 +1336,12 @@ document.addEventListener('DOMContentLoaded', () => {
     syncFeedbackForms();
     injectAllProductSchemas();
     initializeSocialFacades();
+    initOembedCards();
     initializeCookieConsent();
     initializeConversionPrompts();
     initializeSiteTutorial();
     initializeSeraAssistant();
+    initLazyVideos();
     renderRecentlyViewed();
     updateJourneyAssistant();
 

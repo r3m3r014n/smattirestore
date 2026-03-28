@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>About SM ATTIRE | Nairobi Thrift & Mitumba Store</title>
     <meta name="description" content="Learn how SM ATTIRE sources Grade A mitumba in Nairobi, Kenya. We specialize in thrifted casual streetwear and Neatfit Collection sneakers with WhatsApp + M-Pesa checkout.">
-    <meta name="theme-color" content="#0a0a0a">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a">
+    <meta name="theme-color" content="#faf9f7">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111110">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="SM ATTIRE">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <meta name="color-scheme" content="dark light">
+    <meta name="color-scheme" content="light dark">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="About SM ATTIRE | Nairobi Thrift & Mitumba Store">
@@ -26,7 +26,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -34,14 +34,17 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: '#d4af37',
-                        'gold-light': '#f4e4ba',
-                        charcoal: '#1a1a1a',
-                        dark: '#0a0a0a'
+                        gold: '#b8953f',
+                        'gold-light': '#cfab60',
+                        cream: '#faf9f7',
+                        charcoal: '#111110',
+                        dark: '#111110',
+                        muted: '#6b6860',
+                        pearl: '#ffffff'
                     },
                     fontFamily: {
-                        playfair: ['Playfair Display', 'serif'],
-                        rajdhani: ['Rajdhani', 'sans-serif']
+                        playfair: ['Cormorant Garamond', 'serif'],
+                        rajdhani: ['DM Sans', 'sans-serif']
                     }
                 }
             }
@@ -50,16 +53,27 @@
 
     <style>
         body {
-            background:
-                radial-gradient(circle at 12% 8%, rgba(206, 214, 226, 0.2), transparent 34%),
-                radial-gradient(circle at top, rgba(212,175,55,0.12), transparent 35%),
-                #0a0a0a;
+            background: #faf9f7;
         }
         .glass-panel {
-            background: rgba(180, 190, 206, 0.09);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: #ffffff;
+            border-color: rgba(17, 17, 16, 0.1) !important;
+            box-shadow: 0 2px 24px rgba(17, 17, 16, 0.06);
         }
+        /* ── Text colour: specificity beats Tailwind text-white/XX (0,1,0) ── */
+        /* body.safe-area p = 0,1,2 → wins over text-white/XX = 0,1,0       */
+        body.safe-area h1, body.safe-area h2, body.safe-area h3,
+        body.safe-area h4, body.safe-area h5, body.safe-area h6 { color: #111110; }
+        body.safe-area p, body.safe-area li,
+        body.safe-area blockquote, body.safe-area label { color: rgba(17, 17, 16, 0.65); }
+        /* Restore white text inside explicit dark containers (0,2,2 wins) */
+        body.safe-area .bg-dark p, body.safe-area .bg-dark li,
+        body.safe-area .bg-dark blockquote,
+        body.safe-area [class*="bg-charcoal"] p,
+        body.safe-area [class*="bg-charcoal"] li { color: rgba(255, 255, 255, 0.78); }
+        body.safe-area .bg-dark h1, body.safe-area .bg-dark h2, body.safe-area .bg-dark h3,
+        body.safe-area [class*="bg-charcoal"] h1, body.safe-area [class*="bg-charcoal"] h2,
+        body.safe-area [class*="bg-charcoal"] h3 { color: #ffffff; }
     </style>
 
     <script type="application/ld+json">
@@ -82,16 +96,19 @@
     }
     </script>
 </head>
-<body class="safe-area text-white font-rajdhani antialiased">
-    <nav class="sticky top-0 z-50 glass-panel border-b border-gold/20">
+<body class="safe-area text-charcoal font-rajdhani antialiased">
+    <nav id="navbar" class="sticky top-0 z-50 bg-white border-b border-charcoal/10 shadow-sm">
         <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between gap-4">
-            <a href="index.html" class="font-playfair text-2xl tracking-[0.14em] text-gold hover:text-gold-light transition-colors">SM ATTIRE</a>
-            <div class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.18em] font-semibold">
+            <a href="index.html" class="nav-brand">
+                <img src="logo-sm.jpg" alt="" class="nav-logo" width="36" height="36" aria-hidden="true">
+                <span class="font-playfair text-xl tracking-[0.14em] text-gold">SM ATTIRE</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.18em] font-semibold text-charcoal/60">
                 <a href="shop.html" class="hover:text-gold transition-colors">Shop</a>
                 <a href="about.html" class="text-gold">About</a>
                 <a href="contact.html" class="hover:text-gold transition-colors">Contact</a>
             </div>
-            <a href="seo.html" class="hidden md:inline text-xs uppercase tracking-[0.16em] text-white/70 hover:text-gold">SEO</a>
+            <a href="seo.html" class="hidden md:inline text-xs uppercase tracking-[0.16em] text-charcoal/50 hover:text-gold">SEO</a>
             <button onclick="toggleCart()" aria-label="Open Cart" class="relative border border-gold/60 text-gold rounded-full px-4 py-2 hover:bg-gold hover:text-dark transition-all">
                 🛒
                 <span id="cartCount" class="absolute -top-2 -right-2 min-w-[22px] h-[22px] px-1 rounded-full bg-gold text-dark text-xs font-bold flex items-center justify-center">0</span>
@@ -163,13 +180,61 @@
         </div>
     </aside>
 
-    <footer class="border-t border-gold/20 py-10">
-        <div class="max-w-7xl mx-auto px-5 md:px-8 text-center">
-            <p class="font-playfair text-2xl text-gold mb-2">SM ATTIRE</p>
-            <p class="text-white/70">Nairobi, Kenya • WhatsApp: <a href="https://wa.me/254701226084" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">+254 701 226 084</a> • Instagram: <a href="https://instagram.com/sm_attire_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sm_attire_</a> • TikTok: <a href="https://tiktok.com/@sera_muthoni_" target="_blank" rel="noopener" class="underline decoration-gold/40 hover:text-gold">@sera_muthoni_</a> • M-Pesa Payments Accepted</p>
-            <p class="text-white/70 mt-2">Classy, Elegant, Style • Delivery Services Available At A Fee</p>
-            <p class="text-white/50 text-sm mt-3">&copy; 2026 SM ATTIRE — Premium Mitumba</p>
-            <p class="dev-sig mt-2">&lt;/&gt; Built with ♥ by <a href="https://instagram.com/r3m3r0" target="_blank" rel="noopener noreferrer" class="dev-sig-link">#r3m3r0tude</a> · <a href="https://instagram.com/r3m3r0" target="_blank" rel="noopener noreferrer" class="dev-sig-link">@r3m3r0</a></p>
+    <footer class="bg-dark border-t border-white/10 pt-14 pb-8">
+        <div class="max-w-7xl mx-auto px-5 md:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-10">
+
+                <!-- Brand -->
+                <div>
+                    <p class="font-playfair text-2xl text-gold mb-3">SM ATTIRE</p>
+                    <p class="text-white/60 text-sm leading-relaxed">Classy, Elegant, Style.<br>Grade A premium thrift.<br>Est. 2021 · Nairobi, Kenya.</p>
+                    <p class="text-white/40 text-xs mt-4 uppercase tracking-[0.14em]">M-Pesa &amp; Pay on Delivery</p>
+                </div>
+
+                <!-- Navigate -->
+                <div>
+                    <p class="text-white/35 text-[10px] uppercase tracking-[0.22em] mb-5">Navigate</p>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-white/65 text-sm hover:text-gold transition-colors">Home</a></li>
+                        <li><a href="shop.html" class="text-white/65 text-sm hover:text-gold transition-colors">Shop</a></li>
+                        <li><a href="about.html" class="text-white/65 text-sm hover:text-gold transition-colors">About</a></li>
+                        <li><a href="contact.html" class="text-white/65 text-sm hover:text-gold transition-colors">Contact</a></li>
+                        <li><a href="vr.html" class="text-white/65 text-sm hover:text-gold transition-colors">VR Showroom</a></li>
+                    </ul>
+                </div>
+
+                <!-- Find Us -->
+                <div>
+                    <p class="text-white/35 text-[10px] uppercase tracking-[0.22em] mb-5">Find Us</p>
+                    <div class="flex flex-col gap-4">
+                        <a href="https://wa.me/254701226084" target="_blank" rel="noopener" aria-label="WhatsApp SM ATTIRE" class="flex items-center gap-3 text-white/65 text-sm hover:text-gold transition-colors">
+                            <span class="w-8 h-8 flex items-center justify-center rounded-full border border-white/20 shrink-0 hover:border-gold/50 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.975-1.418A9.953 9.953 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.952 7.952 0 0 1-4.073-1.117l-.29-.172-2.952.841.855-2.881-.19-.3A7.96 7.96 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8zm4.406-5.846c-.242-.121-1.432-.707-1.654-.787-.222-.08-.384-.12-.545.12-.161.242-.623.787-.764.948-.14.161-.282.181-.523.06-.242-.12-1.02-.376-1.943-1.198-.717-.64-1.203-1.43-1.344-1.673-.14-.242-.015-.373.106-.493.108-.108.242-.282.363-.423.12-.14.16-.242.242-.403.08-.161.04-.302-.02-.423-.06-.12-.545-1.312-.747-1.797-.196-.47-.397-.407-.545-.415l-.464-.008a.89.89 0 0 0-.645.302c-.222.242-.847.827-.847 2.017s.868 2.34.988 2.501c.12.161 1.708 2.608 4.14 3.556.578.198 1.03.316 1.381.404.58.147 1.109.126 1.527.076.466-.055 1.432-.585 1.633-1.15.202-.564.202-1.047.14-1.148-.06-.101-.222-.161-.464-.282z"/></svg>
+                            </span>
+                            +254 701 226 084
+                        </a>
+                        <a href="https://instagram.com/sm_attire_" target="_blank" rel="noopener" aria-label="Instagram @sm_attire_" class="flex items-center gap-3 text-white/65 text-sm hover:text-gold transition-colors">
+                            <span class="w-8 h-8 flex items-center justify-center rounded-full border border-white/20 shrink-0 hover:border-gold/50 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.055 2.03.242 2.68.516a5.4 5.4 0 0 1 1.953 1.27 5.4 5.4 0 0 1 1.27 1.953c.274.65.461 1.474.516 2.68.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.055 1.206-.242 2.03-.516 2.68a5.4 5.4 0 0 1-1.27 1.953 5.4 5.4 0 0 1-1.953 1.27c-.65.274-1.474.461-2.68.516-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.206-.055-2.03-.242-2.68-.516a5.4 5.4 0 0 1-1.953-1.27 5.4 5.4 0 0 1-1.27-1.953c-.274-.65-.461-1.474-.516-2.68C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.055-1.206.242-2.03.516-2.68a5.4 5.4 0 0 1 1.27-1.953 5.4 5.4 0 0 1 1.953-1.27c.65-.274 1.474-.461 2.68-.516C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.333.014 7.053.072 5.775.13 4.902.333 4.14.63a7.563 7.563 0 0 0-2.733 1.778A7.563 7.563 0 0 0 .63 5.14C.333 5.902.13 6.775.072 8.053.014 9.333 0 9.741 0 12c0 2.259.014 2.667.072 3.947.058 1.278.261 2.151.558 2.913a7.563 7.563 0 0 0 1.778 2.733 7.563 7.563 0 0 0 2.733 1.778c.762.297 1.635.5 2.913.558C9.333 23.986 9.741 24 12 24c2.259 0 2.667-.014 3.947-.072 1.278-.058 2.151-.261 2.913-.558a7.563 7.563 0 0 0 2.733-1.778 7.563 7.563 0 0 0 1.778-2.733c.297-.762.5-1.635.558-2.913.058-1.28.072-1.688.072-3.947 0-2.259-.014-2.667-.072-3.947-.058-1.278-.261-2.151-.558-2.913a7.563 7.563 0 0 0-1.778-2.733A7.563 7.563 0 0 0 18.86.63C18.098.333 17.225.13 15.947.072 14.667.014 14.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                            </span>
+                            @sm_attire_
+                        </a>
+                        <a href="https://tiktok.com/@sera_muthoni_" target="_blank" rel="noopener" aria-label="TikTok @sera_muthoni_" class="flex items-center gap-3 text-white/65 text-sm hover:text-gold transition-colors">
+                            <span class="w-8 h-8 flex items-center justify-center rounded-full border border-white/20 shrink-0 hover:border-gold/50 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
+                            </span>
+                            @sera_muthoni_
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <p class="text-white/35 text-xs">&copy; 2026 SM ATTIRE — Premium Mitumba &middot; Your Ultimate Fashion Guide</p>
+                <p class="dev-sig">&lt;/&gt; Built with &#9825; by <a href="https://instagram.com/r3m3r0" target="_blank" rel="noopener noreferrer" class="dev-sig-link">#r3m3r0tude</a> &middot; <a href="https://instagram.com/r3m3r0" target="_blank" rel="noopener noreferrer" class="dev-sig-link">@r3m3r0</a></p>
+            </div>
         </div>
     </footer>
 
