@@ -908,7 +908,7 @@ function checkout() {
     });
 
     const openWhatsAppFallback = () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
-    const phoneInput = window.prompt('Checkout starts with M-Pesa Daraja. Enter phone number (07XXXXXXXX or 2547XXXXXXXX), or tap Cancel to continue via WhatsApp:', '');
+    const phoneInput = window.prompt('Enter M-Pesa phone (07XXXXXXXX or 2547XXXXXXXX), or Cancel for WhatsApp:', '');
     if (!phoneInput) {
         openWhatsAppFallback();
         return;
