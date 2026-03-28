@@ -67,7 +67,9 @@ exports.handler = async event => {
         };
     }
 
-    if (!parsed.hostname.endsWith('tiktok.com')) {
+    const host = parsed.hostname.toLowerCase();
+    const isTikTokHost = host === 'tiktok.com' || host === 'www.tiktok.com' || host.endsWith('.tiktok.com');
+    if (!isTikTokHost) {
         return {
             statusCode: 403,
             headers: { 'Content-Type': 'application/json' },

@@ -1137,6 +1137,7 @@ function initializeCookieConsent() {
     const confirmAuth = document.getElementById('confirmCookieAuth');
     const cancelAuth = document.getElementById('cancelCookieAuth');
     const authEmail = document.getElementById('cookieAuthEmail');
+    let cookieModalTrigger = null;
     if (!banner || !accept || !decline) return;
 
     const dismissBanner = () => {
@@ -1158,6 +1159,10 @@ function initializeCookieConsent() {
         if (!authModal) return;
         authModal.classList.add('hidden');
         authModal.classList.remove('flex');
+        authModal.setAttribute('aria-hidden', 'true');
+        if (cookieModalTrigger && typeof cookieModalTrigger.focus === 'function') {
+            cookieModalTrigger.focus();
+        }
     };
 
     const applyChoice = choice => {
@@ -1176,10 +1181,13 @@ function initializeCookieConsent() {
             applyChoice('allow');
             return;
         }
+        cookieModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : accept;
         authModal.classList.remove('hidden');
         authModal.classList.add('flex');
+        authModal.removeAttribute('aria-hidden');
         const emailValue = localStorage.getItem('smattire_cookie_auth_email');
         if (authEmail && emailValue) authEmail.value = emailValue;
+        if (authEmail) authEmail.focus();
     };
 
     accept.addEventListener('click', showAuthModal);
@@ -1187,10 +1195,28 @@ function initializeCookieConsent() {
     if (confirmAuth) confirmAuth.addEventListener('click', () => applyChoice('allow'));
     if (cancelAuth) cancelAuth.addEventListener('click', hideAuthModal);
     if (authModal) {
+        const getFocusable = () => Array.from(authModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+            .filter(node => !node.hasAttribute('disabled') && node.getAttribute('aria-hidden') !== 'true');
         authModal.addEventListener('click', event => {
             if (event.target === authModal) hideAuthModal();
         });
         document.addEventListener('keydown', event => {
+            if (authModal.classList.contains('hidden')) return;
+            if (event.key === 'Tab') {
+                const focusable = getFocusable();
+                if (!focusable.length) return;
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                const active = document.activeElement;
+                if (event.shiftKey && active === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && active === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+                return;
+            }
             if (event.key === 'Escape') hideAuthModal();
         });
     }
