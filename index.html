@@ -550,21 +550,6 @@
         </div>
     </footer>
 
-    <div id="stickyBuyBar" class="hidden fixed top-4 right-4 left-4 md:left-auto md:w-[420px] z-[85] glass-panel border border-gold/30 rounded-2xl p-4">
-        <div class="flex items-start gap-3">
-            <div class="text-2xl">🔥</div>
-            <div class="flex-1">
-                <p class="text-gold text-xs uppercase tracking-[0.16em]">Limited Stock Momentum</p>
-                <p class="text-white/80 text-sm">Top picks are moving fast. Add your favorite now and checkout on WhatsApp in under a minute.</p>
-                <div class="mt-3 flex gap-2">
-                    <a href="shop.html" data-track="sticky_buy_shop" class="px-4 py-2 bg-gold text-dark rounded-full text-[11px] uppercase tracking-[0.12em] font-bold">Shop Fast</a>
-                    <button onclick="toggleCart()" class="px-4 py-2 border border-gold/60 text-gold rounded-full text-[11px] uppercase tracking-[0.12em] font-bold">Open Cart</button>
-                </div>
-            </div>
-            <button id="closeStickyBuyBar" class="text-white/70 hover:text-gold text-lg leading-none">&times;</button>
-        </div>
-    </div>
-
     <div id="journeyAssistant" class="fixed right-4 top-1/2 -translate-y-1/2 z-[84]">
         <button id="seraToggleBtn" type="button" aria-label="Open Sera assistant" aria-expanded="false" aria-controls="seraPanel" class="w-11 h-11 rounded-full overflow-hidden border-2 border-gold/60 shadow-lg shadow-gold/20 hover:border-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-1 focus:ring-offset-black block">
             <img src="/sera.jpg" alt="Sera AI assistant" loading="lazy" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.textContent='✨';">
@@ -586,6 +571,21 @@
                 <button type="button" onclick="speakSeraAssistant()" class="px-3 py-2 border border-gold/60 text-gold rounded-full text-[10px] uppercase tracking-[0.12em] font-bold">Play Voice</button>
                 <button type="button" onclick="stopSeraVoice()" class="px-3 py-2 border border-white/30 text-white/80 rounded-full text-[10px] uppercase tracking-[0.12em] font-bold">Stop Voice</button>
             </div>
+        </div>
+    </div>
+
+    <div id="notificationHub" class="fixed bottom-4 left-4 z-[86] flex flex-col gap-2">
+        <button id="notificationToggle" type="button" aria-expanded="false" aria-controls="notificationPanel" class="flex items-center gap-2 px-4 py-2 bg-gold text-dark rounded-full text-xs uppercase tracking-[0.12em] font-bold shadow-lg shadow-gold/20">
+            <span>🔔</span>
+            <span>Notifications</span>
+            <span id="notificationBadge" class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-dark text-gold text-[11px] font-bold">2</span>
+        </button>
+        <div id="notificationPanel" hidden class="w-[320px] max-w-sm glass-panel border border-gold/30 rounded-2xl p-4 shadow-lg shadow-gold/10">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-gold text-[11px] uppercase tracking-[0.14em]">Store Updates</p>
+                <button id="notificationClose" type="button" aria-label="Close notifications" class="text-white/70 hover:text-gold text-base leading-none">&times;</button>
+            </div>
+            <ul id="notificationList" class="space-y-3 text-sm text-white/80"></ul>
         </div>
     </div>
 

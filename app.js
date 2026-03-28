@@ -22,6 +22,20 @@ const RECENTLY_VIEWED_KEY = 'smattire_recently_viewed';
 const SITE_TUTORIAL_KEY = 'smattire_site_tutorial_seen';
 const EXTERNAL_LINK_CONSENT_KEY = 'smattire_external_link_consent';
 const STICKY_BAR_DELAY_MS = 3500;
+const notificationFeed = [
+    {
+        id: 'limited-stock',
+        title: 'Limited Stock Momentum',
+        body: 'Top picks are moving fast. Add your favorite now and checkout with M-Pesa.',
+        cta: { label: 'View Products', href: '#featured' }
+    },
+    {
+        id: 'mpesa-whatsapp',
+        title: 'Checkout Options',
+        body: 'Pay via M-Pesa STK push. WhatsApp chat is optional as a backup for order confirmation.',
+        cta: { label: 'Open Cart', action: 'cart' }
+    }
+];
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let currentProduct = null;
 let currentFilter = 'all';
@@ -912,7 +926,7 @@ function checkout() {
     const openWhatsAppFallback = () => {
         // Prefer a new tab to keep the cart page open; fall back to same-tab navigation if blocked
         const win = window.open(whatsappUrl, '_blank');
-        if (!win || win.closed) window.location.href = whatsappUrl;
+        if (!win) window.location.href = whatsappUrl;
     };
     const phoneInput = window.prompt('Enter your M-Pesa phone (07XXXXXXXX, 01XXXXXXXX, +2547XXXXXXXX, or +2541XXXXXXXX). Click Cancel to use WhatsApp instead.', '');
     if (!phoneInput) {
@@ -969,19 +983,7 @@ function closeExitIntentPrompt() {
 }
 
 function initializeConversionPrompts() {
-    const sticky = document.getElementById('stickyBuyBar');
-    const closeSticky = document.getElementById('closeStickyBuyBar');
     const modal = document.getElementById('exitIntentModal');
-
-    if (sticky) {
-        setTimeout(() => sticky.classList.remove('hidden'), STICKY_BAR_DELAY_MS);
-    }
-    if (closeSticky && sticky) {
-        closeSticky.addEventListener('click', () => {
-            sticky.classList.add('hidden');
-            trackProductInteraction('sticky_bar_closed');
-        });
-    }
 
     if (modal) {
         modal.addEventListener('click', event => {
@@ -1000,6 +1002,52 @@ function initializeConversionPrompts() {
     window.addEventListener('pagehide', () => {
         trackProductInteraction('pagehide');
     });
+}
+
+function initializeNotificationPanel() {
+    const toggle = document.getElementById('notificationToggle');
+    const panel = document.getElementById('notificationPanel');
+    const list = document.getElementById('notificationList');
+    const badge = document.getElementById('notificationBadge');
+    const closeBtn = document.getElementById('notificationClose');
+    if (!toggle || !panel || !list || !badge || !closeBtn) return;
+
+    const render = () => {
+        list.innerHTML = notificationFeed.map(item => {
+            const actionButton = item.cta
+                ? item.cta.href
+                    ? `<a href="${item.cta.href}" class="inline-flex items-center gap-2 text-gold font-semibold hover:text-gold-light transition-colors text-sm">${item.cta.label} →</a>`
+                    : `<button data-action="${item.cta.action}" class="inline-flex items-center gap-2 text-gold font-semibold hover:text-gold-light transition-colors text-sm">${item.cta.label} →</button>`
+                : '';
+            return `<li class="glass-panel bg-dark/40 border border-gold/20 rounded-xl p-3">
+                <p class="text-white font-semibold mb-1">${item.title}</p>
+                <p class="text-white/70 text-sm mb-2">${item.body}</p>
+                ${actionButton}
+            </li>`;
+        }).join('');
+    };
+
+    const setOpen = (isOpen) => {
+        panel.hidden = !isOpen;
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        if (isOpen) badge.classList.add('hidden');
+    };
+
+    list.addEventListener('click', (event) => {
+        const actionBtn = event.target.closest('button[data-action]');
+        if (!actionBtn) return;
+        if (actionBtn.dataset.action === 'cart') {
+            toggleCart();
+        }
+    });
+
+    toggle.addEventListener('click', () => {
+        const isOpen = panel.hidden;
+        setOpen(isOpen);
+    });
+    closeBtn.addEventListener('click', () => setOpen(false));
+
+    render();
 }
 
 function initializeSiteTutorial() {
@@ -1370,6 +1418,7 @@ document.addEventListener('DOMContentLoaded', () => {
     syncFeedbackForms();
     injectAllProductSchemas();
     initializeCookieConsent();
+    initializeNotificationPanel();
     initializeConversionPrompts();
     initializeSiteTutorial();
     initializeSeraAssistant();
