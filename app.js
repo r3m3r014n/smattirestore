@@ -758,6 +758,11 @@ function toggleCart() {
     updateJourneyAssistant();
     sidebar.classList.toggle('translate-x-full');
     const isOpen = !sidebar.classList.contains('translate-x-full');
+    document.querySelectorAll('.floating-whatsapp-chat').forEach(button => {
+        button.classList.toggle('pointer-events-none', isOpen);
+        button.classList.toggle('opacity-0', isOpen);
+        button.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+    });
     if (isOpen) {
         const closeButton = sidebar.querySelector('button[onclick="toggleCart()"]');
         if (closeButton instanceof HTMLElement) closeButton.focus();
@@ -903,13 +908,7 @@ function checkout() {
     });
 
     const openWhatsAppFallback = () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
-    const useDaraja = window.confirm('Use M-Pesa Daraja prompt now? Tap "Cancel" to continue checkout via WhatsApp.');
-    if (!useDaraja) {
-        openWhatsAppFallback();
-        return;
-    }
-
-    const phoneInput = window.prompt('Enter your M-Pesa phone number (07XXXXXXXX or 2547XXXXXXXX):', '');
+    const phoneInput = window.prompt('Checkout starts with M-Pesa Daraja. Enter phone number (07XXXXXXXX or 2547XXXXXXXX), or tap Cancel to continue via WhatsApp:', '');
     if (!phoneInput) {
         openWhatsAppFallback();
         return;
