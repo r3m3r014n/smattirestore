@@ -1,0 +1,8 @@
+# Catch WordPress scans and send to a 410 (Gone)
+/wp-admin/*    /gone.html  410
+/wp-login.php  /gone.html  410
+/xmlrpc.php    /gone.html  410
+
+# Catch common script scans
+/cgi-bin/*     /gone.html  410
+/.env          /gone.html  410

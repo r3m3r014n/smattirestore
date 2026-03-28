@@ -1,4 +1,5 @@
 [build]
+  command = "npm run build"
   publish = "."
   functions = "functions"
 
@@ -8,7 +9,13 @@
 [[plugins]]
   package = "@netlify/plugin-sitemap"
 
-# Block WordPress/CMS probe paths — return 404 immediately
+# Specific page rewrites (specific to general order)
+[[redirects]]
+  from = "/collection"
+  to = "/shop.html"
+  status = 301
+
+# Handle WordPress/CMS probe paths - return 404 responses
 [[redirects]]
   from = "/wp-admin"
   to = "/404.html"
@@ -17,6 +24,12 @@
 
 [[redirects]]
   from = "/wp-admin/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/wordpress/*"
   to = "/404.html"
   status = 404
   force = true
@@ -50,12 +63,6 @@
   to = "/404.html"
   status = 404
   force = true
-
-# Custom 404 error page
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
 
 # API routing
 [[redirects]]
@@ -93,8 +100,17 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://via.placeholder.com https://smattirestore.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;"
-    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' https://fonts.googleapis.com; img-src 'self' data: https://via.placeholder.com https://smattirestore.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://via.placeholder.com https://smattirestore.com https://i.ytimg.com https://*.tiktokcdn.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; media-src 'self' https://res.cloudinary.com https://player.vimeo.com; frame-src https://www.youtube-nocookie.com https://player.vimeo.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;"
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' https://fonts.googleapis.com; img-src 'self' data: https://via.placeholder.com https://smattirestore.com https://i.ytimg.com https://*.tiktokcdn.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; media-src 'self' https://res.cloudinary.com https://player.vimeo.com; frame-src https://www.youtube-nocookie.com https://player.vimeo.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;"
+    # Prevent CDN/Safari content transformation that can corrupt lazy-loaded assets
+    Cache-Control = "no-transform"
+
+# HTML pages — Safari/Applebot-friendly: no-transform keeps content canonical
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate, no-transform"
+    Vary = "Accept-Encoding"
 
 # Static assets cache policy
 [[headers]]
@@ -163,3 +179,24 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
     Content-Type = "application/xml; charset=utf-8"
+
+# Video assets — long CDN cache; Googlebot-Video can index them
+[[headers]]
+  for = "/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+    X-Robots-Tag = "index"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "/*.webm"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+    X-Robots-Tag = "index"
+    Vary = "Accept-Encoding"
+
+# oEmbed API — short browser cache; edge cache handled by function response
+[[headers]]
+  for = "/api/oembed"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, s-maxage=86400"
