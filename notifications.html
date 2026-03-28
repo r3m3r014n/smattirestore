@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Notifications | SM ATTIRE Nairobi</title>
+    <meta name="description" content="Store notifications and updates from SM ATTIRE Nairobi — new arrivals, M-Pesa checkout updates, and exclusive drop alerts.">
+    <meta name="robots" content="noindex,follow">
+    <link rel="icon" type="image/png" href="/sm-attire-logo.png">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#d4af37',
+                        'gold-light': '#f4e4ba',
+                        charcoal: '#1a1a1a',
+                        dark: '#0a0a0a'
+                    },
+                    fontFamily: {
+                        playfair: ['Playfair Display', 'serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background:
+                radial-gradient(circle at 12% 8%, rgba(206, 214, 226, 0.2), transparent 34%),
+                radial-gradient(circle at 85% 18%, rgba(212,175,55,0.12), transparent 36%),
+                #0a0a0a;
+        }
+        .glass-panel {
+            background: rgba(180, 190, 206, 0.09);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+    </style>
+</head>
+<body class="safe-area text-white font-rajdhani antialiased min-h-screen">
+    <nav class="sticky top-0 z-50 glass-panel border-b border-gold/20">
+        <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-2 font-playfair text-2xl tracking-[0.14em] text-gold hover:text-gold-light transition-colors">
+                <img src="/sm-attire-logo.png" alt="SM ATTIRE" class="w-9 h-9 rounded-full object-contain" loading="eager">
+                SM ATTIRE
+            </a>
+            <div class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.18em] font-semibold">
+                <a href="shop.html" class="hover:text-gold transition-colors">Shop</a>
+                <a href="about.html" class="hover:text-gold transition-colors">About</a>
+                <a href="contact.html" class="hover:text-gold transition-colors">Contact</a>
+            </div>
+            <a href="index.html" class="border border-gold/60 text-gold rounded-full px-4 py-2 text-xs uppercase tracking-[0.14em] font-semibold hover:bg-gold hover:text-dark transition-all">Back to Home</a>
+        </div>
+    </nav>
+
+    <main class="max-w-2xl mx-auto px-5 md:px-8 pt-12 pb-20">
+        <div class="mb-8">
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-3">Store Updates</p>
+            <h1 class="font-playfair text-4xl md:text-5xl mb-3">Notifications</h1>
+            <p class="text-white/70">Latest updates, stock alerts, and checkout information from SM ATTIRE Nairobi.</p>
+        </div>
+
+        <ul id="notificationsPage" class="space-y-4"></ul>
+
+        <div class="mt-10 text-center">
+            <a href="shop.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gold text-dark font-bold rounded-full uppercase tracking-[0.14em] hover:bg-gold-light transition-colors">Browse All Products</a>
+        </div>
+    </main>
+
+    <footer class="border-t border-gold/20 py-8 text-center">
+        <p class="text-white/40 text-xs">&copy; 2026 SM ATTIRE — New Arrivals &amp; Streetwear. All rights reserved.</p>
+    </footer>
+
+    <script src="/app.js"></script>
+    <script>
+        (function () {
+            const list = document.getElementById('notificationsPage');
+            if (!list || !Array.isArray(notificationFeed)) return;
+            notificationFeed.forEach(function (item) {
+                var li = document.createElement('li');
+                li.className = 'glass-panel border border-gold/20 rounded-2xl p-5';
+
+                var title = document.createElement('p');
+                title.className = 'font-playfair text-xl text-white mb-2';
+                title.textContent = item.title;
+                li.appendChild(title);
+
+                var body = document.createElement('p');
+                body.className = 'text-white/75 mb-4';
+                body.textContent = item.body;
+                li.appendChild(body);
+
+                if (item.cta) {
+                    if (item.cta.href) {
+                        var link = document.createElement('a');
+                        link.href = item.cta.href;
+                        link.className = 'inline-flex items-center gap-2 px-5 py-2.5 bg-gold text-dark font-bold rounded-full text-xs uppercase tracking-[0.12em] hover:bg-gold-light transition-colors';
+                        link.textContent = item.cta.label + ' →';
+                        li.appendChild(link);
+                    } else if (item.cta.action === 'cart') {
+                        var btn = document.createElement('a');
+                        btn.href = 'shop.html';
+                        btn.className = 'inline-flex items-center gap-2 px-5 py-2.5 bg-gold text-dark font-bold rounded-full text-xs uppercase tracking-[0.12em] hover:bg-gold-light transition-colors';
+                        btn.textContent = item.cta.label + ' →';
+                        li.appendChild(btn);
+                    }
+                }
+
+                list.appendChild(li);
+            });
+        })();
+    </script>
+</body>
+</html>

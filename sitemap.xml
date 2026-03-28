@@ -8,8 +8,8 @@
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://smattirestore.com/grade-a-vintage-graphic-tee.jpg</image:loc>
-      <image:title>Standard Graphic Tee — Casual Streetwear, KES 1,000 | SM ATTIRE Nairobi</image:title>
-      <image:caption>Standard graphic tee in clean Grade A condition, ideal for casual Nairobi streetwear looks.</image:caption>
+      <image:title>Classic Street Jacket — Casual Streetwear, KES 2,500 | SM ATTIRE Nairobi</image:title>
+      <image:caption>New classic street jacket, versatile and clean-cut, perfect for Nairobi streetwear looks.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://smattirestore.com/sm-attire-logo.png</image:loc>
@@ -24,12 +24,12 @@
     <image:image>
       <image:loc>https://smattirestore.com/sm_attire_-20260327-0002.jpg</image:loc>
       <image:title>SM ATTIRE Drop Lookbook — March 2026 Collection | Nairobi</image:title>
-      <image:caption>SM ATTIRE lookbook shot from the March 2026 drop. Thrift fashion curated for Nairobi.</image:caption>
+      <image:caption>SM ATTIRE lookbook shot from the March 2026 drop. Fresh fashion curated for Nairobi.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://smattirestore.com/Screenshot_20260327_235526_InstaGold.jpg</image:loc>
       <image:title>SM ATTIRE Instagram — @sm_attire_ Post 27 March 2026</image:title>
-      <image:caption>SM ATTIRE Instagram post by @sm_attire_ showcasing the latest thrift drops in Nairobi.</image:caption>
+      <image:caption>SM ATTIRE Instagram post by @sm_attire_ showcasing the latest new arrivals in Nairobi.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://smattirestore.com/Screenshot_20260327_235533_InstaGold%20(1).jpg</image:loc>
@@ -50,18 +50,18 @@
     <priority>0.9</priority>
     <image:image>
       <image:loc>https://smattirestore.com/grade-a-vintage-graphic-tee.jpg</image:loc>
-      <image:title>Standard Graphic Tee — Casual Streetwear, KES 1,000 | SM ATTIRE Nairobi</image:title>
-      <image:caption>Standard graphic tee in clean Grade A condition, available at SM ATTIRE Nairobi thrift store.</image:caption>
+      <image:title>Classic Street Jacket — Casual Streetwear, KES 2,500 | SM ATTIRE Nairobi</image:title>
+      <image:caption>New classic street jacket, clean-cut and versatile, available at SM ATTIRE Nairobi.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://smattirestore.com/thrifted-cargo-pants-olive.jpg</image:loc>
-      <image:title>Thrifted Cargo Pants Olive — Casual Streetwear, KES 1500 | SM ATTIRE Nairobi</image:title>
-      <image:caption>Gently used tactical cargo pants. High-quality thrift wear for a rugged, casual look.</image:caption>
+      <image:title>Fabric Cotton Sweater — Casual Streetwear, KES 1,500 | SM ATTIRE Nairobi</image:title>
+      <image:caption>New fabric cotton sweater with a relaxed, cozy fit for casual Nairobi style.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://smattirestore.com/gently-used-air-force-1s.jpg</image:loc>
-      <image:title>Gently Used Air Force 1s — Neatfit Collection, KES 3500 | SM ATTIRE Nairobi</image:title>
-      <image:caption>Top-tier Neatfit Collection sneakers. Carefully cleaned and restored for Nairobi delivery.</image:caption>
+      <image:title>New Air Force 1s — Neatfit Collection, KES 3,500 | SM ATTIRE Nairobi</image:title>
+      <image:caption>Brand-new Air Force 1 sneakers with an iconic low-top silhouette. Fast delivery in Nairobi.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://smattirestore.com/oversized-flannel-shirt.jpg</image:loc>
@@ -71,7 +71,7 @@
     <image:image>
       <image:loc>https://smattirestore.com/retro-running-sneakers.jpg</image:loc>
       <image:title>Retro Running Sneakers — Neatfit Collection, KES 3500 | SM ATTIRE Nairobi</image:title>
-      <image:caption>Affordable, high-quality mitumba running shoes. Grade A condition with plenty of life left.</image:caption>
+      <image:caption>New retro running sneakers with a bold sporty aesthetic. Fresh stock, fast Nairobi delivery.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://smattirestore.com/classic-denim-jacket.jpg</image:loc>
@@ -96,12 +96,12 @@
     <image:image>
       <image:loc>https://smattirestore.com/y2k-baggy-jeans.jpg</image:loc>
       <image:title>Y2K Baggy Jeans — Casual Streetwear, KES 1400 | SM ATTIRE Nairobi</image:title>
-      <image:caption>Authentic vintage baggy denim. The ultimate thrift find for casual streetwear fans in Nairobi.</image:caption>
+      <image:caption>Y2K-style baggy denim jeans — bold wide-fit silhouette for casual Nairobi streetwear fans.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://smattirestore.com/vintage-windbreaker.jpg</image:loc>
       <image:title>Vintage Windbreaker — Casual Streetwear, KES 1600 | SM ATTIRE Nairobi</image:title>
-      <image:caption>Lightweight retro windbreaker jacket. Grade A mitumba perfect for the Nairobi rainy season.</image:caption>
+      <image:caption>New lightweight retro windbreaker jacket. Perfect for the Nairobi rainy season with a clean vintage aesthetic.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://smattirestore.com/mitumba-chelsea-boots.jpg</image:loc>
@@ -118,6 +118,12 @@
       <image:title>Slip-On Casual Vans — Neatfit Collection, KES 3500 | SM ATTIRE Nairobi</image:title>
       <image:caption>Easy, everyday Neatfit Collection slip-on sneakers. Cleaned, prepped, and ready to wear.</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://smattirestore.com/notifications.html</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://smattirestore.com/about.html</loc>

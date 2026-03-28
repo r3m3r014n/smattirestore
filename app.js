@@ -1,18 +1,18 @@
 const products = [
-    { id: 1, name: "Standard Graphic Tee", category: "Casual Streetwear", price: 1000, image: "/grade-a-vintage-graphic-tee.jpg", badge: "Bestseller", desc: "Premium Grade A mitumba graphic t-shirt. Clean, trendy, and perfect for the Nairobi streetwear scene." },
-    { id: 2, name: "Thrifted Cargo Pants - Olive", category: "Casual Streetwear", price: 1500, image: "/thrifted-cargo-pants-olive.jpg", badge: "Hot", desc: "Gently used tactical cargo pants. High-quality thrift wear for a rugged, casual look." },
-    { id: 3, name: "Gently Used Air Force 1s", category: "Neatfit Collection", price: 3500, image: "/gently-used-air-force-1s.jpg", badge: "Shoe Lover", desc: "Top-tier Neatfit Collection sneakers. Carefully cleaned and restored. Delivery within Nairobi." },
-    { id: 4, name: "Vintage Geometric Knit Cardigan", category: "Casual Streetwear", price: 1000, image: "/oversized-flannel-shirt.jpg", badge: "", desc: "Vintage geometric knit cardigan for cozy layering at a friendly price point." },
-    { id: 5, name: "Retro Running Sneakers", category: "Neatfit Collection", price: 3500, image: "/retro-running-sneakers.jpg", badge: "Trending", desc: "Affordable, high-quality mitumba running shoes. Grade A condition with plenty of life left." },
-    { id: 6, name: "Red Snakeskin Textured Cropped Jacket", category: "Casual Streetwear", price: 2500, image: "/classic-denim-jacket.jpg", badge: "", desc: "Grade A red snakeskin textured cropped jacket with a bold, standout aesthetic. A Quality Vintage statement layer with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, red snakeskin cropped jacket, statement outerwear" },
-    { id: 7, name: "Pink 'Alo' Graphic Tee with Matching Cap", category: "Casual Streetwear", price: 1500, image: "/high-top-canvas-shoes.jpg", badge: "Deal", desc: "Grade A Pink 'Alo' graphic tee paired with a matching cap for a clean coordinated aesthetic. A Quality Vintage streetwear set with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, pink alo graphic tee, matching cap set" },
-    { id: 8, name: "Black & White Striped Tees", category: "Casual Streetwear", price: 1500, image: "/thrifted-streetwear-hoodie.jpg", badge: "", desc: "Grade A black and white striped tees with a timeless minimalist aesthetic. Quality Vintage everyday essentials delivered fast in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, black and white striped tees, minimalist streetwear" },
-    { id: 9, name: "Pink & White New Balance Sneakers", category: "Neatfit Collection", price: 3500, image: "/premium-neatfit-jordans.jpg", badge: "Exclusive", desc: "Grade A pink and white New Balance sneakers with a sleek retro-runner aesthetic. Quality Vintage sneaker heat with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, pink white new balance sneakers, retro runner style" },
-    { id: 10, name: "Y2K Baggy Jeans", category: "Casual Streetwear", price: 1400, image: "/y2k-baggy-jeans.jpg", badge: "Trending", desc: "Authentic vintage baggy denim. The ultimate thrift find for casual streetwear fans." },
-    { id: 11, name: "Vintage Windbreaker", category: "Casual Streetwear", price: 1600, image: "/vintage-windbreaker.jpg", badge: "", desc: "Lightweight retro windbreaker jacket. Grade A mitumba perfect for the rainy season." },
-    { id: 12, name: "Red New Balance 9060 Sneakers", category: "Neatfit Collection", price: 3500, image: "/mitumba-chelsea-boots.jpg", badge: "Quality", desc: "Grade A red New Balance 9060 sneakers with a chunky futuristic aesthetic. A Quality Vintage sneaker pick with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, red new balance 9060, chunky sneaker" },
-    { id: 13, name: "Blue NY Cap", category: "Casual Streetwear", price: 800, image: "/casual-summer-shorts.jpg", badge: "", desc: "Classic blue NY-branded cap for effortless streetwear finishing touches." },
-    { id: 14, name: "Slip-On Casual Vans", category: "Neatfit Collection", price: 3500, image: "/slip-on-casual-vans.jpg", badge: "", desc: "Easy, everyday Neatfit Collection slip-on sneakers. Cleaned, prepped, and ready to wear." }
+    { id: 1, name: "Classic Street Jacket", category: "Casual Streetwear", price: 2500, image: "/classic-denim-jacket.jpg", badge: "New Arrival", desc: "Brand-new classic street jacket — clean-cut, versatile, and built for the Nairobi streetwear scene. M-Pesa checkout via WhatsApp." },
+    { id: 2, name: "Fabric Cotton Sweater", category: "Casual Streetwear", price: 1500, image: "/thrifted-cargo-pants-olive.jpg", badge: "Hot", desc: "New fabric cotton sweater with a relaxed, cozy fit. A fresh everyday essential for casual Nairobi style." },
+    { id: 3, name: "New Air Force 1s", category: "Neatfit Collection", price: 3500, image: "/gently-used-air-force-1s.jpg", badge: "Shoe Lover", desc: "Brand-new Air Force 1 sneakers — iconic low-top silhouette, crisp clean finish, and fast delivery within Nairobi." },
+    { id: 4, name: "Vintage Geometric Knit Cardigan", category: "Casual Streetwear", price: 1000, image: "/oversized-flannel-shirt.jpg", badge: "", desc: "New vintage-style geometric knit cardigan for cozy layering at a friendly price point." },
+    { id: 5, name: "Retro Running Sneakers", category: "Neatfit Collection", price: 3500, image: "/retro-running-sneakers.jpg", badge: "Trending", desc: "New retro running sneakers with a bold sporty aesthetic. Fresh stock, fast Nairobi delivery." },
+    { id: 6, name: "Red Snakeskin Textured Cropped Jacket", category: "Casual Streetwear", price: 2500, image: "/classic-denim-jacket.jpg", badge: "", desc: "New red snakeskin textured cropped jacket with a bold, standout aesthetic. A fresh statement layer with fast delivery in Nairobi.", keywords: "Streetwear Kenya, Nairobi Fashion, red snakeskin cropped jacket, statement outerwear" },
+    { id: 7, name: "Pink 'Alo' Graphic Tee with Matching Cap", category: "Casual Streetwear", price: 1500, image: "/high-top-canvas-shoes.jpg", badge: "Deal", desc: "New Pink 'Alo' graphic tee paired with a matching cap for a clean, coordinated streetwear aesthetic. Fast delivery in Nairobi.", keywords: "Streetwear Kenya, Nairobi Fashion, pink alo graphic tee, matching cap set" },
+    { id: 8, name: "Black & White Striped Tees", category: "Casual Streetwear", price: 1500, image: "/thrifted-streetwear-hoodie.jpg", badge: "", desc: "New black and white striped tees with a timeless minimalist aesthetic. Fresh everyday essentials delivered fast in Nairobi.", keywords: "Streetwear Kenya, Nairobi Fashion, black and white striped tees, minimalist streetwear" },
+    { id: 9, name: "Pink & White New Balance Sneakers", category: "Neatfit Collection", price: 3500, image: "/premium-neatfit-jordans.jpg", badge: "Exclusive", desc: "New pink and white New Balance sneakers with a sleek retro-runner aesthetic. Fresh Neatfit Collection sneakers with fast delivery in Nairobi.", keywords: "Streetwear Kenya, Nairobi Fashion, pink white new balance sneakers, retro runner style" },
+    { id: 10, name: "Y2K Baggy Jeans", category: "Casual Streetwear", price: 1400, image: "/y2k-baggy-jeans.jpg", badge: "Trending", desc: "New Y2K-style baggy denim jeans. Bold wide-fit silhouette perfect for casual Nairobi streetwear." },
+    { id: 11, name: "Vintage Windbreaker", category: "Casual Streetwear", price: 1600, image: "/vintage-windbreaker.jpg", badge: "", desc: "New lightweight retro windbreaker jacket. Perfect for the Nairobi rainy season with a clean vintage aesthetic." },
+    { id: 12, name: "Red New Balance 9060 Sneakers", category: "Neatfit Collection", price: 3500, image: "/mitumba-chelsea-boots.jpg", badge: "Quality", desc: "New red New Balance 9060 sneakers with a chunky futuristic aesthetic. Fresh Neatfit Collection pick with fast delivery in Nairobi.", keywords: "Streetwear Kenya, Nairobi Fashion, red new balance 9060, chunky sneaker" },
+    { id: 13, name: "Blue NY Cap", category: "Casual Streetwear", price: 800, image: "/casual-summer-shorts.jpg", badge: "", desc: "New blue NY-branded cap for effortless streetwear finishing touches." },
+    { id: 14, name: "Slip-On Casual Vans", category: "Neatfit Collection", price: 3500, image: "/slip-on-casual-vans.jpg", badge: "", desc: "New slip-on Vans sneakers — easy everyday style with a clean, classic silhouette. Fast delivery in Nairobi." }
 ];
 
 const WHATSAPP_NUMBER = '254701226084';
@@ -134,7 +134,7 @@ function handleSeraChat(userMessage) {
         response = getSeraWitty('greet');
     } else if (keywordTrend) {
         const trend = mockSocialTrends.find(t => t.hot);
-        response = `Trending right now: ${trend ? trend.tag + ' (' + trend.count + ')' : '#NairobiThrift'}. Check out our Casual Streetwear section — it's lit! 🔥`;
+        response = `Trending right now: ${trend ? trend.tag + ' (' + trend.count + ')' : '#StreetWearKE'}. Check out our Casual Streetwear section — it's lit! 🔥`;
     } else if (keywordCart) {
         const count = cart.reduce((s, i) => s + i.quantity, 0);
         response = count > 0 ? getSeraWitty('cart', { count }) : "Your cart is empty. Let me fix that! Try 'show me shoes' or 'what's trending'. 😏";
@@ -147,7 +147,7 @@ function handleSeraChat(userMessage) {
     } else if (keywordShoes) {
         const shoes = products.filter(p => p.category === 'Neatfit Collection');
         const pick = shoes[Math.floor(Math.random() * shoes.length)];
-        response = pick ? getSeraWitty('recommend', { name: pick.name }) : "Check the Neatfit Collection for premium mitumba kicks!";
+        response = pick ? getSeraWitty('recommend', { name: pick.name }) : "Check the Neatfit Collection for fresh kicks and premium sneakers!";
     } else if (keywordHoodie) {
         const hoodie = products.find(p => /hoodie/i.test(p.name));
         response = hoodie ? getSeraWitty('recommend', { name: hoodie.name }) : "We've got hoodies in Casual Streetwear — super cozy and budget-friendly! 🧥";
@@ -155,7 +155,7 @@ function handleSeraChat(userMessage) {
         const jeans = products.find(p => /jean|cargo|pant/i.test(p.name));
         response = jeans ? getSeraWitty('recommend', { name: jeans.name }) : "Baggy jeans alert in Casual Streetwear — Y2K vibes are back! 👖";
     } else if (keywordPrice) {
-        response = "Budget king energy! We have fits from KES 700. Try asking 'under 1000' or 'cheapest shoes'. 💸";
+        response = "Smart shopper energy! We have fits from KES 800. Try asking 'under 1500' or 'cheapest shoes'. 💸";
     } else {
         const recs = getPersonalizedRecommendations();
         const pick = recs[Math.floor(Math.random() * recs.length)];
@@ -282,20 +282,20 @@ function initDarkMode() {
 const copyDictionary = {
     en: {
         heroTagline: 'Classy, Elegant, Style',
-        heroSubtitle: 'Your Ultimate Fashion Guide for elegant looks, smart pricing, and premium thrift confidence.',
+        heroSubtitle: 'Your Ultimate Fashion Guide for elegant looks, smart pricing, and fresh new arrivals.',
         shopNow: 'Shop Now',
         viewCollection: 'View Collection'
     },
     sw: {
         heroTagline: 'Mtindo wa Kifahari, Elegance, Style',
-        heroSubtitle: 'Mwongozo wako kamili wa mitindo ya kifahari kwa bei rafiki na confidence ya thrift premium.',
+        heroSubtitle: 'Mwongozo wako kamili wa mitindo ya kifahari kwa bei rafiki na bidhaa mpya za ubora wa juu.',
         shopNow: 'Nunua Sasa',
         viewCollection: 'Tazama Mkusanyiko'
     }
 };
 
 function productAltText(product) {
-    return `${product.name} — ${product.category}, KES ${product.price.toLocaleString()} | Grade A Mitumba, SM ATTIRE Nairobi`;
+    return `${product.name} — ${product.category}, KES ${product.price.toLocaleString()} | New Arrivals, SM ATTIRE Nairobi`;
 }
 
 function createProductCard(product) {
@@ -321,7 +321,7 @@ function createProductCard(product) {
                     <meta itemprop="priceCurrency" content="KES">
                     <meta itemprop="price" content="${product.price}">
                     <meta itemprop="availability" content="https://schema.org/InStock">
-                    <meta itemprop="itemCondition" content="https://schema.org/UsedCondition">
+                    <meta itemprop="itemCondition" content="https://schema.org/NewCondition">
                     <meta itemprop="url" content="https://smattirestore.com/shop.html">
                     <p class="text-gold font-bold text-2xl">KES ${product.price.toLocaleString()}</p>
                 </div>
@@ -349,7 +349,7 @@ function buildProductSchema(product) {
         '@id': productUrl,
         name: product.name,
         keywords: product.keywords || undefined,
-        description: `${product.desc} Available at SM ATTIRE — Grade A Mitumba store in Nairobi, Kenya. M-Pesa checkout via WhatsApp.`,
+        description: `${product.desc} Available at SM ATTIRE — new streetwear and sneaker store in Nairobi, Kenya. M-Pesa checkout via WhatsApp.`,
         sku: `SM-${String(product.id).padStart(3, '0')}`,
         productID: `SM-${String(product.id).padStart(3, '0')}`,
         category: product.category,
@@ -375,7 +375,7 @@ function buildProductSchema(product) {
             price: product.price,
             priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
             availability: 'https://schema.org/InStock',
-            itemCondition: 'https://schema.org/UsedCondition',
+            itemCondition: 'https://schema.org/NewCondition',
             seller: {
                 '@type': 'Organization',
                 name: 'SM ATTIRE',
@@ -465,7 +465,7 @@ function updateProductListSchema(list, pageName = 'Product Listing') {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
         name: pageName,
-        description: `${pageName} — Grade A mitumba and thrift clothing from SM ATTIRE Nairobi`,
+        description: `${pageName} — new streetwear, sneakers, and casual fashion from SM ATTIRE Nairobi`,
         numberOfItems: list.length,
         itemListElement
     };
