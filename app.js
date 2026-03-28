@@ -896,7 +896,48 @@ function checkout() {
         total_kes: String(total),
         items_count: String(cart.reduce((sum, item) => sum + item.quantity, 0))
     });
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+
+    const openWhatsAppFallback = () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+    const useDaraja = window.confirm('Use M-Pesa Daraja prompt now? Tap "Cancel" to continue checkout via WhatsApp.');
+    if (!useDaraja) {
+        openWhatsAppFallback();
+        return;
+    }
+
+    const phoneInput = window.prompt('Enter your M-Pesa phone number (07XXXXXXXX or 2547XXXXXXXX):', '');
+    if (!phoneInput) {
+        openWhatsAppFallback();
+        return;
+    }
+
+    const requestBody = {
+        amount: total,
+        phone: phoneInput,
+        accountReference: 'SMATTIRE',
+        transactionDesc: 'SM ATTIRE Order'
+    };
+
+    fetch('/.netlify/functions/daraja-stk-push', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody)
+    })
+        .then(async response => {
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok || !data.ok) {
+                const reason = (data && (data.error || data.detail)) ? `${data.error || data.detail}` : 'Daraja request failed';
+                window.alert(`${reason}. Continuing via WhatsApp checkout.`);
+                openWhatsAppFallback();
+                return;
+            }
+            const customerMessage = data.customerMessage || 'Check your phone to complete M-Pesa payment.';
+            window.alert(`${customerMessage} You can still confirm order details on WhatsApp after paying.`);
+            openWhatsAppFallback();
+        })
+        .catch(() => {
+            window.alert('Unable to reach Daraja service right now. Continuing via WhatsApp checkout.');
+            openWhatsAppFallback();
+        });
 }
 
 function showExitIntentPrompt() {
