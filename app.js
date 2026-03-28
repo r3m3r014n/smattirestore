@@ -26,13 +26,13 @@ const notificationFeed = [
     {
         id: 'limited-stock',
         title: 'Limited Stock Momentum',
-        body: 'Top picks are moving fast. Add your favorite now and checkout with M-Pesa.',
+        body: 'Top picks are moving fast. Add your favorite now and finish checkout via WhatsApp while STK push rolls out.',
         cta: { label: 'View Products', href: '#featured' }
     },
     {
         id: 'mpesa-whatsapp',
         title: 'Checkout Options',
-        body: 'Pay via M-Pesa STK push. WhatsApp chat is optional as a backup for order confirmation.',
+        body: 'M-Pesa STK push is coming soon. For now, complete your order through WhatsApp checkout (PayBill 303030, Account 2048379985).',
         cta: { label: 'Open Cart', action: 'cart' }
     }
 ];
