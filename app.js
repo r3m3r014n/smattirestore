@@ -32,7 +32,7 @@ const notificationFeed = [
     {
         id: 'mpesa-whatsapp',
         title: 'Checkout Options',
-        body: 'M-Pesa STK push is coming soon. For now, complete your order through WhatsApp checkout (PayBill 303030, Account 2048379985).',
+        body: 'The store is live. Complete your order through WhatsApp checkout and pay with M-Pesa (PayBill 303030, Account 2048379985).',
         cta: { label: 'Open Cart', action: 'cart' }
     }
 ];
