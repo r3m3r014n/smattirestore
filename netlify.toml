@@ -12,8 +12,8 @@
 # Specific page rewrites (specific to general order)
 [[redirects]]
   from = "/collection"
-  to = "/collection.html"
-  status = 200
+  to = "/shop.html"
+  status = 301
 
 # Handle WordPress/CMS probe paths - return 404 responses
 [[redirects]]
