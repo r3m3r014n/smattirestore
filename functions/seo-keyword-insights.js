@@ -11,24 +11,24 @@ const SEASONAL_HINTS = [
   { month: 11, signal: 'Holiday and travel demand spikes for casual outfits and shoes' }
 ];
 
-function buildKeywordClusters(seed = 'mitumba nairobi') {
+function buildKeywordClusters(seed = 'shoes nairobi') {
   const city = 'nairobi';
   return {
     transactional: [
       `buy ${seed}`,
-      `grade a mitumba ${city}`,
+      `grade a finds ${city}`,
       `neatfit collection sneakers ${city}`,
       `thrift clothes ${city} delivery`,
-      `cheap mitumba shoes ${city}`
+      `cheap shoes ${city}`
     ],
     commercialInvestigation: [
       `best thrift store ${city}`,
-      `mitumba vs new clothes kenya`,
+      `thrift vs new clothes kenya`,
       `where to buy thrifted jordans kenya`,
       `affordable streetwear kenya`
     ],
     localIntent: [
-      `mitumba near me ${city}`,
+      `shoes near me ${city}`,
       `thrift shop in ${city}`,
       `mpesa thrift store kenya`,
       `whatsapp clothing store kenya`
@@ -52,7 +52,7 @@ exports.handler = async (event) => {
     payload = {};
   }
 
-  const seedKeyword = String(payload.seedKeyword || 'mitumba nairobi').trim().toLowerCase();
+  const seedKeyword = String(payload.seedKeyword || 'shoes nairobi').trim().toLowerCase();
   const clusters = buildKeywordClusters(seedKeyword);
   const month = new Date().getMonth() + 1;
 

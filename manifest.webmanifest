@@ -1,7 +1,7 @@
 {
   "name": "SM ATTIRE",
   "short_name": "SM ATTIRE",
-  "description": "Nairobi thrift and mitumba store for Grade A streetwear and Neatfit Collection sneakers.",
+  "description": "Nairobi thrift store for Grade A streetwear and Neatfit Collection sneakers.",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",

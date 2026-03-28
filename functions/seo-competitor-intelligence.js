@@ -32,9 +32,9 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         message: 'No competitors provided; returning strategic baseline for Nairobi thrift SERPs.',
         opportunities: [
-          'Create city-intent pages for mitumba shoes in Nairobi neighborhoods',
-          'Publish weekly price comparison snippets targeting “cheap mitumba shoes Nairobi”',
-          'Add “how to verify Grade A mitumba” FAQ hub with schema'
+          'Create city-intent pages for shoes in Nairobi neighborhoods',
+          'Publish weekly price comparison snippets targeting “cheap shoes Nairobi”',
+          'Add “how to verify Grade A quality” FAQ hub with schema'
         ]
       })
     };

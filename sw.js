@@ -14,7 +14,7 @@ const STATIC_ASSETS = [
     '/grade-a-vintage-graphic-tee.jpg', '/thrifted-cargo-pants-olive.jpg', '/gently-used-air-force-1s.jpg',
     '/oversized-flannel-shirt.jpg', '/retro-running-sneakers.jpg', '/classic-denim-jacket.jpg',
     '/high-top-canvas-shoes.jpg', '/thrifted-streetwear-hoodie.jpg', '/premium-neatfit-jordans.jpg',
-    '/y2k-baggy-jeans.jpg', '/vintage-windbreaker.jpg', '/mitumba-chelsea-boots.jpg',
+    '/y2k-baggy-jeans.jpg', '/vintage-windbreaker.jpg', '/chelsea-boots.jpg',
     '/casual-summer-shorts.jpg', '/slip-on-casual-vans.jpg',
     '/sm-attire-logo.png', '/neatfit-logo.jpg', '/sm-attire-insta-page.jpg',
     '/sm_attire_-20260327-0001.mp4', '/sm_attire_-20260327-0001.jpg', '/sm_attire_-20260327-0002.jpg',

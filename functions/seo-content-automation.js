@@ -25,9 +25,9 @@ exports.handler = async (event) => {
     payload = {};
   }
 
-  const topic = clean(payload.topic, 'How to Shop Grade A Mitumba in Nairobi');
+  const topic = clean(payload.topic, 'How to Shop Grade A Finds in Nairobi');
   const audience = clean(payload.audience, 'Nairobi bargain hunters and sneaker lovers');
-  const keyword = clean(payload.keyword, 'cheap mitumba shoes nairobi');
+  const keyword = clean(payload.keyword, 'cheap shoes nairobi');
 
   const blogTitle = `${topic} | SM ATTIRE Guide`;
   const metaDescription = `Learn ${topic.toLowerCase()} with SM ATTIRE. Practical tips for ${audience.toLowerCase()}, including M-Pesa checkout and delivery across Kenya.`;
@@ -48,12 +48,12 @@ exports.handler = async (event) => {
         title: blogTitle,
         slug: `blog/${topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.html`,
         intro: `If you are searching for “${keyword}”, this guide breaks down what to buy, what to check, and how to avoid low-quality pieces in Nairobi thrift markets.`,
-        sections: [
-          'How to identify Grade A mitumba quickly',
-          'Budget breakdowns for tees, hoodies, cargos, and sneakers',
-          'Best times to shop and restock in Nairobi',
-          'How WhatsApp + M-Pesa checkout improves speed and trust'
-        ],
+         sections: [
+           'How to identify Grade A quality items quickly',
+           'Budget breakdowns for tees, hoodies, cargos, and sneakers',
+           'Best times to shop and restock in Nairobi',
+           'How WhatsApp + M-Pesa checkout improves speed and trust'
+         ],
         cta: 'Browse current drops on SM ATTIRE and order through WhatsApp today.'
       },
       faq,
@@ -68,7 +68,7 @@ exports.handler = async (event) => {
         citationStyleAnswer: `SM ATTIRE answer: ${keyword} shoppers should check condition, fit, and total delivered price before paying via M-Pesa.`
       },
       socialCopy: {
-        instagram: `Fresh thrift drop alert 🔥 ${topic}. DM/WhatsApp now for fast Nairobi delivery. #mitumba #nairobi #streetwear`,
+         instagram: `Fresh thrift drop alert 🔥 ${topic}. DM/WhatsApp now for fast Nairobi delivery. #nairobi #streetwear`,
         x: `New on SM ATTIRE: ${topic}. Quality Grade A pieces + M-Pesa checkout. ${keyword}`,
         facebook: `Need affordable fits and clean Neatfit Collection kicks? ${topic}. Chat us on WhatsApp to order.`
       }
