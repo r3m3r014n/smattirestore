@@ -1044,64 +1044,6 @@ function openOptimizedSocialLink(url) {
     }
 }
 
-function buildSocialEmbedUrl(postUrl, platform) {
-    try {
-        const parsed = new URL(postUrl);
-        if (platform === 'tiktok') {
-            const match = parsed.pathname.match(/\/video\/(\d+)/);
-            if (match) return `https://www.tiktok.com/embed/v2/${match[1]}`;
-        } else if (platform === 'instagram') {
-            const match = parsed.pathname.match(/\/p\/([^/]+)/);
-            if (match) return `https://www.instagram.com/p/${match[1]}/embed/`;
-        }
-    } catch (e) { /* noop */ }
-    return '';
-}
-
-function openSocialModal(embedUrl, postUrl, platform) {
-    const modal = document.getElementById('socialPostModal');
-    const container = document.getElementById('socialPostIframeContainer');
-    const link = document.getElementById('socialPostOpenLink');
-    if (!modal || !container) {
-        window.open(postUrl, '_blank', 'noopener,noreferrer');
-        return;
-    }
-    const label = platform === 'tiktok' ? 'TikTok' : 'Instagram';
-    container.innerHTML = `<iframe src="${embedUrl}" title="SM ATTIRE social drop on ${label}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    if (link) {
-        link.href = postUrl;
-        link.textContent = `Open on ${label} \u2197`;
-    }
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeSocialModal() {
-    const modal = document.getElementById('socialPostModal');
-    const container = document.getElementById('socialPostIframeContainer');
-    if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
-    if (container) container.innerHTML = '';
-    document.body.style.overflow = '';
-}
-
-function mountFacadeIframe(card) {
-    if (!card) return;
-    const postUrl = card.dataset.postUrl;
-    if (!postUrl) return;
-    const platform = card.dataset.platform || '';
-    const embedUrl = buildSocialEmbedUrl(postUrl, platform);
-    if (embedUrl) {
-        openSocialModal(embedUrl, postUrl, platform);
-    } else {
-        window.open(postUrl, '_blank', 'noopener,noreferrer');
-    }
-}
-
-let socialFacadesInitialized = false;
 
 function initializeSeraAssistant() {
     const toggleBtn = document.getElementById('seraToggleBtn');
@@ -1156,19 +1098,6 @@ function initializeSeraAssistant() {
     }
 }
 
-function initializeSocialFacades() {
-    if (socialFacadesInitialized) return;
-    socialFacadesInitialized = true;
-    const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 11);
-    if (!cards.length) return;
-
-    cards.forEach(card => {
-        const trigger = card.querySelector('.facade-trigger');
-        if (trigger) {
-            trigger.addEventListener('click', () => mountFacadeIframe(card));
-        }
-    });
-}
 
 function syncFeedbackForms() {
     const forms = Array.from(document.querySelectorAll('form'));
@@ -1239,11 +1168,6 @@ function initializeCookieConsent() {
             if (authEmail && authEmail.value) {
                 localStorage.setItem('smattire_cookie_auth_email', authEmail.value.trim());
             }
-            initializeSocialFacades();
-            const apiFeed = document.getElementById('officialApiFeed');
-            if (apiFeed) {
-                apiFeed.innerHTML = '<p class="text-white/70 text-sm">Optional media integrations enabled. Add provider script settings to activate live API feed.</p>';
-            }
         }
     };
 
@@ -1271,7 +1195,6 @@ function initializeCookieConsent() {
         });
     }
 
-    if (saved === 'allow') initializeSocialFacades();
 }
 
 function initializeLangToggle() {
@@ -1332,8 +1255,6 @@ function initializeOptimizedLinks() {
 document.addEventListener('click', event => {
     const productModal = document.getElementById('productModal');
     if (productModal && event.target === productModal) closeModal();
-    const socialModal = document.getElementById('socialPostModal');
-    if (socialModal && event.target === socialModal) closeSocialModal();
 });
 
 document.addEventListener('keydown', event => {
@@ -1341,12 +1262,7 @@ document.addEventListener('keydown', event => {
     const modal = document.getElementById('productModal');
     const exitIntentModal = document.getElementById('exitIntentModal');
     const tutorialModal = document.getElementById('siteTutorialModal');
-    const socialModal = document.getElementById('socialPostModal');
     const cartSidebar = document.getElementById('cartSidebar');
-    if (socialModal && !socialModal.classList.contains('hidden')) {
-        closeSocialModal();
-        return;
-    }
     if (modal && !modal.classList.contains('hidden')) {
         closeModal();
         return;
@@ -1376,7 +1292,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeOptimizedLinks();
     syncFeedbackForms();
     injectAllProductSchemas();
-    initializeSocialFacades();
     initializeCookieConsent();
     initializeConversionPrompts();
     initializeSiteTutorial();
