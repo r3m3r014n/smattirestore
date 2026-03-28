@@ -22,6 +22,20 @@ const RECENTLY_VIEWED_KEY = 'smattire_recently_viewed';
 const SITE_TUTORIAL_KEY = 'smattire_site_tutorial_seen';
 const EXTERNAL_LINK_CONSENT_KEY = 'smattire_external_link_consent';
 const STICKY_BAR_DELAY_MS = 3500;
+const notificationFeed = [
+    {
+        id: 'limited-stock',
+        title: 'Limited Stock Momentum',
+        body: 'Top picks are moving fast. Add your favorite now and finish checkout via WhatsApp while STK push rolls out.',
+        cta: { label: 'View Products', href: '#featured' }
+    },
+    {
+        id: 'mpesa-whatsapp',
+        title: 'Checkout Options',
+        body: 'M-Pesa STK push is coming soon. For now, complete your order through WhatsApp checkout (PayBill 303030, Account 2048379985).',
+        cta: { label: 'Open Cart', action: 'cart' }
+    }
+];
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let currentProduct = null;
 let currentFilter = 'all';
@@ -908,7 +922,12 @@ function checkout() {
         items_count: String(cart.reduce((sum, item) => sum + item.quantity, 0))
     });
 
-    const openWhatsAppFallback = () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+    const openWhatsAppFallback = () => {
+        // Prefer a new tab to keep the cart page open; fall back to same-tab navigation if blocked
+        const win = window.open(whatsappUrl, '_blank');
+        if (!win) window.location.href = whatsappUrl;
+    };
     const phoneInput = window.prompt('Enter your M-Pesa phone (07XXXXXXXX, 01XXXXXXXX, +2547XXXXXXXX, or +2541XXXXXXXX). Click Cancel to use WhatsApp instead.', '');
     if (!phoneInput) {
         openWhatsAppFallback();
@@ -931,17 +950,17 @@ function checkout() {
             const data = await response.json().catch(() => ({}));
             if (!response.ok || !data.ok) {
                 const reason = (data && (data.error || data.detail)) ? `${data.error || data.detail}` : 'Daraja request failed';
-                window.alert(`${reason}. Continuing via WhatsApp checkout.`);
-                openWhatsAppFallback();
+                const proceed = window.confirm(`${reason}. Open WhatsApp chat to finish the order?`);
+                if (proceed) openWhatsAppFallback();
                 return;
             }
             const customerMessage = data.customerMessage || 'Check your phone to complete M-Pesa payment.';
-            window.alert(`${customerMessage} You can still confirm order details on WhatsApp after paying.`);
-            openWhatsAppFallback();
+            const openChat = window.confirm(`${customerMessage} Open WhatsApp chat to confirm order details now?`);
+            if (openChat) openWhatsAppFallback();
         })
         .catch(() => {
-            window.alert('Unable to reach Daraja service right now. Continuing via WhatsApp checkout.');
-            openWhatsAppFallback();
+            const proceed = window.confirm('Unable to reach Daraja service right now. Open WhatsApp chat to finish the order?');
+            if (proceed) openWhatsAppFallback();
         });
 }
 
@@ -964,19 +983,7 @@ function closeExitIntentPrompt() {
 }
 
 function initializeConversionPrompts() {
-    const sticky = document.getElementById('stickyBuyBar');
-    const closeSticky = document.getElementById('closeStickyBuyBar');
     const modal = document.getElementById('exitIntentModal');
-
-    if (sticky) {
-        setTimeout(() => sticky.classList.remove('hidden'), STICKY_BAR_DELAY_MS);
-    }
-    if (closeSticky && sticky) {
-        closeSticky.addEventListener('click', () => {
-            sticky.classList.add('hidden');
-            trackProductInteraction('sticky_bar_closed');
-        });
-    }
 
     if (modal) {
         modal.addEventListener('click', event => {
@@ -995,6 +1002,87 @@ function initializeConversionPrompts() {
     window.addEventListener('pagehide', () => {
         trackProductInteraction('pagehide');
     });
+}
+
+function initializeNotificationPanel() {
+    const toggle = document.getElementById('notificationToggle');
+    const panel = document.getElementById('notificationPanel');
+    const list = document.getElementById('notificationList');
+    const badge = document.getElementById('notificationBadge');
+    const closeBtn = document.getElementById('notificationClose');
+    if (!toggle || !panel || !list || !badge || !closeBtn) return;
+
+    const AUTO_CLOSE_MS = 5000;
+    let autoCloseTimer = null;
+
+    const render = () => {
+        list.innerHTML = '';
+        notificationFeed.forEach(item => {
+            const li = document.createElement('li');
+            li.className = 'glass-panel bg-dark/40 border border-gold/20 rounded-xl p-3';
+
+            const title = document.createElement('p');
+            title.className = 'text-white font-semibold mb-1';
+            title.textContent = item.title;
+            li.appendChild(title);
+
+            const body = document.createElement('p');
+            body.className = 'text-white/70 text-sm mb-2';
+            body.textContent = item.body;
+            li.appendChild(body);
+
+            if (item.cta) {
+                if (item.cta.href) {
+                    const link = document.createElement('a');
+                    link.href = item.cta.href;
+                    link.className = 'inline-flex items-center gap-2 text-gold font-semibold hover:text-gold-light transition-colors text-sm';
+                    link.textContent = `${item.cta.label} →`;
+                    link.rel = 'noopener';
+                    li.appendChild(link);
+                } else {
+                    const button = document.createElement('button');
+                    button.dataset.action = item.cta.action;
+                    button.className = 'inline-flex items-center gap-2 text-gold font-semibold hover:text-gold-light transition-colors text-sm';
+                    button.textContent = `${item.cta.label} →`;
+                    li.appendChild(button);
+                }
+            }
+
+            list.appendChild(li);
+        });
+    };
+
+    const setOpen = (isOpen) => {
+        panel.hidden = !isOpen;
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        if (autoCloseTimer) {
+            clearTimeout(autoCloseTimer);
+            autoCloseTimer = null;
+        }
+        if (isOpen) {
+            badge.classList.add('hidden');
+            autoCloseTimer = setTimeout(() => {
+                panel.hidden = true;
+                toggle.setAttribute('aria-expanded', 'false');
+            }, AUTO_CLOSE_MS);
+        }
+    };
+
+    list.addEventListener('click', (event) => {
+        const actionBtn = event.target.closest('button[data-action]');
+        if (!actionBtn) return;
+        if (actionBtn.dataset.action === 'cart') {
+            toggleCart();
+        }
+    });
+
+    toggle.addEventListener('click', () => {
+        const isOpen = panel.hidden;
+        setOpen(isOpen);
+    });
+    closeBtn.addEventListener('click', () => setOpen(false));
+
+    render();
 }
 
 function initializeSiteTutorial() {
@@ -1365,6 +1453,7 @@ document.addEventListener('DOMContentLoaded', () => {
     syncFeedbackForms();
     injectAllProductSchemas();
     initializeCookieConsent();
+    initializeNotificationPanel();
     initializeConversionPrompts();
     initializeSiteTutorial();
     initializeSeraAssistant();
