@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smattire-v4';
+const CACHE_NAME = 'smattire-v5';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
@@ -10,7 +10,6 @@ const STATIC_ASSETS = [
     '/manifest.webmanifest',
     '/icon-192.png',
     '/icon-512.png',
-    '/sera.jpg',
     '/oversized-flannel-shirt.jpg', '/retro-running-sneakers.jpg', '/classic-denim-jacket.jpg',
     '/high-top-canvas-shoes.jpg', '/premium-neatfit-jordans.jpg',
     '/y2k-baggy-jeans.jpg', '/vintage-windbreaker.jpg', '/chelsea-boots.jpg',
